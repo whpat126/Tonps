@@ -12,20 +12,20 @@ public class LoginInterceptor implements HandlerInterceptor{
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		//»ñÈ¡ÇëÇóurl
+		//è·å–è¯·æ±‚url
 		String url = request.getRequestURI();
-		//ÅĞ¶ÏurlÊÇ·ñÊÇ¹«¿ªµØÖ·,
+		//åˆ¤æ–­urlæ˜¯å¦æ˜¯å…¬å¼€åœ°å€,
 		if(url.indexOf("Login.do") >= 0){
 			return true;
 		}
-		// ÅĞ¶Ïsession
+		// åˆ¤æ–­session
 		HttpSession session = request.getSession();
-		// ´ÓsessionÖĞÈ¡³öÓÃ»§Éí·İĞÅÏ¢
+		// ä»sessionä¸­å–å‡ºç”¨æˆ·èº«ä»½ä¿¡æ¯
 		String username = (String) session.getAttribute("username");
 		if(username != null){
 			return true;
 		}
-		// µ½Õâ±íÊ¾ÓÃ»§Éí·İĞèÒªÈÏÖ¤£¬Ìø×ªµÇÂ¼Ò³Ãæ
+		// åˆ°è¿™è¡¨ç¤ºç”¨æˆ·èº«ä»½éœ€è¦è®¤è¯ï¼Œè·³è½¬ç™»å½•é¡µé¢
 		request.getRequestDispatcher("/login.jsp").forward(request, response);
 		return false;
 	}
