@@ -16,6 +16,7 @@ import javax.annotation.PostConstruct;
 
 public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 
+	//此类别可能需要调整
 	protected BaseDao<Entity> baseDaoImpl;
 
 	
