@@ -93,6 +93,9 @@ public class CodeMethod {
 		return result;
 	}
 	
+	public void test(){}
+	
+	
 	
 	public static void main(String[] args) {
 /*//		String content = "As`123~!@#$%^&*()_+{}|:<>?,./';[]\'";
