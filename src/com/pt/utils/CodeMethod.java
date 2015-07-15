@@ -7,9 +7,12 @@ import javax.crypto.KeyGenerator;
 import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
-
-public class CodeMethod {
-	
+/**
+ * 加密解密方法
+ * @author sq
+ *
+ */
+public class CodeMethod {	
 	/** 
 	 * 加密 
 	 * @param content 需要加密的内容 
