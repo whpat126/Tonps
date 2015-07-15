@@ -7,7 +7,12 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-
+/**
+ * 这是一个测试
+ * @author Administrator
+ *
+ * @param <Entity>
+ */
 
 public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 
