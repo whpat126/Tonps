@@ -8,6 +8,9 @@ import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 /**
+ * 19点43改了
+ */
+/**
  * songqi
  * @author Administrator
  *
