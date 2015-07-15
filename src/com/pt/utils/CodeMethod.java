@@ -10,6 +10,7 @@ import javax.crypto.spec.SecretKeySpec;
 /**
  * 加密解密方法
  * @author sq
+ * @2015-07-15
  *
  */
 public class CodeMethod {	
