@@ -9,6 +9,7 @@ import javax.crypto.spec.SecretKeySpec;
 
 
 public class CodeMethod {
+	
 	/** 
 	 * 加密 
 	 * @param content 需要加密的内容 
