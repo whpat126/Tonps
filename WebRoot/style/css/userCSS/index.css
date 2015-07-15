@@ -1,0 +1,351 @@
+*{
+	margin:0px;
+	padding:0px;
+}
+body{
+	width:100%;
+	margin:0px auto;
+	background:#f3f3f3;
+}
+/* 黑条设置 */
+.black_bar{
+	/*border:1px red solid;*/
+	background: #1e1b29 none repeat scroll 0 0;
+	height: 30px;
+	color:#fff;
+}
+/* .black_bar_left{
+	
+	float:left;
+	
+} */
+.userSet{
+	display:block;
+	float:left;
+}
+.black_bar_right {
+	float:right;
+	padding-right:50px;
+	
+}
+.fl li{
+	display:inline-block;
+	padding: 6 10px;
+	font-size: 14px;
+}
+.fl li a {
+	color:#fff;
+	text-decoration:none; /* 去掉a标签的下划线 */
+}
+
+/* logo和导航 */
+
+.mainNav{
+	width:1200px;
+	margin:0px auto;
+	/* border:1px red solid; */
+	height:80px;
+}
+.logo{
+	background-image: url("logoxztm.gif");
+    background-position: 0 0;
+    background-repeat: no-repeat;
+    float: left;
+    height: 80px;
+    left: 80px;
+    position: relative;
+    top: 0px;
+    width: 130px;
+    z-index:1000;
+}
+.mainNav div{
+	display:inline-block;
+}
+.menu {
+	display:inline-block;
+	margin-left:300px;
+	font-size:20px;	
+	padding-top:30px;
+}
+.menu ul li {
+	display:inline-block;
+	padding-right:60px;
+}
+.menu ul li a, .login_href a{
+	color:#000;
+	text-decoration:none;
+}
+.menu ul li a:hover{
+	color:#00bbee;
+}
+.loginAndReg {
+	display:inline-block;
+	margin-left:100px;
+	background-color:#00bbee;
+	color:#fff;
+	padding:5px 30px;
+	border-radius: 4px; /* 圆角效果 */
+}
+.loginAndReg span:hover,.login_href a:hover{
+	color:black;
+	cursor:pointer;
+}
+/*随页面滚动部分 */
+.header {
+	background-color:#f3f3f3;
+	left:0;
+	position:fixed;
+	top:0;
+	width:100%;
+	z-index:999;
+}
+.img_lunbo{
+	height:768px;
+	z-index:2;
+}
+
+.login_href{
+	position:absolute;
+	left:40%;
+	top:50%;
+	margin-left:-180px;
+	font-size:25px;
+	z-index:5;
+	
+}
+
+.login_href a{
+	background-color:red;
+	color:#fff;
+	padding:20px 120px;
+	border-radius: 4px; /* 圆角效果 */
+}
+.introduce{
+	height:700px;
+	color:gray;
+}
+
+/* 业务介绍*/
+.introduce{
+	font-family:"Microsoft YaHei","宋体";
+	color:#2d2c34;
+}
+.slogan {
+	padding-top:20px;
+	font-size:50px;
+	text-align:center;
+}
+.app_main{
+	font-size:20px;
+}
+
+
+
+
+
+
+/* 结尾部分 */
+.footer {
+    background-color: #2d2c34;
+    height: 431px;
+}
+a {
+	color:gray;
+	text-decoration:none;
+}
+.footer .footer-t .footer-inner {
+    overflow: hidden;
+    padding: 75px 0 10px;
+    position: relative;
+}
+.footer .footer-t .footer-link {
+    bottom: 10px;
+    left: 20px;
+    position: absolute;
+}
+.footer .footer-t .footer-link a {
+    margin-right: 10px;
+}
+.footer .footer-box {
+    float: left;
+    padding-left: 20px;
+    text-align: left;
+    width: 200px;
+}
+.footer .contact {
+    margin-left: 1px;
+}
+.footer .download {
+    margin-left: 122px;
+    width: 320px;
+}
+.footer .footer-box .title, .footer .footer-box .sub-title {
+    color: #b8b7bb;
+    font-size: 18px;
+    padding-bottom: 10px;
+}
+.footer .footer-box .sub-title {
+    font-size: 14px;
+}
+.footer .footer-box .telphone {
+    color: #737279;
+    font-size: 32px;
+    padding-bottom: 13px;
+    width: 320px;
+}
+.footer .footer-box ul li {
+    margin-left:120px;
+    list-style:none;  /* 去掉li前面的圆点*/
+    color: gray;
+    font-size: 14px;
+    line-height: 28px;
+}
+.footer .footer-box ul li a {
+    font-size: 14px;
+    transition: all 0.5s ease 0s;
+}
+.footer .footer-b {
+    background-color: #1e1d23;
+    height: 138px;
+    line-height: 25px;
+}
+.footer .footer-b .footer-inner {
+    padding: 44px 0 0;
+    text-align: center;
+}
+.footer-b {
+	color:gray;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
