@@ -12,13 +12,12 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Repository;
 
-import com.pt.base.BaseDaoImpl;
 import com.pt.dao.UserDao;
 import com.pt.domain.Users;
 import com.pt.utils.OurDaoUtils;
 
 @Repository("userDao")
-public class UserDaoImpl extends BaseDaoImpl<Users> implements UserDao {
+public class UserDaoImpl implements UserDao {
 
 	private Connection conn;
 	private PreparedStatement pstmt;
