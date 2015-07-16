@@ -115,7 +115,7 @@ public interface BaseService<Entity> {
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
-	Entity findByProp(Long id, String pk) ;
+	Entity findByProp(String id, String pk) ;
 
 	/** 
 	  * findById 方法 

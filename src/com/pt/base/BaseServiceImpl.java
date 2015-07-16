@@ -174,9 +174,9 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * @date 2015年7月16日 
 	*/ 
 	@Override
-	public Entity findByProp(Long id, String pk){
+	public Entity findByProp(String id, String pk){
 		// TODO Auto-generated method stub
-		return baseDaoImpl.findByProp(id.toString(), pk).get(0);
+		return baseDaoImpl.findByProp(id, pk).get(0);
 	}
 	/** 
 	  * findById 方法 
