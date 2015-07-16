@@ -12,12 +12,13 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Repository;
 
+import com.pt.base.BaseDaoImpl;
 import com.pt.dao.UserDao;
 import com.pt.domain.Users;
 import com.pt.utils.OurDaoUtils;
 
 @Repository("userDao")
-public class UserDaoImpl implements UserDao {
+public class UserDaoImpl extends BaseDaoImpl<Users> implements UserDao {
 
 	private Connection conn;
 	private PreparedStatement pstmt;
@@ -44,21 +45,6 @@ public class UserDaoImpl implements UserDao {
 	 * @return
 	 */
 	private boolean validateAdmin(Users user) {
-		SAXReader reader = new SAXReader();
-		try {
-			Document document = reader.read(path);
-			Element root = document.getRootElement();
-			List<Element> element = root.elements("user");
-			for (Element e : element) {
-				String username = e.element("username").getText();
-				String password = e.element("password").getText();
-				if (user.getUsername().equals(username)
-						&& user.getPassword().equals(password))
-					return true;
-			}
-		} catch (DocumentException e) {
-			e.printStackTrace();
-		}
 		return false;
 	}
 

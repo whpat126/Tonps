@@ -96,7 +96,7 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	@Override
 	public Entity findById(Long id, String pk) throws Exception {
 		// TODO Auto-generated method stub
-		return baseDaoImpl.findById(id.toString(), pk);
+		return baseDaoImpl.findByProp(id.toString(), pk).get(0);
 	}
 
 	@Override

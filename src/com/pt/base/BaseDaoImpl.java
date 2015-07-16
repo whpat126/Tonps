@@ -1,7 +1,6 @@
 package com.pt.base;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.sql.Connection;
@@ -22,12 +21,14 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.pt.utils.OurDaoUtils;
 
-public  class BaseDaoImpl<Entity> implements BaseDao<Entity> {
+public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 
-	// public
+	// 公共类入口 泛型要求
 	protected Class<Entity> clazz;
 
-	@SuppressWarnings("unchecked")
+	/**
+	 * 构造函数 初始化 clazz 将成员变量 clazz 初始化为子类泛型中的实体class
+	 */
 	public BaseDaoImpl() {
 
 		// System.out.println(this.getClass());
@@ -64,49 +65,49 @@ public  class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			for (int i = 1; i < fs.length; i++) {
 				// 拼接方法的名称
 				String MethodName = "get" + Character.toUpperCase(fs[i].getName().charAt(0)) + fs[i].getName().substring(1);
-				System.out.println("MethodName:"+MethodName);
+				// System.out.println("MethodName:"+MethodName);
 				Method m = clazz.getMethod(MethodName);
-				System.out.println(">>>>>>>>>>>"+m.invoke(obj));
+				// System.out.println(">>>>>>>>>>>"+m.invoke(obj));
 				ps.setObject(i, m.invoke(obj));
 			}
 			ps.executeUpdate();
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
-			return false;
 		} finally {
-
 			OurDaoUtils.close(ps);
 			OurDaoUtils.close(conn);
 		}
+		return false;
 	}
+
 	@Override
-	public boolean save(Entity obj,String tablename) {
+	public boolean save(Entity obj, String tablename) {
 		// obj.getSimpleName();
 		Connection conn = OurDaoUtils.getConnection();
 		String sql = "insert into " + tablename + " values(null ";
 		// 可以获取本类所声明的变量
 		Field[] fs = clazz.getDeclaredFields();
 		System.out.println(fs.length);
-		
+
 		for (int i = 1; i < fs.length; i++) {
 			sql += ",? ";
 		}
 		sql = sql + ")";
 		System.out.println(sql);
-		
+
 		// 进行预编译
 		PreparedStatement ps = OurDaoUtils.getPs(conn, sql);
-		
+
 		// ps.setString(1, user.getName());
-		
+
 		try {
 			for (int i = 1; i < fs.length; i++) {
 				// 拼接方法的名称
 				String MethodName = "get" + Character.toUpperCase(fs[i].getName().charAt(0)) + fs[i].getName().substring(1);
-				System.out.println("MethodName:"+MethodName);
+				// System.out.println("MethodName:"+MethodName);
 				Method m = clazz.getMethod(MethodName);
-				System.out.println(">>>>>>>>>>>"+m.invoke(obj));
+				// System.out.println(">>>>>>>>>>>"+m.invoke(obj));
 				ps.setObject(i, m.invoke(obj));
 			}
 			ps.executeUpdate();
@@ -115,7 +116,6 @@ public  class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			e.printStackTrace();
 			return false;
 		} finally {
-			
 			OurDaoUtils.close(ps);
 			OurDaoUtils.close(conn);
 		}
@@ -147,27 +147,13 @@ public  class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			ps.setLong(fs.length, (Long) m2.invoke(obj));
 
 			ps.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (SecurityException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (NoSuchMethodException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalArgumentException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} finally {
+			OurDaoUtils.close(ps);
+			OurDaoUtils.close(conn);
 		}
-		OurDaoUtils.close(ps);
-		OurDaoUtils.close(conn);
 	}
 
 	/**
@@ -193,7 +179,7 @@ public  class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 	 * 查询所有
 	 */
 	@Override
-	public List<Entity> findAll() throws Exception {
+	public List<Entity> findAll() {
 		Connection conn = OurDaoUtils.getConnection();
 		String sql = " select * from " + clazz.getSimpleName();
 		try {
@@ -214,25 +200,42 @@ public  class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		}
 	}
 
+	/**
+	 * 根据主键查找实体
+	 * 
+	 * @param id
+	 *            实体类的主键
+	 * @return 实体类
+	 * @author lenovo
+	 */
 	@Override
-	public Entity findById(Long id) throws Exception {
+	public Entity findById(Long id) {
 		// TODO Auto-generated method stub
-		return findById( "id",id.toString());
+		return findByProp("id", id.toString()).get(0);
 	}
 
+	/**
+	 * 根据属性值 查找实体
+	 * 
+	 * @param prop
+	 *            实体类的属性名
+	 * @param value
+	 *            实体类的属性值
+	 * @return 实体类list
+	 * @author lenovo
+	 */
 	@Override
-	public Entity findById(String prop, String value) throws Exception {
-
+	public List<Entity> findByProp(String prop, String value) {
 		Connection conn = OurDaoUtils.getConnection();
-		String sql = " select * from  " + clazz.getSimpleName() + " where " + prop + " = '" + value+"'";
+		String sql = " select * from  " + clazz.getSimpleName() + " where " + prop + " = ?";
 		try {
 			QueryRunner qRunner = new QueryRunner();
 			List<Entity> nList = new ArrayList<Entity>();
 			// 使用 BeanListHandler 实现将所有的结果集转换为 实体bean
 			ResultSetHandler<List<Entity>> h = new BeanListHandler<Entity>(clazz);
 			// 执行 SQL 语句,使用 BeanListHandler,返回对象的list集合
-			nList = (List<Entity>) qRunner.query(conn, sql, h);
-			return nList.get(0);
+			nList = (List<Entity>) qRunner.query(conn, sql, h, value);
+			return nList;
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return null;
@@ -241,13 +244,21 @@ public  class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		}
 	}
 
+	/**
+	 * 根据id值 删除实体
+	 * 
+	 * @param id
+	 *            实体类的主键
+	 * @return 是否成功
+	 * @author lenovo
+	 */
 	@Override
 	public boolean delete(Long id) {
 		Connection conn = OurDaoUtils.getConnection();
-		String sql = " delete from  " + clazz.getSimpleName() + " where id = " + id;
+		String sql = " delete from  " + clazz.getSimpleName() + " where id = ?";
 		try {
 			QueryRunner qRunner = new QueryRunner();
-			qRunner.update(conn, sql);
+			qRunner.update(conn, sql, id);
 			return true;
 
 		} catch (SQLException e) {
@@ -258,16 +269,32 @@ public  class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		}
 	}
 
-	public int getTotal(String sql) {
+	/**
+	 * 根据sqlwhere语句查询结果的个数
+	 * 
+	 * @param sqlwhere
+	 * @return 个数
+	 */
+	public int getTotal(String sqlwhere) {
 		Connection conn = OurDaoUtils.getConnection();
 		QueryRunner qRunner = new QueryRunner();
+		String sql = "select count(*) as total from" + clazz.getSimpleName()+" where ";
+		sql += sqlwhere;
+		
 		try {
+			// ScalarHandler：将结果集中某一条记录的其中某一列的数据存成 Object,此处为 Integer
+			/*
+			 * ScalarHandler: 单值查询 如： select count(*) from account; Long count =
+			 * (Long)runner.query("select count(*) from account",new
+			 * ScalarHandler(1) );
+			 */
 			int count = (Integer) qRunner.query(conn, sql, new ScalarHandler<Integer>(1));
 			return count;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return 0;
+		} finally {
+			DbUtils.closeQuietly(conn);
 		}
 	}
 
@@ -295,6 +322,16 @@ public  class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		}
 	}
 
+	/**
+	 * 分页显示对象list
+	 * 
+	 * @param currentPage
+	 *            页面传递过来的当前页
+	 * @param pageSize
+	 *            页面传递过来的每页显示条数
+	 * @param Map
+	 *            <String, Object> m 页面传递过来的的查询条件 map 其中的kv值的含义可以自定义
+	 */
 	@Override
 	public List<Entity> findAll(String username, int currentPage, int pageSize, Map<String, Object> m) {
 		Connection conn = OurDaoUtils.getConnection();
@@ -305,18 +342,15 @@ public  class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		Iterator<Entry<String, Object>> io = set.iterator();
 		while (io.hasNext()) {
 			Map.Entry<String, Object> me = (Map.Entry<String, Object>) io.next();
-			if ("htcode".equals(me.getKey()) && !"".equals(me.getValue())) {
-				sql += " and " + me.getKey() + " like '%" + me.getValue() + "%'";
-			}
-			if ("dwname".equals(me.getKey()) && !"".equals(me.getValue())) {
-				sql += " and " + me.getKey() + " like '%" + me.getValue() + "%'";
-			}
+			// easyui自动搜索控件 传递的参数值，一般作为sql语句的like条件使用。
 			if ("q".equals(me.getKey()) && !"".equals(me.getValue())) {
 				sql += " and htcode  like '%" + me.getValue() + "%'";
 			}
+			// easyui datagrid控件传递的排序字段名
 			if ("sort".equals(me.getKey()) && !"".equals(me.getValue())) {
 				sql += " order by " + me.getValue();
 			}
+			// easyui datagrid控件传递的升序或者降序字段名
 			if ("order".equals(me.getKey()) && !"".equals(me.getValue())) {
 				sql += " " + me.getValue();
 			}
