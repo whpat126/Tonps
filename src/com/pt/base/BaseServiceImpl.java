@@ -7,21 +7,24 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
-/**
- * 这是一个测试
- * @author Administrator
- *
- * @param <Entity>
- */
-
+/** 
+  * BaseServiceImpl  
+  * <br/>说明:<br/> 基础service实现类，实现了BaseService接口,可由其他ServiceImpl实现类继承
+  * @param <Entity> 
+  * @author whp 
+  * @date 2015年7月16日 
+*/ 
 public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 
-	//此类别可能需要调整
+	/**
+	 * BaseDao<Entity>baseDaoImpl
+	 */
 	protected BaseDao<Entity> baseDaoImpl;
-
-	
-	
-	private Class<?> clazz;//存储了具体操作的类,
+	/**
+	 * Class<?>clazz
+	 * 存储了具体操作的类
+	 */
+	private Class<?> clazz;
 	@SuppressWarnings("unchecked")
 	public BaseServiceImpl(){
 		// System.out.println(this.getClass());
@@ -53,56 +56,155 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 		this.baseDaoImpl = baseDaoImpl;
 	}
 
+	/** 
+	  * save 方法 
+	  * <br/>方法说明:<br/> 保存对象到对象对应的物理表
+	  * @param obj 对象
+	  * @return 
+	  * @return boolean 是否保存成功
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public boolean save(Entity obj) {
 		return baseDaoImpl.save(obj);
 	}
 
+	/** 
+	  * findAll 方法 
+	  * <p>方法说明:</p> 查询所有对象(无约束条件)
+	  * @return
+	  * @throws Exception 
+	  * @return List<Entity> 对象列表
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
-	public List<Entity> findAll() throws Exception {
+	public List<Entity> findAll() {
 		// TODO Auto-generated method stub
 		return baseDaoImpl.findAll();
 	}
-
+	/** 
+	  * findAll 方法 
+	  * 方法说明:<br/> 分页显示对象list
+	  * @param username
+	  * @param currentPage 页面传递过来的当前页
+	  * @param pageSize 页面传递过来的每页显示条数
+	  * @return 
+	  * @return List<Entity> 对象list
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public List<Entity> findAll(String username, int currentPage, int pageSize) throws Exception {
 		// TODO Auto-generated method stub
 		return baseDaoImpl.findAll();
 	}
-
+	/** 
+	  * findAll 方法 
+	  * <p>方法说明:</p> 分页显示对象list
+	  * @param username
+	  * @param currentPage 页面传递过来的当前页
+	  * @param pageSize 页面传递过来的每页显示条数
+	  * @param m 页面传递过来的的查询条件 map 其中的kv值的含义可以自定义
+	  * @return 
+	  * @return List<Entity> 对象list
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public List<Entity> findAll(String username, int currentPage, int pageSize, Map<String, Object> m) throws Exception {
 		// TODO Auto-generated method stub
 		return baseDaoImpl.findAll();
 	}
-
+	/** 
+	  * update 方法 
+	  * <p>方法说明:</p> 更新对象
+	  * @param obj 对象
+	  * @param pk 主键
+	  * @throws Exception 
+	  * @return boolean 是否更新成功
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
-	public void update(Entity obj, String pk) throws Exception {
-		 baseDaoImpl.update(obj, pk);;
+	public boolean update(Entity obj, String pk) throws Exception {
+		 return baseDaoImpl.update(obj, pk);
 	}
-
+	/** 
+	  * delete 方法 
+	  * <p>方法说明:</p> 根据pk名称和对应的值id 删除对象
+	  * @param id 值
+	  * @param pk 名称
+	  * @return
+	  * @throws Exception 
+	  * @return boolean 
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public boolean delete(Long id, String pk) throws Exception {
 		return baseDaoImpl.delete(id, pk);
 	}
-
+	/** 
+	  * delete 方法 
+	  * <p>方法说明:</p> 根据主键id删除对象
+	  * @param id
+	  * @return
+	  * @throws Exception 
+	  * @return boolean 
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public boolean delete(Long id) throws Exception {
 		return baseDaoImpl.delete(id);
 	}
 
 	
-
+	/** 
+	  * findById 方法 
+	  * <p>方法说明:</p> 根据pk名称和对应的值id 查找对象
+	  * @param id 值
+	  * @param pk 名称
+	  * @return
+	  * @throws Exception 
+	  * @return Entity 
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
-	public Entity findById(Long id, String pk) throws Exception {
+	public Entity findByProp(Long id, String pk){
 		// TODO Auto-generated method stub
 		return baseDaoImpl.findByProp(id.toString(), pk).get(0);
 	}
-
+	/** 
+	  * findById 方法 
+	  * <p>方法说明:</p> 根据主键查找实体
+	  * @param id 实体类的主键
+	  * @return 
+	  * @return Entity 实体类
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public Entity findById(Long id) throws Exception {
 		// TODO Auto-generated method stub
 		return baseDaoImpl.findById(id);
+	}
+	/** 
+	  * delete 方法 
+	  * <p>方法说明:</p> 批量删除对象
+	  * @param ids 主键数组
+	  * @return 
+	  * @return boolean 
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
+	@Override
+	public boolean delete(String[] ids) {
+		// TODO Auto-generated method stub
+		return baseDaoImpl.delete(ids);
 	}
 
 }

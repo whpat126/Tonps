@@ -21,14 +21,24 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import com.pt.utils.OurDaoUtils;
 
+/** 
+  * BaseDaoImpl  
+  * <br/>说明:<br/> BaseDao的实现类,可由其他实体DaoImpl类继承
+  * @param <Entity> 实体类
+  * @author whp 
+  * @date 2015年7月16日 
+*/ 
 public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 
-	// 公共类入口 泛型要求
+	/**
+	 * 根据泛型需要,设置的成员变量clazz,由子类的构造函数进行实例化
+	 */
 	protected Class<Entity> clazz;
 
 	/**
 	 * 构造函数 初始化 clazz 将成员变量 clazz 初始化为子类泛型中的实体class
 	 */
+	@SuppressWarnings("unchecked")
 	public BaseDaoImpl() {
 
 		// System.out.println(this.getClass());
@@ -38,9 +48,15 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		clazz = (Class<Entity>) pt.getActualTypeArguments()[0];
 	}
 
-	/**
-	 * 保存方法
-	 */
+	/** 
+	  * save 方法 
+	  * <br/>方法说明:<br/> 保存对象到对象对应的物理表
+	  * @param obj 对象
+	  * @return 
+	  * @return boolean 是否保存成功
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public boolean save(Entity obj) {
 		// obj.getSimpleName();
@@ -48,13 +64,13 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		String sql = "insert into " + clazz.getSimpleName() + " values(null ";
 		// 可以获取本类所声明的变量
 		Field[] fs = clazz.getDeclaredFields();
-		System.out.println(fs.length);
+//		System.out.println(fs.length);
 
 		for (int i = 1; i < fs.length; i++) {
 			sql += ",? ";
 		}
 		sql = sql + ")";
-		System.out.println(sql);
+//		System.out.println(sql);
 
 		// 进行预编译
 		PreparedStatement ps = OurDaoUtils.getPs(conn, sql);
@@ -80,7 +96,16 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		}
 		return false;
 	}
-
+	/** 
+	  * save 方法 
+	  * <p>方法说明:</p> 保存对象到指定表
+	  * @param obj对象
+	  * @param tablename 物理表名
+	  * @return 
+	  * @return boolean 是否保存成功
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public boolean save(Entity obj, String tablename) {
 		// obj.getSimpleName();
@@ -88,13 +113,13 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		String sql = "insert into " + tablename + " values(null ";
 		// 可以获取本类所声明的变量
 		Field[] fs = clazz.getDeclaredFields();
-		System.out.println(fs.length);
+//		System.out.println(fs.length);
 
 		for (int i = 1; i < fs.length; i++) {
 			sql += ",? ";
 		}
 		sql = sql + ")";
-		System.out.println(sql);
+//		System.out.println(sql);
 
 		// 进行预编译
 		PreparedStatement ps = OurDaoUtils.getPs(conn, sql);
@@ -102,7 +127,7 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		// ps.setString(1, user.getName());
 
 		try {
-			for (int i = 1; i < fs.length; i++) {
+			for (int i = 1; i < fs.length; i++) {//从1开始,避开主键
 				// 拼接方法的名称
 				String MethodName = "get" + Character.toUpperCase(fs[i].getName().charAt(0)) + fs[i].getName().substring(1);
 				// System.out.println("MethodName:"+MethodName);
@@ -121,22 +146,26 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		}
 	}
 
-	/**
-	 * 更新方法 无返回值
-	 */
+	/** 
+	  * update 方法 
+	  * <p>方法说明:</p> 更新对象
+	  * @param obj 对象
+	  * @param pk 主键
+	  * @throws Exception 
+	  * @return boolean 是否更新成功
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
-	public void update(Entity obj, String pk) {
+	public boolean update(Entity obj, String pk) {
 		Connection conn = OurDaoUtils.getConnection();
-		// update user set name = ? , age = ? where id = ?
 		String sql = " update " + clazz.getSimpleName() + " set  ";
 		Field[] fs = clazz.getDeclaredFields();
 		for (int i = 1; i < fs.length; i++) {
 			sql += fs[i].getName() + "=?,";
 		}
 		sql = sql.substring(0, sql.length() - 1) + " where " + pk + " = ? ";
-
 		PreparedStatement ps = OurDaoUtils.getPs(conn, sql);
-
 		try {
 			for (int i = 1; i < fs.length; i++) {
 				String methodName = "get" + Character.toUpperCase(fs[i].getName().charAt(0)) + fs[i].getName().substring(1);
@@ -147,18 +176,26 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			ps.setLong(fs.length, (Long) m2.invoke(obj));
 
 			ps.executeUpdate();
+			return true;
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
+			return false;
 		} finally {
 			OurDaoUtils.close(ps);
 			OurDaoUtils.close(conn);
 		}
 	}
 
-	/**
-	 * 删除方法
-	 */
+	/** 
+	  * delete 方法 
+	  * <p>方法说明:</p> 
+	  * @param id
+	  * @param pk
+	  * @return 
+	  * @return boolean 
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public boolean delete(Long id, String pk) {
 		Connection conn = OurDaoUtils.getConnection();
@@ -175,9 +212,16 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		}
 	}
 
-	/**
-	 * 查询所有
-	 */
+
+	/** 
+	  * findAll 方法 
+	  * <p>方法说明:</p> 查询所有对象(无约束条件)
+	  * @return
+	  * @throws Exception 
+	  * @return List<Entity> 对象列表
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public List<Entity> findAll() {
 		Connection conn = OurDaoUtils.getConnection();
@@ -200,30 +244,32 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		}
 	}
 
-	/**
-	 * 根据主键查找实体
-	 * 
-	 * @param id
-	 *            实体类的主键
-	 * @return 实体类
-	 * @author lenovo
-	 */
+	/** 
+	  * findById 方法 
+	  * <p>方法说明:</p> 根据主键查找实体
+	  * @param id 实体类的主键
+	  * @return 
+	  * @return Entity 实体类
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public Entity findById(Long id) {
-		// TODO Auto-generated method stub
-		return findByProp("id", id.toString()).get(0);
+		Field[] fs = clazz.getDeclaredFields();
+		String pkName=fs[0].getName();//反射得出主键名称
+		return findByProp(pkName, id.toString()).get(0);
 	}
 
-	/**
-	 * 根据属性值 查找实体
-	 * 
-	 * @param prop
-	 *            实体类的属性名
-	 * @param value
-	 *            实体类的属性值
-	 * @return 实体类list
-	 * @author lenovo
-	 */
+	/** 
+	  * findByProp 方法 
+	  * <p>方法说明:</p> 根据属性值 查找实体
+	  * @param prop 实体类的属性名
+	  * @param value 实体类的属性值
+	  * @return 
+	  * @return List<Entity> 实体类list
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public List<Entity> findByProp(String prop, String value) {
 		Connection conn = OurDaoUtils.getConnection();
@@ -244,18 +290,22 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		}
 	}
 
-	/**
-	 * 根据id值 删除实体
-	 * 
-	 * @param id
-	 *            实体类的主键
-	 * @return 是否成功
-	 * @author lenovo
-	 */
+
+	/** 
+	  * delete 方法 
+	  * <p>方法说明:</p> 根据id值 删除实体
+	  * @param id 实体类的主键
+	  * @return 
+	  * @return boolean 是否成功
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public boolean delete(Long id) {
+		Field[] fs = clazz.getDeclaredFields();
+		String pkName=fs[0].getName();//反射得出主键名称
 		Connection conn = OurDaoUtils.getConnection();
-		String sql = " delete from  " + clazz.getSimpleName() + " where id = ?";
+		String sql = " delete from  " + clazz.getSimpleName() + " where "+pkName+" = ?";
 		try {
 			QueryRunner qRunner = new QueryRunner();
 			qRunner.update(conn, sql, id);
@@ -269,12 +319,16 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		}
 	}
 
-	/**
-	 * 根据sqlwhere语句查询结果的个数
-	 * 
-	 * @param sqlwhere
-	 * @return 个数
-	 */
+	/** 
+	  * getTotal 方法 
+	  * <br/>方法说明:<br/> 根据sqlwhere语句查询结果的个数
+	  * @param sqlwhere
+	  * @return 
+	  * @return int 对象个数
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
+	@Override
 	public int getTotal(String sqlwhere) {
 		Connection conn = OurDaoUtils.getConnection();
 		QueryRunner qRunner = new QueryRunner();
@@ -298,6 +352,17 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		}
 	}
 
+	/** 
+	  * findAll 方法 
+	  * 方法说明:<br/> 分页显示对象list
+	  * @param username
+	  * @param currentPage 页面传递过来的当前页
+	  * @param pageSize 页面传递过来的每页显示条数
+	  * @return 
+	  * @return List<Entity> 对象list
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public List<Entity> findAll(String username, int currentPage, int pageSize) {
 		Connection conn = OurDaoUtils.getConnection();
@@ -321,17 +386,18 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			DbUtils.closeQuietly(conn);
 		}
 	}
-
-	/**
-	 * 分页显示对象list
-	 * 
-	 * @param currentPage
-	 *            页面传递过来的当前页
-	 * @param pageSize
-	 *            页面传递过来的每页显示条数
-	 * @param Map
-	 *            <String, Object> m 页面传递过来的的查询条件 map 其中的kv值的含义可以自定义
-	 */
+	/** 
+	  * findAll 方法 
+	  * <p>方法说明:</p> 分页显示对象list
+	  * @param username
+	  * @param currentPage 页面传递过来的当前页
+	  * @param pageSize 页面传递过来的每页显示条数
+	  * @param m 页面传递过来的的查询条件 map 其中的kv值的含义可以自定义
+	  * @return 
+	  * @return List<Entity> 对象list
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
 	@Override
 	public List<Entity> findAll(String username, int currentPage, int pageSize, Map<String, Object> m) {
 		Connection conn = OurDaoUtils.getConnection();
@@ -368,6 +434,39 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
+		} finally {
+			DbUtils.closeQuietly(conn);
+		}
+	}
+
+	
+	/** 
+	  * delete 方法 
+	  * <p>方法说明:</p> 批量删除
+	  * @param ids 主键值数组
+	  * @return 
+	  * @return boolean 是否操作成功
+	  * @author whp 
+	  * @date 2015年7月16日 
+	*/ 
+	@Override
+	public boolean delete(String[] ids) {
+		Field[] fs = clazz.getDeclaredFields();
+		String pkName=fs[0].getName();//反射得出主键名称
+		Connection conn = OurDaoUtils.getConnection();
+		String sqlin="";
+		for(String id:ids){
+			sqlin +=","+id;
+		}
+		sqlin=sqlin.substring(1);
+		String sql = " delete from " + clazz.getSimpleName() + " where " + pkName + " in("+sqlin+")";
+		QueryRunner qRunner = new QueryRunner();
+		try {
+			qRunner.update(conn, sql);
+			return true;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return false;
 		} finally {
 			DbUtils.closeQuietly(conn);
 		}
