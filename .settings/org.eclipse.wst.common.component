@@ -2,6 +2,7 @@
     <wb-module deploy-name="pt2all">
         <wb-resource deploy-path="/" source-path="/WebRoot" tag="defaultRootSource"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config"/>
         <property name="context-root" value="/pt2all"/>
         <property name="java-output-path" value="/pt2all/WebRoot/WEB-INF/classes"/>
         <property name="me-merge-utility-modules" value="true"/>

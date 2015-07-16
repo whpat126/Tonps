@@ -4,12 +4,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.pt.base.BaseServiceImpl;
 import com.pt.dao.UserDao;
 import com.pt.domain.Users;
 import com.pt.service.UserService;
 
 @Service("userService")
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<Users> implements UserService {
 
 	@Autowired
 	@Qualifier("userDao")

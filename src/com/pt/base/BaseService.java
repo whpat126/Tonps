@@ -5,7 +5,6 @@ import java.util.Map;
 
 public interface BaseService<Entity> {
 	boolean save(Entity obj) ; 
-    
 	
 	List<Entity> findAll() throws Exception;
 	List<Entity> findAll(String username, int currentPage, int pageSize) throws Exception;

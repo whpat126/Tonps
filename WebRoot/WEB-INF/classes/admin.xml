@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<users>
+	<database>
+		<dbtype>oracle</dbtype>
+		<!-- oracle : jdbc:oracle:thin:@127.0.0.1:1521:orcl -->
+		<!-- sqlserver : jdbc:sqlserver://127.0.0.1:1433; DatabaseName=mydb -->
+		<!-- mysql : jdbc:mysql://127.0.0.1:3306/kmdc -->
+		<dbaddress>jdbc:oracle:thin:@127.0.0.1:1521:oracle</dbaddress>
+		<dbuser>pt2all</dbuser>
+		<dbpassword>657DE24F52B9257075DB76EEFA5EE6E5</dbpassword> 
+	</database>
+	<user>
+		<username>sqadmin</username>
+		<password>sq</password>
+	</user>
+	<user>
+		<username>whpadmin</username>
+		<password>whp</password>
+	</user>
+</users>
