@@ -6,24 +6,25 @@ import org.springframework.stereotype.Service;
 
 import com.pt.base.BaseServiceImpl;
 import com.pt.dao.UserDao;
+import com.pt.dao.impl.UserDaoImpl;
 import com.pt.domain.Users;
 import com.pt.service.UserService;
 
 @Service("userService")
 public class UserServiceImpl extends BaseServiceImpl<Users> implements UserService {
 
-	@Autowired
-	@Qualifier("userDao")
-	private UserDao ud;
+//	@Autowired
+//	@Qualifier("userDao")
+//	private UserDao ud;
 
 	public boolean adminValidate(Users user) {
-
-		return ud.adminValidate(user);
+		return userDao.adminValidate(user);
 	}
 
 	public String userValidate(Users user) {
 
-		return ud.userValidate(user);
+		System.out.println("userService----qudiaolezhujieming");
+		return userDao.userValidate(user);
 	}
 
 }

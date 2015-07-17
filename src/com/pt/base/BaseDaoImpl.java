@@ -59,6 +59,7 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 	*/ 
 	@Override
 	public boolean save(Entity obj) {
+		System.out.println("111111111111111111111111111111111111");
 		// obj.getSimpleName();
 		Connection conn = OurDaoUtils.getConnection();
 		String sql = "insert into " + clazz.getSimpleName() + " values(null ";

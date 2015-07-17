@@ -20,6 +20,9 @@ import com.pt.utils.OurDaoUtils;
 @Repository("userDao")
 public class UserDaoImpl extends BaseDaoImpl<Users> implements UserDao {
 
+//	private UserDaoImpl(){
+//		System.out.println("zhujiezhujiezhujiezhujiezhujie");
+//	}
 	private Connection conn;
 	private PreparedStatement pstmt;
 	private ResultSet rs;

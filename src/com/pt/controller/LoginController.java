@@ -15,7 +15,7 @@ import com.pt.service.UserService;
 public class LoginController {
 	
 	@Autowired
-	@Qualifier("userService")
+//	@Qualifier("abcdService")
 	private UserService us;
 	
 	@RequestMapping("/userLogin")

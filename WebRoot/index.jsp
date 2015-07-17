@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-  	<link href="style/css/userCSS/index.css" rel="stylesheet" type="text/css"/>
+  	<link href="style/common/userCSS/index.css" rel="stylesheet" type="text/css"/>
   	
 	
   </head>
