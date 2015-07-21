@@ -8,9 +8,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-  	<link href="style/css/userCSS/index.css" rel="stylesheet" type="text/css"/>
-  	
-	
+  	<link href="style/common/userCSS/index.css" rel="stylesheet" type="text/css"/>
+  	<script src="style/other/jquery-1.11.2.min.js" type="text/javascript"></script>
+	<script src="style/common/userjs/index.js" type="text/javascript"></script>
+	<script type="text/javascript">
+	</script>	
   </head>
   
   <body>
@@ -47,10 +49,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	</div>
   </div>
   
-  <div class="img_lunbo" style="background-image: url('style/css/userCSS/1.jpg');">
+  <div class="img_lunbo" style="background-image: url('style/common/userCSS/1.jpg');">
   	<div class="login_href">
-  		<a href="#">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>&nbsp;&nbsp;&nbsp;&nbsp;
-  		<a href="#" style="background:rgba(0,0,0,0.2);">立即注册</a>
+  		<a href="javascript:void(0);" id="loginDialog">登&nbsp;&nbsp;&nbsp;&nbsp;录</a>&nbsp;&nbsp;&nbsp;&nbsp;
+  		<a href="register.jsp" style="background:rgba(0,0,0,0.2);">立即注册</a>
   	</div>
   </div>
   
@@ -108,6 +110,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 
   </div>
+<div id="sidediv" class="side">
+	<ul>
+		<li><a href="javascript:void(0);"><div class="sidebox"><img src="style/common/userCSS/img/side_icon01.png">客服中心</div></a></li>
+		<li><a href="javascript:void(0);"><div class="sidebox"><img src="style/common/userCSS/img/side_icon02.png">客户案例</div></a></li>
+		<li><a href="javascript:void(0);" ><div class="sidebox"><img src="style/common/userCSS/img/side_icon04.png">QQ客服</div></a></li>
+		<li><a href="javascript:void(0);" ><div class="sidebox"><img src="style/common/userCSS/img/side_icon03.png">新浪微博</div></a></li>
+		<li style="border:none;"><a href="javascript:goTop();" class="sidetop"><img src="style/common/userCSS/img/side_icon05.png"></a></li>
+	</ul>
+</div>
  <%--  <div>
   ${error }
     <form action="userLogin.do">

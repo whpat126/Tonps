@@ -5,6 +5,44 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
   <display-name></display-name>	
+  
+  <!--配置Sring MVC的核心控制器DispatcherServlet -->
+	<servlet>
+		<servlet-name>springmvc</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<!-- contextConfigLocation配置springmvc加载的配置文件（配置处理器映射器、适配器等） 
+			如果不配置contextConfigLocation，默认加载的是/WEB-INF/servlet名称-servlet.xml(springmvc-servlet.xml)
+		-->
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<!--非注解方式 <param-value>classpath:springmvc.xml</param-value> -->
+			<param-value>classpath:springmvc.xml</param-value>
+			
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>springmvc</servlet-name>
+		<!--
+			1. *.do 访问以.do结尾 由DispatcherServlet进行解析
+			2. /，所有访问的地址都由DispatcherServlet进行解析，对于静态文件的解析需要配置不让DispatcherServlet进行解析。
+		-->
+		
+		<url-pattern>*.do</url-pattern>
+	</servlet-mapping>
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   <welcome-file-list>
     <welcome-file>index.jsp</welcome-file>
   </welcome-file-list>

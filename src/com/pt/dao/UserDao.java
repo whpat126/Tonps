@@ -5,9 +5,11 @@ import com.pt.domain.Users;
 
 public interface UserDao extends BaseDao<Users> {
 
-	boolean adminValidate(Users user);
+	boolean adminLogin(Users user);
+	
+	boolean userLogin(Users user);
 
-	String userValidate(Users user);
+	boolean userValidate(String userName);
 
 	
 	

@@ -7,6 +7,13 @@ import java.util.Map;
 
 import javax.annotation.PostConstruct;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Lazy;
+import org.springframework.stereotype.Service;
+
+import com.pt.dao.UserDao;
+
 /** 
   * BaseServiceImpl  
   * <br/>说明:<br/> 基础service实现类，实现了BaseService接口,可由其他ServiceImpl实现类继承
@@ -14,10 +21,12 @@ import javax.annotation.PostConstruct;
   * @author whp 
   * @date 2015年7月16日 
 */ 
+@Lazy(true)
+@Service("baseService")
 public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 
 	/**
-	 * BaseDao<Entity>baseDaoImpl
+	 * BaseDao<Entity>baseDao接口
 	 */
 	protected BaseDao<Entity> baseDaoImpl;
 	/**
@@ -47,6 +56,11 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 			// TODO: handle exception
 		}
 	}
+	@Autowired
+	@Qualifier("userDao")
+	public UserDao userDao;
+	
+	
 
 	public BaseDao<Entity> getBaseDaoImpl() {
 		return baseDaoImpl;
@@ -60,20 +74,19 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * save 方法 
 	  * <br/>方法说明:<br/> 保存对象到对象对应的物理表
 	  * @param obj 对象
-	  * @return 
 	  * @return boolean 是否保存成功
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
 	@Override
 	public boolean save(Entity obj) {
+		System.out.println("22222222222222222222222222222222");
 		return baseDaoImpl.save(obj);
 	}
 
 	/** 
 	  * findAll 方法 
 	  * <p>方法说明:</p> 查询所有对象(无约束条件)
-	  * @return
 	  * @throws Exception 
 	  * @return List<Entity> 对象列表
 	  * @author whp 
@@ -90,7 +103,6 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * @param username
 	  * @param currentPage 页面传递过来的当前页
 	  * @param pageSize 页面传递过来的每页显示条数
-	  * @return 
 	  * @return List<Entity> 对象list
 	  * @author whp 
 	  * @date 2015年7月16日 
@@ -107,7 +119,6 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * @param currentPage 页面传递过来的当前页
 	  * @param pageSize 页面传递过来的每页显示条数
 	  * @param m 页面传递过来的的查询条件 map 其中的kv值的含义可以自定义
-	  * @return 
 	  * @return List<Entity> 对象list
 	  * @author whp 
 	  * @date 2015年7月16日 
@@ -136,7 +147,6 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * <p>方法说明:</p> 根据pk名称和对应的值id 删除对象
 	  * @param id 值
 	  * @param pk 名称
-	  * @return
 	  * @throws Exception 
 	  * @return boolean 
 	  * @author whp 
@@ -150,7 +160,6 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * delete 方法 
 	  * <p>方法说明:</p> 根据主键id删除对象
 	  * @param id
-	  * @return
 	  * @throws Exception 
 	  * @return boolean 
 	  * @author whp 
