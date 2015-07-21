@@ -1,6 +1,7 @@
 *{
 	margin:0px;
 	padding:0px;
+	list-style-type:none;
 }
 body{
 	width:100%;
@@ -218,8 +219,13 @@ a {
 }
 
 
-
-
+/* ¹ö¶¯Ìõ¿ØÖÆ */
+.side{position:fixed;width:54px;height:275px;right:0;top:214px;z-index:100;}
+.side ul li{width:54px;height:54px;float:left;position:relative;border-bottom:1px solid #444;}
+.side ul li .sidebox{position:absolute;width:54px;height:54px;top:0;right:0;transition:all 0.3s;background:#000;opacity:0.8;filter:Alpha(opacity=80);color:#fff;font:14px/54px "Î¢ÈíÑÅºÚ";overflow:hidden;}
+.side ul li .sidetop{width:54px;height:54px;line-height:54px;display:inline-block;background:#000;opacity:0.8;filter:Alpha(opacity=80);transition:all 0.3s;}
+.side ul li .sidetop:hover{background:#ae1c1c;opacity:1;filter:Alpha(opacity=100);}
+.side ul li img{float:left;}
 
 
 

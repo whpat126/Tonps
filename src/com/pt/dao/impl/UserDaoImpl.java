@@ -33,29 +33,16 @@ public class UserDaoImpl extends BaseDaoImpl<Users> implements UserDao {
 	 * 验证管理员的用户名和密码是否一致
 	 */
 	@Override
-	public boolean adminValidate(Users user) {
-		path = this.getClass().getClassLoader().getResource("admin.xml")
-				.getPath();
-		// 调用验证管理员的方法
-		boolean flag = this.validateAdmin(user);
-		return flag;
-	}
-
-	/**
-	 * 验证user对象中的内容与保存的内容是否一致
-	 * 
-	 * @param user
-	 * @return
-	 */
-	private boolean validateAdmin(Users user) {
+	public boolean adminLogin(Users user) {
 		return false;
 	}
+
 
 	/**
 	 * 验证用户的用户名和密码是否一致
 	 */
 	@Override
-	public String userValidate(Users user) {
+	public boolean userLogin(Users user) {
 		String sql = "select username from users where username=? and password=?";
 		Connection conn = OurDaoUtils.getConnection();
 		
@@ -65,12 +52,24 @@ public class UserDaoImpl extends BaseDaoImpl<Users> implements UserDao {
 			pstmt.setString(2, user.getPassword());
 			rs = pstmt.executeQuery();
 			if(rs.next())
-				return user.getUsername();
+				return true;
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return "false";
+		return false;
+	}
+
+	/**
+	 * 验证用户是否存在
+	 * author:宋琪
+	 * @param userName
+	 * @return
+	 */
+	@Override
+	public boolean userValidate(String userName) {
+		System.out.println("验证用户已经存在：useName" + userName);
+		return false;
 	}
 
 }

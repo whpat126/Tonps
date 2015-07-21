@@ -1,34 +1,83 @@
 package com.pt.interceptor;
 
+import javax.annotation.Resource;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-public class LoginInterceptor implements HandlerInterceptor{
+import com.pt.base.BaseService;
+import com.pt.domain.Users;
+import com.pt.service.UserService;
 
+public class LoginInterceptor implements HandlerInterceptor {
+
+	@Autowired
+	@Qualifier("userService")
+	private UserService userService;
+
+	/**
+	 * 业务处理请求之前被调用 Administrator
+	 * 
+	 * @param request
+	 * @param response
+	 * @param handler
+	 * @return
+	 * @throws Exception
+	 */
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-//		//获取请求url
-//		String url = request.getRequestURI();
-//		//判断url是否是公开地址,
-//		if(url.indexOf("Login.do") >= 0){
-//			return true;
-//		}
-//		// 判断session
-//		HttpSession session = request.getSession();
-//		// 从session中取出用户身份信息
-//		String username = (String) session.getAttribute("username");
-//		if(username != null){
-//			return true;
-//		}
-//		// 到这表示用户身份需要认证，跳转登录页面
-//		request.getRequestDispatcher("/login.jsp").forward(request, response);
-//		return false;
+		/**
+		 * 自动登录实现
+		 * 1. 获取用户的session中的AuthenToken
+		 * 		存在：不执行任何操作
+		 * 不存在：
+		 * 2. 获取cookie中的用户ID，存在：获取该用户的详细信息，保存到session中
+		 * 不存在：
+		 * 3. 获取当前访问url
+		 * 4. 获取web.xml中放行的地址
+		 * 5. 如果访问的url不是放行的地址，跳转到登录页面
+		 */
+		//获取请求url
+		String url = request.getRequestURI();
+		if(url.indexOf("userLogin.do") >= 0 || url.indexOf("userValidate.do") >=0 ){
+			return true;
+		}
+		HttpSession session = request.getSession();
+		String userName = (String)session.getAttribute("userName");
+		
+		if(null == userName){ // session 不存在
+			Cookie[] cookies = request.getCookies();
+			if(cookies != null && cookies.length > 0 ){
+				String userId = "";
+				String password = "";
+				for(Cookie cookie : cookies){
+					if("userId".equals(cookie.getName())){
+//						String userId = cookie.getValue();
+//						Users user2 = baseUserService.findById(Long.parseLong(userId));
+						userId = cookie.getValue();
+					}
+					if("password".equals(cookie.getName())){
+						password = cookie.getValue();
+					}
+					Users user = userService.findByProp(userId, password);
+					if(user != null){
+						return true;
+					}
+				}
+			}
+			
+			request.getRequestDispatcher("/index2.jsp").forward(request, response);
+			return false;
+		}
 		return true;
+		
 	}
 
 	@Override
@@ -36,7 +85,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 			HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -44,7 +93,7 @@ public class LoginInterceptor implements HandlerInterceptor{
 			HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }
