@@ -2,26 +2,32 @@
 $(function() {
 	$.ajax({
 		type : "POST",
-		//async: false,
-		url : "userLogin.do",
+		async: false,
+		url : "autoLogin.do",
 //		error : function(){alert("连接错误....");},
 		success : function(data){
-			
+			if(data == "false"){
+				$("#userLogin").show();
+			}else{
+				$("#userName").html(data);
+				$("#userInfo").show(); // 显示用户按钮
+				$("#userSet").show();
+			}
 		},
 		error:function(data){
 			alert("123");
 		}
 	});
 	
-	var userName = $("#userName").html();
-	if(userName=="" || userName == null){ // 即用户不存在
-//		alert(userName);
-		$("#userLogin").show(); // 登录按钮显示
-	}else{ //用户已经登录
-//		$("#userLogin").hide(); // 登录按钮yincang
-		$("#userInfo").show(); // 显示用户按钮
-		$("#userSet").show();
-	}
+//	var userName = $("#userName").html();
+//	if(userName=="" || userName == null){ // 即用户不存在
+////		alert(userName);
+//		$("#userLogin").show(); // 登录按钮显示
+//	}else{ //用户已经登录
+////		$("#userLogin").hide(); // 登录按钮yincang
+//		$("#userInfo").show(); // 显示用户按钮
+//		$("#userSet").show();
+//	}
 	
 	
 	

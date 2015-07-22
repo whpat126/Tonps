@@ -1,6 +1,7 @@
 package com.pt.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.Cookie;
@@ -25,21 +26,22 @@ public class UserController {
 	private UserService us;
 
 	/**
-	 * 用户注册信息验证
-	 * author：songqi
+	 * 用户注册信息验证 author：songqi
+	 * 
 	 * @param userName
 	 * @return
 	 */
 	@RequestMapping("/userValidate")
-	private ModelAndView userValidate(String userName){
-//		System.out.println("bbbbbbbbbbbbb");
-//		System.out.println("----------->" + userName);
+	private ModelAndView userValidate(String userName) {
+		// System.out.println("bbbbbbbbbbbbb");
+		// System.out.println("----------->" + userName);
 		boolean flag = us.userValidate(userName);
 		return null;
 	}
+
 	/**
-	 * 用户登录验证，交service判断用户名密码是否正确
-	 * author：songqi
+	 * 用户登录验证，交service判断用户名密码是否正确 author：songqi
+	 * 
 	 * @param user
 	 * @param request
 	 * @param resp
@@ -51,32 +53,45 @@ public class UserController {
 	private void userLogin(Users user, HttpServletRequest request,
 			HttpServletResponse resp) throws ServletException, IOException {
 		ModelAndView mav = new ModelAndView();
-//		System.out.println("aaaaaaaaaaaaaaaa");
+		// System.out.println("aaaaaaaaaaaaaaaa");
 		boolean flag = us.userLogin(user);
 		if (!flag) {
 			mav.setViewName("index");
 			mav.addObject("error", "用户名或密码不正确！");
 
-//			return mav;
-		} 
-		else {
+			// return mav;
+		} else {
 			System.out.println("111111111111111");
 			HttpSession session = request.getSession();
-//			session.setAttribute("userName", user.getUsername());
-//			Cookie cookieName = new Cookie("user", user.getId() + "?????!!!!!" + user.getPassword());
+			// session.setAttribute("userName", user.getUsername());
+			// Cookie cookieName = new Cookie("user", user.getId() +
+			// "?????!!!!!" + user.getPassword());
 			session.setAttribute("userName", "zhangsan");
 			Cookie cookieName = new Cookie("user", "1" + "@@@@" + "zhangsanpwd");
 			// 保留7天
-			cookieName.setMaxAge(7*24*3600);
+			cookieName.setMaxAge(7 * 24 * 3600);
 			resp.addCookie(cookieName);
 			resp.setCharacterEncoding("utf-8");
 			resp.setContentType("text/html;charset=utf-8");
-			
+
 			resp.sendRedirect("index2.jsp");
-			
-//			mav.setViewName("/index2");
-//			return mav;
+
+			// mav.setViewName("/index2");
+			// return mav;
 		}
+	}
+
+	@RequestMapping("/autoLogin")
+	private void autoLogin(HttpSession session, HttpServletRequest request,
+			HttpServletResponse resp)throws ServletException, IOException {
+		System.out.println("autoLogin的session"
+				+ session.getAttribute("userName"));
+		String userName = (String) session.getAttribute("userName");
+		PrintWriter out = resp.getWriter();
+		if(userName == null || "".equals(userName)){
+			out.print(false);
+		}else
+			out.print(userName);
 	}
 
 	/**

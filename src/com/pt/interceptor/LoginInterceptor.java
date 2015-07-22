@@ -59,12 +59,12 @@ public class LoginInterceptor implements HandlerInterceptor {
 //						Users user2 = baseUserService.findById(Long.parseLong(userId));
 						usernameAndPwd = cookie.getValue();
 						String[] str = usernameAndPwd.split("@@@@");
-						System.out.println("loginInterceptor的for循环中" + str[0] +  " :  " + str[1]);
+					 	System.out.println("loginInterceptor的for循环中" + str[0] +  " :  " + str[1]);
 //						Users user = userService.findByProp(str[0], str[1]);
 //						Users user = new Users();
 //						if(user != null){
 							session.setAttribute("userName", str[1]);
-							return false;
+							return true;
 //						}
 					}
 				}
@@ -76,8 +76,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 				return true;
 			}
 			
-			request.getRequestDispatcher("/index2.jsp").forward(request, response);
-			return false;
+//			request.getRequestDispatcher("/index.jsp").forward(request, response);
+//			return false;
 		}
 		return true;
 		
