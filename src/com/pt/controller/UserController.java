@@ -38,7 +38,7 @@ public class UserController {
 		return null;
 	}
 	/**
-	 * 用户登录验证，叫service判断用户名密码是否正确
+	 * 用户登录验证，交service判断用户名密码是否正确
 	 * author：songqi
 	 * @param user
 	 * @param request
@@ -48,31 +48,34 @@ public class UserController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/userLogin")
-	private ModelAndView userLogin(Users user, HttpServletRequest request,
+	private void userLogin(Users user, HttpServletRequest request,
 			HttpServletResponse resp) throws ServletException, IOException {
 		ModelAndView mav = new ModelAndView();
 //		System.out.println("aaaaaaaaaaaaaaaa");
-		boolean str = us.userLogin(user);
-		if (str) {
+		boolean flag = us.userLogin(user);
+		if (!flag) {
 			mav.setViewName("index");
 			mav.addObject("error", "用户名或密码不正确！");
 
-			return mav;
+//			return mav;
 		} 
 		else {
+			System.out.println("111111111111111");
 			HttpSession session = request.getSession();
-			session.setAttribute("username", str);
-			Cookie cookieName = new Cookie("userName", user.getId() + "");
-			Cookie cookiePwd = new Cookie("password", user.getPassword());
+//			session.setAttribute("userName", user.getUsername());
+//			Cookie cookieName = new Cookie("user", user.getId() + "?????!!!!!" + user.getPassword());
+			session.setAttribute("userName", "zhangsan");
+			Cookie cookieName = new Cookie("user", "1" + "@@@@" + "zhangsanpwd");
 			// 保留7天
 			cookieName.setMaxAge(7*24*3600);
-			cookiePwd.setMaxAge(7*24*3600);
 			resp.addCookie(cookieName);
-			resp.addCookie(cookiePwd);
 			resp.setCharacterEncoding("utf-8");
 			resp.setContentType("text/html;charset=utf-8");
-			mav.setViewName("/index2");
-			return mav;
+			
+			resp.sendRedirect("index2.jsp");
+			
+//			mav.setViewName("/index2");
+//			return mav;
 		}
 	}
 

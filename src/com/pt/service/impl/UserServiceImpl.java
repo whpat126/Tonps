@@ -35,7 +35,7 @@ public class UserServiceImpl extends BaseServiceImpl<Users> implements UserServi
 	@Override
 	public boolean userLogin(Users user) {
 		// TODO Auto-generated method stub
-		return false;
+		return true;
 	}
 
 	@Override

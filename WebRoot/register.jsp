@@ -10,6 +10,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>平通云应用用户注册</title>
+    <link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
+    <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
+   	<script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script> 
 	<script>
 		$(function () { 
 			$('#myModal').modal({backdrop:"static", keyboard:false, show:false});

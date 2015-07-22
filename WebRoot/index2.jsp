@@ -8,8 +8,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
+	<link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
+	
 	<script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
-   <script type="text/javascript" src="style/common/userjs/index2.js"></script> 
+   	<script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script> 
+   	<script type="text/javascript" src="style/common/userjs/index2.js"></script>
   </head>
   <body>
   
@@ -30,9 +33,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 		</div>
 	 		<!-- 退出系统 -->
 	 		<div class="black_bar_right" >
-	 			<ul class="fl" >
-	 				<li ><span id="userName">xx</span>  <a id="logout" href="javascript:;" title="退出系统">退出</a></li>
-	 			</ul>
+	 			<!-- 如果session存在则显示用户名，鼠标划过，下方显示链接；不存在则显示登录 -->
+	 			<div id="userInfo" style="display:none;">
+		 			<ul class="fl" >
+		 				<li ><span id="userName">${userName }</span>  </li>
+		 			</ul>
+	 			</div>
+	 			<!-- 个人设置 -->
+	 			<div id="userSet" style="display:none;">
+	 				个人中心
+	 				消息中心
+	 				<a id="logout" href="javascript:;" title="退出系统">退出</a>
+	 			</div>
 	 		</div>
  		</div>
 		
@@ -55,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 		<!-- 用户信息 -->
 		<!-- 未登录 -->
-		<div id="userLogin"><a href="javascript:void(0);">登录</a></div>
+		<div id="userLogin" style="display:none;"> <a id="login" href="javascript:void(0);">登录</a></div>
 		
 		
 		<!-- 百度导航 -->
@@ -96,7 +108,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
   
-  
+    <!-- 登录模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">登录</h4>
+					</div>
+					<div class="modal-body">
+						${msg }
+					    <form action="userLogin.do" method="post">
+					    	手机/邮箱:<input type="text" name="username" /><br/>
+					    	密码:<input type="password" name="password" /><br/>
+						<div class="modal-footer">
+							<button type="button" class="btn btn-primary">登录</button>
+						</div>
+						</form>
+					   
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
   
   </body>
 </html>

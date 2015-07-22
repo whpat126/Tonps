@@ -1,6 +1,5 @@
 package com.pt.interceptor;
 
-import javax.annotation.Resource;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -11,7 +10,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pt.base.BaseService;
 import com.pt.domain.Users;
 import com.pt.service.UserService;
 
@@ -22,8 +20,8 @@ public class LoginInterceptor implements HandlerInterceptor {
 	private UserService userService;
 
 	/**
-	 * 业务处理请求之前被调用 Administrator
-	 * 
+	 * 业务处理请求之前被调用 
+	 * author:宋琪
 	 * @param request
 	 * @param response
 	 * @param handler
@@ -33,7 +31,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 	@Override
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
-		/**
+		/*
 		 * 自动登录实现
 		 * 1. 获取用户的session中的AuthenToken
 		 * 		存在：不执行任何操作
@@ -44,33 +42,38 @@ public class LoginInterceptor implements HandlerInterceptor {
 		 * 4. 获取web.xml中放行的地址
 		 * 5. 如果访问的url不是放行的地址，跳转到登录页面
 		 */
-		//获取请求url
-		String url = request.getRequestURI();
-		if(url.indexOf("userLogin.do") >= 0 || url.indexOf("userValidate.do") >=0 ){
-			return true;
-		}
+		
 		HttpSession session = request.getSession();
 		String userName = (String)session.getAttribute("userName");
-		
-		if(null == userName){ // session 不存在
+//		System.out.println("=========>loginInterceptor   "+ userName);
+		if(null == userName || "".equals(userName)){ // session 不存在
+			
 			Cookie[] cookies = request.getCookies();
 			if(cookies != null && cookies.length > 0 ){
-				String userId = "";
-				String password = "";
+				String usernameAndPwd = "";
 				for(Cookie cookie : cookies){
-					if("userId".equals(cookie.getName())){
+					
+					if("user".equals(cookie.getName())){
+//						System.out.println("1233211234567");
 //						String userId = cookie.getValue();
 //						Users user2 = baseUserService.findById(Long.parseLong(userId));
-						userId = cookie.getValue();
-					}
-					if("password".equals(cookie.getName())){
-						password = cookie.getValue();
-					}
-					Users user = userService.findByProp(userId, password);
-					if(user != null){
-						return true;
+						usernameAndPwd = cookie.getValue();
+						String[] str = usernameAndPwd.split("@@@@");
+						System.out.println("loginInterceptor的for循环中" + str[0] +  " :  " + str[1]);
+//						Users user = userService.findByProp(str[0], str[1]);
+//						Users user = new Users();
+//						if(user != null){
+							session.setAttribute("userName", str[1]);
+							return false;
+//						}
 					}
 				}
+			}
+			//获取请求url
+			String url = request.getRequestURI();
+			if(url.indexOf("userLogin.do") >= 0 || url.indexOf("userValidate.do") >=0 ){
+				System.out.println("进入url判断---------------");
+				return true;
 			}
 			
 			request.getRequestDispatcher("/index2.jsp").forward(request, response);
