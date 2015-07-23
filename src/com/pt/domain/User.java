@@ -1,20 +1,14 @@
 package com.pt.domain;
 
-public class Users {
+public class User {
 
-	private Integer id;
+	private String pk_users;
 	private String username;
 	private String password;
 	private String email;
 	private String phone;
 	private String name;
 	private String demo;
-	public Integer getId() {
-		return id;
-	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
 	public String getUsername() {
 		return username;
 	}
@@ -50,6 +44,12 @@ public class Users {
 	}
 	public void setDemo(String demo) {
 		this.demo = demo;
+	}
+	public String getPk_users() {
+		return pk_users;
+	}
+	public void setPk_users(String pk_users) {
+		this.pk_users = pk_users;
 	}
 	
 }

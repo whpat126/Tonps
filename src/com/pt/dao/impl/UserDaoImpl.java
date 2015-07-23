@@ -14,11 +14,11 @@ import org.springframework.stereotype.Repository;
 
 import com.pt.base.BaseDaoImpl;
 import com.pt.dao.UserDao;
-import com.pt.domain.Users;
+import com.pt.domain.User;
 import com.pt.utils.OurDaoUtils;
 
 @Repository("userDao")
-public class UserDaoImpl extends BaseDaoImpl<Users> implements UserDao {
+public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 
 //	private UserDaoImpl(){
 //		System.out.println("zhujiezhujiezhujiezhujiezhujie");
@@ -33,7 +33,7 @@ public class UserDaoImpl extends BaseDaoImpl<Users> implements UserDao {
 	 * 验证管理员的用户名和密码是否一致
 	 */
 	@Override
-	public boolean adminLogin(Users user) {
+	public boolean adminLogin(User user) {
 		return false;
 	}
 
@@ -42,7 +42,7 @@ public class UserDaoImpl extends BaseDaoImpl<Users> implements UserDao {
 	 * 验证用户的用户名和密码是否一致
 	 */
 	@Override
-	public boolean userLogin(Users user) {
+	public boolean userLogin(User user) {
 		String sql = "select username from users where username=? and password=?";
 		Connection conn = OurDaoUtils.getConnection();
 		

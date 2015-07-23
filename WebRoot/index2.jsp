@@ -117,12 +117,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<h4 class="modal-title" id="myModalLabel">登录</h4>
 					</div>
 					<div class="modal-body">
+						<span id="msg"></span>
 						${msg }
 					    <form action="userLogin.do" method="post">
-					    	手机/邮箱:<input type="text" name="username" /><br/>
-					    	密码:<input type="password" name="password" /><br/>
+					    	手机/邮箱:<input type="text" id="username" name="username" /><br/>
+					    	密码:<input type="password" id="password" name="password" /><br/>
+							<input type="checkbox" id="remeber" name="remeber" checked /> 7日内免登录
 						<div class="modal-footer">
-							<button type="button" class="btn btn-primary">登录</button>
+							<button id="loginButton" type="button" class="btn btn-primary">登录</button>
+						</div>
+						<!-- 社交工具登录 -->
+						<div id="otherLogin">
+							
 						</div>
 						</form>
 					   

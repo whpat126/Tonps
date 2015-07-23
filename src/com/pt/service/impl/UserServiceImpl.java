@@ -6,11 +6,11 @@ import org.springframework.stereotype.Service;
 
 import com.pt.base.BaseServiceImpl;
 import com.pt.dao.UserDao;
-import com.pt.domain.Users;
+import com.pt.domain.User;
 import com.pt.service.UserService;
 
 @Service("userService")
-public class UserServiceImpl extends BaseServiceImpl<Users> implements UserService {
+public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
 
 	@Autowired
 	@Qualifier("userDao")
@@ -27,13 +27,13 @@ public class UserServiceImpl extends BaseServiceImpl<Users> implements UserServi
 //	}
 
 	@Override
-	public boolean adminLogin(Users user) {
+	public boolean adminLogin(User user) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean userLogin(Users user) {
+	public boolean userLogin(User user) {
 		// TODO Auto-generated method stub
 		return true;
 	}

@@ -1,13 +1,13 @@
 package com.pt.service;
 
 import com.pt.base.BaseService;
-import com.pt.domain.Users;
+import com.pt.domain.User;
 
-public interface UserService extends BaseService<Users> {
+public interface UserService extends BaseService<User> {
 
-	boolean adminLogin(Users user);
+	boolean adminLogin(User user);
 
-	boolean userLogin(Users user);
+	boolean userLogin(User user);
 	/**
 	 * 添加一个用户
 	 * author：songqi

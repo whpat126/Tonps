@@ -15,7 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pt.domain.Users;
+import com.pt.domain.User;
 import com.pt.service.UserService;
 
 @Controller
@@ -40,8 +40,8 @@ public class UserController {
 	}
 
 	/**
-	 * 用户登录验证，交service判断用户名密码是否正确 author：songqi
-	 * 
+	 * 用户登录验证，交service判断用户名密码是否正确 
+	 * @author：songqi
 	 * @param user
 	 * @param request
 	 * @param resp
@@ -50,42 +50,41 @@ public class UserController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/userLogin")
-	private void userLogin(Users user, HttpServletRequest request,
+	private void userLogin(String username,String password,String remeber, HttpServletRequest request,
 			HttpServletResponse resp) throws ServletException, IOException {
-		ModelAndView mav = new ModelAndView();
-		// System.out.println("aaaaaaaaaaaaaaaa");
+//		System.out.println("userLogin......");
+		User user = new User();
+		user.setUsername(username);
+		user.setPassword(password);
 		boolean flag = us.userLogin(user);
+		PrintWriter out = resp.getWriter();
+//		flag =false;
 		if (!flag) {
-			mav.setViewName("index");
-			mav.addObject("error", "用户名或密码不正确！");
-
+			out.print(false);
 			// return mav;
-		} else {
-			System.out.println("111111111111111");
+		} else if("true".equals(remeber)){
 			HttpSession session = request.getSession();
-			// session.setAttribute("userName", user.getUsername());
-			// Cookie cookieName = new Cookie("user", user.getId() +
-			// "?????!!!!!" + user.getPassword());
-			session.setAttribute("userName", "zhangsan");
-			Cookie cookieName = new Cookie("user", "1" + "@@@@" + "zhangsanpwd");
+			session.setAttribute("userName", "zhangsan"); //要修改
+			Cookie cookieName = new Cookie("user", "1" + "@@@@" + "zhangsanpwd"); // 要修改
 			// 保留7天
 			cookieName.setMaxAge(7 * 24 * 3600);
 			resp.addCookie(cookieName);
 			resp.setCharacterEncoding("utf-8");
 			resp.setContentType("text/html;charset=utf-8");
-
-			resp.sendRedirect("index2.jsp");
-
+			out.print(username);
 			// mav.setViewName("/index2");
 			// return mav;
+		}else{
+			HttpSession session = request.getSession();
+			session.setAttribute("userName", "zhangsan"); //要修改
+			out.print(username);
 		}
 	}
 
 	@RequestMapping("/autoLogin")
 	private void autoLogin(HttpSession session, HttpServletRequest request,
 			HttpServletResponse resp)throws ServletException, IOException {
-		System.out.println("autoLogin的session"
-				+ session.getAttribute("userName"));
+		System.out.println("autoLogin的session" + session.getAttribute("userName"));
 		String userName = (String) session.getAttribute("userName");
 		PrintWriter out = resp.getWriter();
 		if(userName == null || "".equals(userName)){
@@ -102,7 +101,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/adminLogin")
-	private ModelAndView adminLogin(Users user, HttpSession session) {
+	private ModelAndView adminLogin(User user, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
 		boolean flag = us.adminLogin(user);

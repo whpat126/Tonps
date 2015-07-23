@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pt.domain.Users;
+import com.pt.domain.User;
 import com.pt.service.UserService;
 
 public class LoginInterceptor implements HandlerInterceptor {
@@ -69,6 +69,7 @@ public class LoginInterceptor implements HandlerInterceptor {
 					}
 				}
 			}
+			
 			//获取请求url
 			String url = request.getRequestURI();
 			if(url.indexOf("userLogin.do") >= 0 || url.indexOf("userValidate.do") >=0 ){

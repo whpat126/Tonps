@@ -15,7 +15,7 @@ $(function() {
 			}
 		},
 		error:function(data){
-			alert("123");
+			alert("获得用户信息失败，但不影响系统业务的使用。");
 		}
 	});
 	
@@ -29,7 +29,33 @@ $(function() {
 //		$("#userSet").show();
 //	}
 	
-	
+	// 当点击登录按钮时
+	$("#loginButton").click(function(){
+		var username = $.trim($("#username").val());
+		var password = $.trim($("#password").val());
+		var remeber = $("#remeber").is(":checked"); // 判断checkbox是否被选中
+		if(username == "") {$("#msg").html("用户名不能为空");return false;}
+		if(password == "") {$("#msg").html("密码不能为空");return false;}
+		$.ajax({
+			type : "POST",
+			async: false,
+			url : "userLogin.do",
+			data : { "username" : username, "password" : password, "remeber" :remeber },
+			error : function(){alert("获得用户信息失败，但不影响系统业务的使用。");},
+			success : function(data){
+				if(data == "false"){
+					$("#msg").html("用户名或密码不正确");
+				}else{
+					$("#userName").html(data); //显示用户姓名
+//					$("#userInfo").show(); // 显示用户按钮
+//					$("#userSet").show(); // 用户设置
+					location.replace(location);
+				}
+			}
+		});
+		
+		
+	});
 	
 	
 	// 模态框设置

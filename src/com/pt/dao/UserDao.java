@@ -1,13 +1,13 @@
 package com.pt.dao;
 
 import com.pt.base.BaseDao;
-import com.pt.domain.Users;
+import com.pt.domain.User;
 
-public interface UserDao extends BaseDao<Users> {
+public interface UserDao extends BaseDao<User> {
 
-	boolean adminLogin(Users user);
+	boolean adminLogin(User user);
 	
-	boolean userLogin(Users user);
+	boolean userLogin(User user);
 
 	boolean userValidate(String userName);
 
