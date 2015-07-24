@@ -6,81 +6,141 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <!DOCTYPE HTML>
 <html>
-  <head>
+<head>
+    <meta name="renderer" content="webkit"/>
+    <meta name="keywords" content="平通,平通网,网址导航,网址大全,上网导航,portal,门户,云平台,信息平台,信息门户,导航,搜索,导航软件,信息集成,企业云,云服务,云"/>
+    <meta name="description"
+          content="平通网致力于打造企业及个人的信息门户，构建企业及个人的地址图谱，通过集成技术实现单点登录、信息集成，并与企业内部系统进行互通，实现信息共享，打造个人一个网页所有应用的平台(OPAA)"/>
+    <meta http-equiv="imagetoolbar" content="no"/>
+    <meta name="baidu-site-verification" content="GZU70K0VRo"/>
     <base href="<%=basePath%>">
-	<link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
-	
-	<script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
-   	<script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script> 
-   	<script type="text/javascript" src="style/common/userjs/index2.js"></script>
-  </head>
-  <body>
-  
-	<div>
-		<!-- 最上方黑条  style="display:none;" -->
-		<div><%@ include file="black_on_top.jsp" %></div>
-		
-		
-		<!-- 单位logo -->
-		<div id="logo" class="logo"></div>
-		
-		<!-- 导航栏 -->
-		<div id="menuBar" class="menuBar">
-			<ul>
-				<li>我的消息</li>
-				<li>我的企业</li>
-				<li>我的应用</li>
-				<li>我的社区</li>
-				<li>帮助中心</li>
-			</ul>
-		</div>
-		
-		
-		<!-- 用户信息 -->
-		<!-- 未登录 -->
-		<div id="userLogin" style="display:none;"> <a id="login" href="javascript:void(0);">登录</a></div>
-		
-		
-		<!-- 百度导航 -->
-		<div id="baidu" class="baidu"> 
-			
-		</div>
-		
-		<div id="funcMenu">
-			<!-- 后台生成，此处先写出来 -->
-			<ul>
-				<li>系统推荐（暂时）</li>
-				<li>爱常用</li>
-				<li>爱工作</li>
-				<li>爱生活</li>
-				<li>平通云</li>
-			</ul>
-		</div>
-		
-		<!-- 主要内容展示区 -->
-		<div id="mainContent" >
-			<!-- 未登录用户使用，由系统推送 -->
-			<div id="none_login" style="display:none;">
-				
-			</div>
-			<!-- 爱常用中内容 -->
-			<div id="love_common" style="display:none;">
-				
-			</div>
-			<div id="love_work" style="display:none;"></div>
-			<div id="love_life" style="display:none;"></div>
-			<div id="pt_yun" style="display:none;"></div>
-		</div>
-		<!-- 侧边回到页首和帮助 -->
-		<div id="side">
-			<ul>
-				<li></li>
-			</ul>
-		</div>
-	</div>
-	
-  	<!-- 登录的model -->
-   <%@ include file="login.jsp"  %>
-  
-  </body>
+    <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
+    <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="style/common/userjs/index2.js"></script>
+    <link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
+    <link rel="stylesheet" href="style/common/userCSS/base.css"/>
+    <link rel='icon' href='style/common/img/fivelogo.ico' type=‘image/x-ico’/>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <title>企业云信息门户（SSO）,网址导航,打造自己的独立桌面-平通网</title>
+
+</head>
+<body style="background-color: #f9f9f9">
+
+<div class="container">
+    <!-- 最上方黑条  style="display:none;" -->
+    <div class="row"><%@ include file="black_on_top.jsp" %></div>
+    <!-- 单位logo -->
+
+    <div class="row" >
+        <div class="col-md-12">
+            <div class="black_bar navbar navbar-default navbar-fixed-top" style="margin-top: 100px;position: absolute;transition: 100px">
+                <div class="col-md-1"><a href="http://www.ptsso.com"><img src="style/common/img/logoxztm.gif" alt="平通网"></a></div>
+                <!-- 导航栏 -->
+                <div id="menuBar" class="menuBar col-md-5">
+                    <div>
+                        <div>
+                            <ul class="nav nav-tabs">
+                                <li><a href="#">我的消息</a></li>
+                                <li><a href="#">我的企业</a></li>
+                                <li><a href="#">我的应用</a></li>
+                                <li><a href="#">我的社区</a></li>
+                                <li><a href="#">帮助中心</a></li>
+                            </ul>
+                        </div>
+                        <!-- 未登录 -->
+                        <div id="userLogin" class="col-md-6" style="display:block;"><a id="login" href="javascript:void(0);">登录</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    </div>
+    <!-- 用户信息 -->
+
+
+    <!-- 搜索引擎 -->
+    <div>
+        <form action="http://www.baidu.com/baidu" target="_blank">
+            <table>
+                <tr>
+                    <td>
+                        <input name=tn type=hidden value=baidu>
+                        <a href="http://www.baidu.com/" target="_blank"><img id="baidulogo"
+                                                                             src="style/common/img/baidu_web.png"
+                                                                             alt="Baidu" align="bottom" border="0"
+                                                                             height="40px"></a>
+                        <input type=text name=word size=70px>
+                        <input type="submit" value="搜一下">
+                    </td>
+                </tr>
+            </table>
+        </form>
+
+    </div>
+    <div id="funcMenu">
+        <!-- 后台生成，此处先写出来 -->
+        <ul>
+            <li>酷&nbsp;&nbsp;&nbsp;&nbsp;站</li>
+            <li>爱常用</li>
+            <li>爱工作</li>
+            <li>爱生活</li>
+            <li>平通云</li>
+        </ul>
+    </div>
+
+    <!-- 主要内容展示区 -->
+    <div id="mainContent">
+        <!-- 未登录用户使用，由系统推送 -->
+        <div id="none_login" style="display:none;">
+
+        </div>
+        <!-- 爱常用中内容 -->
+        <div id="love_common" style="display:none;">
+
+        </div>
+        <div id="love_work" style="display:none;"></div>
+        <div id="love_life" style="display:none;"></div>
+        <div id="pt_yun" style="display:none;"></div>
+    </div>
+    <!-- 侧边回到页首和帮助 -->
+    <div id="side">
+        <ul>
+            <li></li>
+        </ul>
+    </div>
+    <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+    <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+    <br/>
+    <br/>
+
+    <div id="sidediv" class="side" style="list-style-type:none;">
+        <ul style="list-style-type:none;">
+            <li style="list-style-type:none;"><a href="javascript:void(0);">
+                <div class="sidebox"><img src="style/common/img/side_icon01.png">客服中心</div>
+            </a></li>
+            <li style="list-style-type:none;"><a href="javascript:void(0);">
+                <div class="sidebox"><img src="style/common/img/side_icon02.png">客户案例</div>
+            </a></li>
+            <li style="list-style-type:none;"><a href="javascript:void(0);">
+                <div class="sidebox"><img src="style/common/img/side_icon04.png">QQ客服</div>
+            </a></li>
+            <li style="list-style-type:none;"><a href="javascript:void(0);">
+                <div class="sidebox"><img src="style/common/img/side_icon03.png">新浪微博</div>
+            </a></li>
+            <li style="border:none;list-style-type:none;"><a href="javascript:goTop();" class="sidetop"><img
+                    src="style/common/img/side_icon05.png"></a></li>
+        </ul>
+    </div>
+
+</div>
+
+<!-- 登录的model -->
+<%@ include file="login.jsp" %>
+
+</body>
 </html>
