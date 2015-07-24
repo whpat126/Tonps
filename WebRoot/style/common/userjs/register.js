@@ -1,33 +1,63 @@
 
 $(function() {
-	$.ajax({
-		type : "POST",
-		async: false,
-		url : "autoLogin.do",
-//		error : function(){alert("连接错误....");},
-		success : function(data){
-			if(data == "false"){
-				$("#userLogin").show();
-			}else{
-				$("#userName").html(data);
-				$("#userInfo").show(); // 显示用户按钮
-				$("#userSet").show();
+	// 用户注册
+	$("#register").click(function(){
+		var reusername = $.trim($("#reusername").val());
+		var repassword = $.trim($("#repassword").val());
+		var rerepassword = $.trim($("#rerepassword").val());
+		var agree = $("#agree").is(":checked");
+		if(reusername == "") {$("#remsg").html("用户名不能为空");return false;}
+		if(repassword == "") {$("#remsg").html("密码不能为空");return false;}
+		if(repassword != rerepassword) {$("#remsg").html("密码不一致");return false;}
+		if(!agree) {$("#remsg").html("请阅读相关协议后再注册"); return false;}
+		//$("#form1").submit();
+		$.ajax({
+			type : "POST",
+			data : {"reusername" : reusername,"repassword" : repassword},
+			url : "userRegister.do",
+			success : function(data){
+				if("true" == data){
+					$("#remsg").html("用户已经存在");
+				}else if("success" == data){
+					alert("注册成功，点击确定则跳转到首页");
+					location.replace("index2.jsp");
+				}else{
+					$("#remsg").html("注册失败，用户已经存在");
+				}
 			}
-		},
-		error:function(data){
-			alert("获得用户信息失败，但不影响系统业务的使用。");
-		}
+		});
+		
+		
+		
+	});
+	// 验证用户是否存在
+	$("#validate").click(function(){
+		var reusername = $.trim($("#reusername").val());
+		if(reusername == "") {$("#remsg").html("用户名不能为空");return false;}
+		$.ajax({
+			type : "POST",
+			data : {"userName" : reusername},
+			url : "userValidate.do",
+			success : function(data){
+				if("false" == data){
+					$("#remsg").html("用户可以注册");
+				}else{
+					$("#remsg").html("用户已经存在");
+				}
+			}
+		});
 	});
 	
-//	var userName = $("#userName").html();
-//	if(userName=="" || userName == null){ // 即用户不存在
-////		alert(userName);
-//		$("#userLogin").show(); // 登录按钮显示
-//	}else{ //用户已经登录
-////		$("#userLogin").hide(); // 登录按钮yincang
-//		$("#userInfo").show(); // 显示用户按钮
-//		$("#userSet").show();
-//	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	// 当点击登录按钮时
 	$("#loginButton").click(function(){
@@ -75,11 +105,6 @@ $(function() {
 		window.location.href="/pt2all/logout.jsp";
 		
 	});
-	
-	
-	
-	
-	
 	
 	// 网址加入收藏
 	function collect(sTitle,sURL){

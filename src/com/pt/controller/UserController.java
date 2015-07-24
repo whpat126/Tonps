@@ -26,21 +26,67 @@ public class UserController {
 	private UserService us;
 
 	/**
-	 * 用户注册信息验证 author：songqi
+	 * 用户注册信息验证 ，判断该用户是否存在
 	 * 
+	 * @author：songqi
 	 * @param userName
 	 * @return
 	 */
 	@RequestMapping("/userValidate")
-	private ModelAndView userValidate(String userName) {
+	private void userValidate(String userName, HttpServletResponse resp)
+			throws IOException {
 		// System.out.println("bbbbbbbbbbbbb");
-		// System.out.println("----------->" + userName);
+		System.out.println("用户验证的方法-------->" + userName);
+		//flag 为 true 表示用户已经存在，false表示不存在，默认是true
 		boolean flag = us.userValidate(userName);
-		return null;
+		PrintWriter out = resp.getWriter();
+		flag = false;
+		if (flag) {
+			out.print(false);
+		} else {
+			out.print(true);
+		}
+
 	}
 
 	/**
-	 * 用户登录验证，交service判断用户名密码是否正确 
+	 * 用户注册的类，需要先判断用户是否存在，然后再判断是否添加成功
+	 * 
+	 * @author：songqi
+	 * @return
+	 */
+	@RequestMapping("/userRegister")
+	private void userRegister(String reusername, String repassword,
+			HttpServletResponse resp,HttpSession session) throws IOException {
+		PrintWriter out = resp.getWriter();
+		System.out.println("===》用户注册的方法" + reusername);
+		// 验证用户名是否存在  flag 为 true 表示用户已经存在，false表示不存在，默认是true
+		boolean flag = us.userValidate(reusername);
+		flag = false;
+		if (flag) {
+			out.print(true);
+		} else {
+			User user = new User();
+			user.setUsername(reusername);
+			user.setPassword(repassword);
+			// 保存用户到数据库中
+//			boolean bl = us.save(user);
+//			System.out.println("userRegister方法中判断basedao返回的值：" + bl);
+			boolean bl = false;
+			bl = true;
+			if(bl){
+				session.setAttribute("userName", reusername);
+				out.print("success");
+			}else{
+				out.print(false);
+			}
+			
+		}
+	}
+
+	/**
+	 * 用户登录验证，交service判断用户名密码是否正确
+	 * 
 	 * @author：songqi
 	 * @param user
 	 * @param request
@@ -50,21 +96,22 @@ public class UserController {
 	 * @throws IOException
 	 */
 	@RequestMapping("/userLogin")
-	private void userLogin(String username,String password,String remeber, HttpServletRequest request,
-			HttpServletResponse resp) throws ServletException, IOException {
-//		System.out.println("userLogin......");
+	private void userLogin(String username, String password, String remeber,
+			HttpServletRequest request, HttpServletResponse resp)
+			throws ServletException, IOException {
+		// System.out.println("userLogin......");
 		User user = new User();
 		user.setUsername(username);
 		user.setPassword(password);
 		boolean flag = us.userLogin(user);
 		PrintWriter out = resp.getWriter();
-//		flag =false;
+		// flag =false;
 		if (!flag) {
 			out.print(false);
 			// return mav;
-		} else if("true".equals(remeber)){
+		} else if ("true".equals(remeber)) {
 			HttpSession session = request.getSession();
-			session.setAttribute("userName", "zhangsan"); //要修改
+			session.setAttribute("userName", "zhangsan"); // 要修改
 			Cookie cookieName = new Cookie("user", "1" + "@@@@" + "zhangsanpwd"); // 要修改
 			// 保留7天
 			cookieName.setMaxAge(7 * 24 * 3600);
@@ -74,22 +121,23 @@ public class UserController {
 			out.print(username);
 			// mav.setViewName("/index2");
 			// return mav;
-		}else{
+		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("userName", "zhangsan"); //要修改
+			session.setAttribute("userName", "zhangsan"); // 要修改
 			out.print(username);
 		}
 	}
 
 	@RequestMapping("/autoLogin")
 	private void autoLogin(HttpSession session, HttpServletRequest request,
-			HttpServletResponse resp)throws ServletException, IOException {
-		System.out.println("autoLogin的session" + session.getAttribute("userName"));
+			HttpServletResponse resp) throws ServletException, IOException {
+		System.out.println("autoLogin的session"
+				+ session.getAttribute("userName"));
 		String userName = (String) session.getAttribute("userName");
 		PrintWriter out = resp.getWriter();
-		if(userName == null || "".equals(userName)){
+		if (userName == null || "".equals(userName)) {
 			out.print(false);
-		}else
+		} else
 			out.print(userName);
 	}
 

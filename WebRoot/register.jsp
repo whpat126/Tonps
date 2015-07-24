@@ -12,7 +12,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <title>平通云应用用户注册</title>
     <link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
     <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
-   	<script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script> 
+   	<script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
+   	<script type="text/javascript" src="${pageContext.request.contextPath }/style/common/userjs/register.js"></script> 
 	<script>
 		$(function () { 
 			$('#myModal').modal({backdrop:"static", keyboard:false, show:false});
@@ -22,51 +23,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
+  
+  <jsp:include page="black_on_top.jsp"></jsp:include>
+  
   <!-- 点击后调用下面的model，登录 -->
   <div id="refLogin">已有账号，直接<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">登录</button></div>
+  
   <!-- 用户注册页面，该页面必须存在，因为登录就是一个弹窗了 -->
-  <div>
+<div>
   	<!-- 注册 -->
-  	${msg }
-    <form action="userRegister.do" method="post">
-    	手机/邮箱:<input type="text" name="username" /><br/>
-    	密码:<input type="password" name="password" /><br/>
-    	确认密码:<input type="password" name="repassword" /><br/>
-    	<input type="checkbox" name="agree" checked="checked" /><span>阅读并接受<a href="statement.html">《平通用户协议》</a></span><br/>
-    	<input type="submit" value="注册" />
-    </form>
+  	<div>
+	  	${msg }
+	    <span id="remsg"></span>
+	    <form id="form1">
+	    	手机/邮箱:<input type="text" name="reusername" id="reusername" /> <a href="javascript:;" id="validate" title="检测用户是否存在">图标</a><br/>
+	    	密码:<input type="password" name="password" id="repassword" /><br/>
+	    	确认密码:<input type="password" name="repassword" id="rerepassword" /><br/>
+	    	<input type="checkbox" name="agree" id="agree" /><span>阅读并接受<a href="statement.html">《平通用户协议》</a></span><br/>
+	    	<input type="button" id="register" class="btn " value="注册" />
+	    </form>
+	    <!-- 社交工具登录 -->
+		<div>
+	  	
+		</div>
+    </div>
+    <!-- 登录的model -->
+   	<%@ include file="login.jsp"  %>
     
-    <!-- 登录模态框（Modal） -->
-		<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-						<h4 class="modal-title" id="myModalLabel">登录</h4>
-					</div>
-					<div class="modal-body">
-						${msg }
-					    <form action="userLogin.do" method="post">
-					    	手机/邮箱:<input type="text" name="username" /><br/>
-					    	密码:<input type="password" name="password" /><br/>
-						<div class="modal-footer">
-							<button type="button" class="btn btn-primary">登录</button>
-						</div>
-						</form>
-					   
-					</div>
-				</div><!-- /.modal-content -->
-			</div><!-- /.modal-dialog -->
-		</div><!-- /.modal -->
-    
-    
-    
-    
-    
-  </div>
-  <!-- 社交工具登录 -->
-  <div>
-  	
-  </div>
+</div>
+	
   </body>
 </html>

@@ -61,15 +61,15 @@ public class UserDaoImpl extends BaseDaoImpl<User> implements UserDao {
 	}
 
 	/**
-	 * 验证用户是否存在
+	 * 验证用户是否存在，默认返回的是true，这一点和其他类有所不同，需注意
 	 * author:宋琪
 	 * @param userName
-	 * @return
+	 * @return true表示已经存在，false表示不存在
 	 */
 	@Override
 	public boolean userValidate(String userName) {
-		System.out.println("验证用户已经存在：useName" + userName);
-		return false;
+		System.out.println("dao中---》验证用户已经存在：" + userName);
+		return true;
 	}
 
 }
