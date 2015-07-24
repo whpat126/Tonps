@@ -26,9 +26,9 @@
     }
 
 </SCRIPT>
-<div class="row" style="height: 28px;">
+<div class="row">
     <div class="col-md-12">
-        <nav class="black_bar navbar navbar-default navbar-fixed-top navbar-inverse">
+        <nav class="black_bar navbar navbar-default navbar-fixed-top navbar-inverse" style="height: 28px;">
             <div class="navbar-header">
                 <div class="black_bar_left col-md-6">
                     <ul class="fl nav nav-tabs">

@@ -1,4 +1,16 @@
 
+//回到顶部
+function goTop(){
+	$('html,body').animate({'scrollTop':0},600);
+}
+window.onscroll = function () {
+	if (document.documentElement.scrollTop + document.body.scrollTop > 50) {
+		document.getElementById("sidetop").style.display = "block";
+	}
+	else {
+		document.getElementById("sidetop").style.display = "none";
+	}
+}
 $(function() {
 	$.ajax({
 		type : "POST",
@@ -14,9 +26,9 @@ $(function() {
 				$("#userSet").show();
 			}
 		},
-		error:function(data){
+/*		error:function(data){
 			alert("获得用户信息失败，但不影响系统业务的使用。");
-		}
+		}*/
 	});
 	
 //	var userName = $("#userName").html();
@@ -41,7 +53,7 @@ $(function() {
 			async: false,
 			url : "userLogin.do",
 			data : { "username" : username, "password" : password, "remeber" :remeber },
-			error : function(){alert("获得用户信息失败，但不影响系统业务的使用。");},
+			//error : function(){alert("获得用户信息失败，但不影响系统业务的使用。");},
 			success : function(data){
 				if(data == "false"){
 					$("#msg").html("用户名或密码不正确");
@@ -56,18 +68,7 @@ $(function() {
 
 	});
 
-	//回到顶部
-	function goTop(){
-		$('html,body').animate({'scrollTop':0},600);
-	}
-	window.onscroll = function () {
-		if (document.documentElement.scrollTop + document.body.scrollTop > 500) {
-			document.getElementById("sidediv").style.display = "block";
-		}
-		else {
-			document.getElementById("sidediv").style.display = "none";
-		}
-	}
+
 
 
 		$(".side ul li").hover(function(){

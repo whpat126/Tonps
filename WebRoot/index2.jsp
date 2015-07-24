@@ -33,15 +33,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div class="container">
     <!-- 最上方黑条  style="display:none;" -->
-    <div class="row"><%@ include file="black_on_top.jsp" %></div>
+    <div class="row"  style="float: left;z-index: 20;"><%@ include file="black_on_top.jsp" %></div>
     <!-- 单位logo -->
 
-    <div class="row" >
+    <div class="row">
         <div class="col-md-12">
-            <div class="black_bar navbar navbar-default navbar-fixed-top" style="margin-top: 100px;position: absolute;transition: 100px">
-                <div class="col-md-1"><a href="http://www.ptsso.com"><img src="style/common/img/logoxztm.gif" alt="平通网"></a></div>
+            <div class="navbar navbar-default navbar-fixed-top nav-tabs" style="position: fixed;top: 50px;">
+                <div class="col-md-1 logo-bar"><a href="http://www.ptsso.com"><img src="style/common/img/logoxztm.gif" alt="平通网"></a></div>
                 <!-- 导航栏 -->
-                <div id="menuBar" class="menuBar col-md-5">
+                <div id="menu-Bar" class="col-md-5">
                     <div>
                         <div>
                             <ul class="nav nav-tabs">
@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                             </ul>
                         </div>
                         <!-- 未登录 -->
-                        <div id="userLogin" class="col-md-6" style="display:block;"><a id="login" href="javascript:void(0);">登录</a>
+                        <div id="userLogin" class="col-md-6 user-bar" style="display:block;"><a id="login" href="javascript:void(0);">登录</a>
                         </div>
                     </div>
                 </div>
@@ -64,32 +64,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
     <!-- 搜索引擎 -->
-    <div>
+    <div style="margin-top: 140px;position: fixed;left: 400px;">
         <form action="http://www.baidu.com/baidu" target="_blank">
             <table>
                 <tr>
                     <td>
                         <input name=tn type=hidden value=baidu>
-                        <a href="http://www.baidu.com/" target="_blank"><img id="baidulogo"
-                                                                             src="style/common/img/baidu_web.png"
-                                                                             alt="Baidu" align="bottom" border="0"
-                                                                             height="40px"></a>
-                        <input type=text name=word size=70px>
-                        <input type="submit" value="搜一下">
+                        <a href="http://www.baidu.com/" target="_blank"></a>
+                        <input type="text" name="word" size="90px" style="width:540px;height: 36px;font-size:22px;border: 1px #5bc0de solid;" autofocus="autofocus"/>
+                        <input type="submit" value="搜一下" class="btn btn-info btn-lg">
                     </td>
                 </tr>
             </table>
         </form>
 
     </div>
-    <div id="funcMenu">
+    <div id="funcMenu" class="appclass">
         <!-- 后台生成，此处先写出来 -->
         <ul>
-            <li>酷&nbsp;&nbsp;&nbsp;&nbsp;站</li>
-            <li>爱常用</li>
-            <li>爱工作</li>
-            <li>爱生活</li>
-            <li>平通云</li>
+            <li class="btn btn-danger">酷&nbsp;&nbsp;&nbsp;&nbsp;站</li>
+            <li class="btn btn-info">爱常用</li>
+            <li class="btn btn-success">爱工作</li>
+            <li class="btn btn-default">爱生活</li>
+            <li class="btn btn-warning">平通云</li>
         </ul>
     </div>
 
@@ -115,27 +112,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </div>
     <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
     <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+    <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
+    <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/> <br/>
     <br/>
     <br/>
 
-    <div id="sidediv" class="side" style="list-style-type:none;">
-        <ul style="list-style-type:none;">
-            <li style="list-style-type:none;"><a href="javascript:void(0);">
-                <div class="sidebox"><img src="style/common/img/side_icon01.png">客服中心</div>
-            </a></li>
-            <li style="list-style-type:none;"><a href="javascript:void(0);">
-                <div class="sidebox"><img src="style/common/img/side_icon02.png">客户案例</div>
-            </a></li>
-            <li style="list-style-type:none;"><a href="javascript:void(0);">
-                <div class="sidebox"><img src="style/common/img/side_icon04.png">QQ客服</div>
-            </a></li>
-            <li style="list-style-type:none;"><a href="javascript:void(0);">
-                <div class="sidebox"><img src="style/common/img/side_icon03.png">新浪微博</div>
-            </a></li>
-            <li style="border:none;list-style-type:none;"><a href="javascript:goTop();" class="sidetop"><img
-                    src="style/common/img/side_icon05.png"></a></li>
+    <div id="sidediv" class="side">
+        <ul>
+            <li><a href="javascript:void(0);"><div class="sidebox"><img src="style/common/img/side_icon01.png">客服中心</div></a></li>
+            <li><a href="javascript:void(0);"><div class="sidebox"><img src="style/common/img/side_icon02.png">客户案例</div></a></li>
+            <li><a href="javascript:void(0);" ><div class="sidebox"><img src="style/common/img/side_icon04.png">QQ客服</div></a></li>
+            <li><a href="javascript:void(0);" ><div class="sidebox"><img src="style/common/img/side_icon03.png">新浪微博</div></a></li>
+            <li style="border:none;display: none;" id="sidetop"><a href="javascript:goTop();" class="sidetop"><img src="style/common/img/side_icon05.png"></a></li>
         </ul>
     </div>
+
 
 </div>
 
