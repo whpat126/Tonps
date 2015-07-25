@@ -33,17 +33,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 <div class="container">
     <!-- 最上方黑条  style="display:none;" -->
-    <div class="row"  style="float: left;z-index: 20;"><%@ include file="black_on_top.jsp" %></div>
+    <!--<div class="row"><%@ include file="black_on_top.jsp" %></div>-->
+    <div class="row">
+        <div class="black_bar navbar navbar-default navbar-fixed-top navbar-inverse" style="height: 28px;">
+            <div class="black_bar_left col-md-6">
+                <ul class="nav nav-tabs">
+                    <li class="userSet"><a onClick="SetHome('http://ptsoo.com')" href="javascript:void(0)"
+                                           title="设为首页"
+                                           class="firstpage">设为首页</a>
+                    </li>
+                    <li class="userSet"><a onClick="AddFavorite('http://ptsoo.com','平通网')" href="javascript:void(0)"
+                                           title="加入收藏">加入收藏</a>
+                    </li>
+                    <li class="userSet"><a id="creDesktop" href="javascript:void(0);">创建桌面快捷</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 退出系统 -->
+            <div class="col-md-6">
+                <!-- 如果session存在则显示用户名，鼠标划过，下方显示链接；不存在则显示登录 -->
+                <!-- 个人设置 -->
+                <div id="userSet" class=" col-md-6 col-md-offset-4" style="display:inline;">
+                    <ul class="nav nav-tabs">
+                        <li><a href="#">个人中心</a></li>
+                        <li><a href="#">消息中心</a></li>
+                        <li><a id="logout" href="javascript:;" title="退出系统">退出</a></li>
+                    </ul>
+                </div>
+                <div id="userInfo" class="col-md-2" style="display:inline;">
+                    <ul class="fl">
+                        <li><span id="userName" style="color: white">${userName }用户</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- 单位logo -->
 
     <div class="row">
-        <div class="col-md-12">
-            <div class="navbar navbar-default navbar-fixed-top nav-tabs" style="position: fixed;top: 50px;">
-                <div class="col-md-1 logo-bar"><a href="http://www.ptsso.com"><img src="style/common/img/logoxztm.gif" alt="平通网"></a></div>
+            <div class="navbar navbar-default navbar-fixed-top nav-tabs" style="position: fixed;top: 32px;height: 32px;">
+                <div class="col-md-1 logo-bar navbar navbar-left" ><a href="http://www.ptsso.com"><img src="style/common/img/pingtong_web.png" width="270px" alt="平通网"></a></div>
                 <!-- 导航栏 -->
-                <div id="menu-Bar" class="col-md-5">
-                    <div>
-                        <div>
+                <div id="menu-Bar" class="col-md-5 navbar navbar-right" style="right: 100px;">
+
                             <ul class="nav nav-tabs">
                                 <li><a href="#">我的消息</a></li>
                                 <li><a href="#">我的企业</a></li>
@@ -51,42 +84,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                                 <li><a href="#">我的社区</a></li>
                                 <li><a href="#">帮助中心</a></li>
                             </ul>
-                        </div>
-                        <!-- 未登录 -->
-                        <div id="userLogin" class="col-md-6 user-bar" style="display:block;"><a id="login" href="javascript:void(0);">登录</a>
-                        </div>
-                    </div>
                 </div>
+                <!-- 未登录 -->
+                <div id="userLogin" class="col-md-1 user-bar  btn btn-lg btn-info navbar navbar-right" style="display:block;left:500px;"><a id="login" href="javascript:void(0);">登录</a></div>
+
             </div>
-    </div>
     </div>
     <!-- 用户信息 -->
 
 
     <!-- 搜索引擎 -->
-    <div style="margin-top: 140px;position: fixed;left: 400px;">
+    <div class="row" style="float: left">
+    <div style="margin-top: 118px;position: fixed;left: 400px;">
         <form action="http://www.baidu.com/baidu" target="_blank">
             <table>
                 <tr>
-                    <td>
-                        <input name=tn type=hidden value=baidu>
-                        <a href="http://www.baidu.com/" target="_blank"></a>
-                        <input type="text" name="word" size="90px" style="width:540px;height: 36px;font-size:22px;border: 1px #5bc0de solid;" autofocus="autofocus"/>
-                        <input type="submit" value="搜一下" class="btn btn-info btn-lg">
+                    <td style="vertical-align:middle; background-color: red">
+                        <input type="text" name="word" size="90px" style="position:absolute;width:540px;font-size:22px;border: 1px #5bc0de solid;"/>
+                        <input type="submit" value="搜一下" class="btn btn-info" style="position:absolute;left: 540px;">
                     </td>
                 </tr>
             </table>
         </form>
-
     </div>
+    </div>
+
     <div id="funcMenu" class="appclass">
         <!-- 后台生成，此处先写出来 -->
         <ul>
-            <li class="btn btn-danger">酷&nbsp;&nbsp;&nbsp;&nbsp;站</li>
+            <li class="btn btn-info">酷&nbsp;&nbsp;&nbsp;&nbsp;站</li>
             <li class="btn btn-info">爱常用</li>
-            <li class="btn btn-success">爱工作</li>
-            <li class="btn btn-default">爱生活</li>
-            <li class="btn btn-warning">平通云</li>
+            <li class="btn btn-info">爱工作</li>
+            <li class="btn btn-info">爱生活</li>
+            <li class="btn btn-info">平通云</li>
         </ul>
     </div>
 

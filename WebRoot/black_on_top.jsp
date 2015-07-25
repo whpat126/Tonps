@@ -26,11 +26,9 @@
     }
 
 </SCRIPT>
-<div class="row">
-    <div class="col-md-12">
-        <nav class="black_bar navbar navbar-default navbar-fixed-top navbar-inverse" style="height: 28px;">
-            <div class="navbar-header">
-                <div class="black_bar_left col-md-6">
+  <!--  <div class="col-md-12">
+        <div class="black_bar navbar navbar-default navbar-fixed-top navbar-inverse nav" style="height: 28px;">
+                 <div class="black_bar_left col-md-6">
                     <ul class="fl nav nav-tabs">
                         <li class="userSet"><a onClick="SetHome('http://ptsoo.com')" href="javascript:void(0)"
                                                title="设为首页"
@@ -44,16 +42,16 @@
                     </ul>
                 </div>
 
-                <!-- 退出系统 -->
-                <div class="black_bar_right col-md-6">
-                    <!-- 如果session存在则显示用户名，鼠标划过，下方显示链接；不存在则显示登录 -->
-                    <div id="userInfo" class="col-md-1" style="display:block;">
+                &lt;!&ndash; 退出系统 &ndash;&gt;
+                <div class="black_bar_right col-md-6 nav navbar navbar-right" >
+                    &lt;!&ndash; 如果session存在则显示用户名，鼠标划过，下方显示链接；不存在则显示登录 &ndash;&gt;
+                    <div id="userInfo" class="col-md-1 nav navbar navbar-right" style="display:block;">
                         <ul class="fl">
                             <li><span id="userName">${userName }用户</span></li>
                         </ul>
                     </div>
-                    <!-- 个人设置 -->
-                    <div id="userSet" class=" col-md-10" style="display:block;">
+                    &lt;!&ndash; 个人设置 &ndash;&gt;
+                    <div id="userSet" class=" col-md-5 nav navbar navbar-right" style="display:block;">
                         <ul class="nav nav-tabs">
                             <li><a href="#">个人中心</a></li>
                             <li><a href="#">消息中心</a></li>
@@ -61,7 +59,6 @@
                         </ul>
                     </div>
                 </div>
-            </div>
-        </nav>
+             </div>
     </div>
-</div>
+-->
