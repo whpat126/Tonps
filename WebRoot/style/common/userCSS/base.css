@@ -1,4 +1,12 @@
 @charset "UTF-8";
+.black_bar_left{
+    position: relative; right: 50px;
+    margin: 0px;
+}
+li{
+    list-style-type: none;
+    display: inline;
+}
 .userSet a{
     color: white;
 }
@@ -8,12 +16,12 @@
     list-style-type:none;
 }
 .appclass{
-    position:fixed;width:54px;height:275px;left:-40px;top:214px;z-index:100;
+    position:fixed;width:54px;left:-40px;top:214px;
 }
 .appclass ul{
     list-style-type:none;
 }
-.appclass ul li{width:100px;height:54px;float:left;position:relative;border-bottom:1px solid #444;}
+.appclass ul li{width:100px;text-align: center; height:54px;float:left;position:relative;border-bottom:1px solid #444;}
 
 /* 滚动条控制 */
 .side{position:fixed;width:54px;height:275px;right:0;top:300px;z-index:100;}
@@ -22,6 +30,21 @@
 .sidetop{width:54px;height:54px;line-height:54px;display:inline-block;background:#000;opacity:0.8;filter:Alpha(opacity=80);transition:all 0.3s;}
 .side ul li .sidetop:hover{background:#ae1c1c;opacity:1;filter:Alpha(opacity=100);}
 .side ul li img{float:left;}
+
+.cus-addr li a{
+
+    margin: 4px;
+    background-color: whitesmoke ;
+
+}
+
+
+.cus-addr li a:hover{
+    margin:2px;
+    border: 2px green solid;
+
+}
+
 
 
 

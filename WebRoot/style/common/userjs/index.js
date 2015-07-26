@@ -3,6 +3,7 @@
 function goTop(){
 	$('html,body').animate({'scrollTop':0},600);
 }
+
 window.onscroll = function () {
 	if (document.documentElement.scrollTop + document.body.scrollTop > 50) {
 		document.getElementById("sidetop").style.display = "block";
@@ -16,7 +17,7 @@ $(function() {
 		type : "POST",
 		async: false,
 		url : "autoLogin.do",
-//		error : function(){alert("连接错误....");},
+		error : function(){alert("连接错误....");},
 		success : function(data){
 			if(data == "false"){
 				$("#userLogin").show();
@@ -53,7 +54,7 @@ $(function() {
 			async: false,
 			url : "userLogin.do",
 			data : { "username" : username, "password" : password, "remeber" :remeber },
-			//error : function(){alert("获得用户信息失败，但不影响系统业务的使用。");},
+/*			error : function(){alert("获得用户信息失败，但不影响系统业务的使用。");},*/
 			success : function(data){
 				if(data == "false"){
 					$("#msg").html("用户名或密码不正确");
@@ -71,10 +72,10 @@ $(function() {
 
 
 
-		$(".side ul li").hover(function(){
-			$(this).find(".sidebox").stop().animate({"width":"124px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background":"#ae1c1c"})
-		},function(){
-			$(this).find(".sidebox").stop().animate({"width":"54px"},200).css({"opacity":"0.8","filter":"Alpha(opacity=80)","background":"#000"})
+	$(".side ul li").hover(function(){
+		$(this).find(".sidebox").stop().animate({"width":"124px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background":"#ae1c1c"})
+			},function(){
+		$(this).find(".sidebox").stop().animate({"width":"54px"},200).css({"opacity":"0.8","filter":"Alpha(opacity=80)","background":"#000"})
 		});
 
 
@@ -88,12 +89,9 @@ $(function() {
 
 	// 退出系统
 	$("#logout").click(function(){
-		window.location.href="/pt2all/logout.jsp";
-		
-	});
-	
-	
-	
+		window.location.href="/logout.jsp";
+	})
+
 
 
 
