@@ -15,16 +15,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	<script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
    	<script type="text/javascript" src="${pageContext.request.contextPath }/style/common/userjs/register.js"></script> 
 	<script>
-		$(function () { 
+		/* $(function () { 
 			$('#myModal').modal({backdrop:"static", keyboard:false, show:false});
-		});
+		}); */
 	</script>
 
   </head>
   
   <body>
   
-  <jsp:include page="black_on_top.jsp"></jsp:include>
   
   <!-- 点击后调用下面的model，登录 -->
   <div id="refLogin">已有账号，直接<button class="btn btn-primary" data-toggle="modal" data-target="#myModal">登录</button></div>
