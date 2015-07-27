@@ -58,8 +58,8 @@
                 <ul class="userSet nav-pills nav-tabs navbar-inverse navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-envelope" style="color: red;"></span>消息(<span style="color: red">5</span>)</a></li>
                     <li>&nbsp;</li>
-                    <li><a id="login" href="javascript:void(0);" class="hidden">登录</a></li>
-                    <li  class="dropdown visible">
+                    <li><a id="login" href="javascript:void(0);" class="visible">登录</a></li>
+                    <li id="userInfo" class="dropdown hidden">
                             <a href="javascript:void(0);" id="userDown" class="dropdown-toggle" data-toggle="dropdown"><span id="userName"  style="color: white;">${userName}用户<span class="caret"></span></span>
                             </a>
                             <ul class="dropdown-menu">
