@@ -70,7 +70,9 @@ public class UserInterceptor implements HandlerInterceptor {
 			String url = request.getRequestURI();
 			if (url.indexOf("userLogin.do") >= 0
 					|| url.indexOf("userValidate.do") >= 0
-					|| url.indexOf("userRegister.do") >= 0) {
+					|| url.indexOf("userRegister.do") >= 0
+					|| url.indexOf("qqLogin.do") >=0
+					|| url.indexOf("wechatLogin.do") >=0) {
 				System.out.println("进入url判断---------------");
 				return true;
 			}

@@ -8,11 +8,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
+    <meta property="qc:admins" content="1220550751606061704214471645026230" />
 	<link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
 	
 	<script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
    	<script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script> 
    	<script type="text/javascript" src="style/common/userjs/index2.js"></script>
+   	
+   	
   </head>
   <body>
   

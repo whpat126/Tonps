@@ -1,6 +1,7 @@
 eclipse.preferences.version=1
 encoding//WebRoot/login.jsp=UTF-8
 encoding//config/log4j.properties=UTF-8
+encoding//config/qqconnectconfig.properties=UTF-8
 encoding//src/com/pt/utils/DBTest.java=UTF-8
 encoding//src/com/pt/utils/OurDaoUtils.java=UTF-8
 encoding/<project>=UTF-8
