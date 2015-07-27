@@ -58,6 +58,25 @@ $(function() {
 	});
 	
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	// 模态框设置
 	$('#myModal').modal({backdrop:"static", keyboard:false, show:false});
 	$("#login").click(function(){
