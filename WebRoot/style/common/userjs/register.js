@@ -20,7 +20,7 @@ $(function() {
 					$("#remsg").html("用户已经存在");
 				}else if("success" == data){
 					alert("注册成功，点击确定则跳转到首页");
-					location.replace("index2.jsp");
+					location.replace("index.jsp");
 				}else{
 					$("#remsg").html("注册失败，用户已经存在");
 				}
@@ -79,7 +79,7 @@ $(function() {
 					$("#userName").html(data); //显示用户姓名
 //					$("#userInfo").show(); // 显示用户按钮
 //					$("#userSet").show(); // 用户设置
-					location.replace("index2.jsp");
+					location.replace("index.jsp");
 				}
 			}
 		});
@@ -87,41 +87,6 @@ $(function() {
 		
 	});
 	
-	
-	// 模态框设置
-	$('#myModal').modal({backdrop:"static", keyboard:false, show:false});
-	$("#login").click(function(){
-		$('#myModal').modal({backdrop:"static", keyboard:false, show:true});
-	});
-	
-	//加入收藏
-	$("#collect").click(function(){
-		alert("abc");
-		collect("ptxx","http://www.pinton.com.cn");
-	});
-	
-	// 退出系统
-	$("#logout").click(function(){
-		window.location.href="/pt2all/logout.jsp";
-		
-	});
-	
-	// 网址加入收藏
-	function collect(sTitle,sURL){
-		try{
-			// IE
-			window.external.addFavorite(sURL,sTile);
-			alert("已收藏，请打开收藏查看！");
-		}catch(e){
-			try{
-				//ff
-				window.sidebar.addPanel(sTitle,sURL,"");
-				alert("已收藏，请打开收藏查看！");
-			}catch(e){
-				alert("收藏失败！");
-			}
-		}
-	}
 	
 });
 
