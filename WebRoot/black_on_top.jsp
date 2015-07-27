@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
 <!-- 最上方黑条 -->
-<SCRIPT language="javascript">
+<SCRIPT type="text/javascript">
     //加入收藏
     function AddFavorite(sURL, sTitle) {
         sURL = encodeURI(sURL);
@@ -25,15 +26,32 @@
         }
     }
 
-    $(function () {
-    	$("#userDown").hover(function(){
-    		$(this).dropdown("toggle");
-    	});
-    	$(".dropdown-menu").hover(function(){
-    		$(this).dropdown("toggle");
-    	});
+	$(function () {
+		// 模态框设置
+		$('#myModal').modal({backdrop:"static", keyboard:false, show:false});
+		$("#login").click(function(){
+			$('#myModal').modal({backdrop:"static", keyboard:false, show:true});
+		});
+		// 退出系统
+		$("#logout").click(function(){
+			window.location.href="logout.jsp";
+		});
+		// 鼠标划过用户名自动弹出个人中心和退出
+		dropdownOpen();
+		function dropdownOpen() {
+		    var $dropdownLi = $('li.dropdown');
+		    $dropdownLi.mouseover(function() {
+		        $(this).addClass('open');
+		    }).mouseout(function() {
+		        $(this).removeClass('open');
+		    });
+		}
+		// 退出系统
+		$("#logout").click(function(){
+			window.location.href="logout.jsp";
+		});
     })
-
+    
 </SCRIPT>
 <div class="row">
     <div class="black-bar navbar-fixed-top navbar-inverse" style="height: 28px;">
@@ -62,7 +80,7 @@
 						<a href="javascript:void(0);" id="userDown" class="dropdown-toggle" data-toggle="dropdown"><span id="userName"  style="color: white;"></span><span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
-						    <li id="user-center"><a href="javascript:void(0);">个人中心</a></li>
+						    <li id="user-center"><a id="usercenter" href="javascript:;" onclick="window.open('usercenter.jsp', '_blank')" >个人中心</a></li>
 						    <li id="quit"><a id="logout" href="javascript:;" title="退出系统">退出账号</a></li>
 						</ul>
                     </li>
