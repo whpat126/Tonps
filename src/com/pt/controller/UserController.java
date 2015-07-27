@@ -132,7 +132,7 @@ public class UserController {
 	}
 
 	/**
-	 * 用户在访问页面时，会使用自动登录功能
+	 * 用户在访问页面时，会使用自动登录功能,如果获得的session为null，则返回false
 	 * author：songqi
 	 * @param session
 	 * @param request
