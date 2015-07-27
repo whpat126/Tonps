@@ -12,6 +12,7 @@ window.onscroll = function () {
 		document.getElementById("sidetop").style.display = "none";
 	}
 }
+
 $(function() {
 	$.ajax({
 		type : "POST",
@@ -31,6 +32,7 @@ $(function() {
 			alert("获得用户信息失败，但不影响系统业务的使用。");
 		}*/
 	});
+
 	
 	var userName = $("#userName").html();
 	if(userName=="" || userName == null){ // 即用户不存在
