@@ -41,6 +41,6 @@
 		}
 	}
 	%>
-	<% response.sendRedirect("index2.jsp"); %>
+	<% response.sendRedirect("index.jsp"); %>
 </body>
 </html>
