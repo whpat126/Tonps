@@ -8,8 +8,7 @@
         </div>
         <!-- 导航栏 -->
         <div id="menu-Bar" class="col-md-8">
-
-            <ul class="nav navbar  nav-tabs  navbar-right">
+            <ul class="nav navbar nav-tabs  navbar-right">
                 <li><a href="#">首页</a></li>
                 <li><a href="#">我的企业</a></li>
                 <li><a href="#">我的应用</a></li>
