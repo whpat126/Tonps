@@ -1,5 +1,5 @@
 
-//回到顶部
+//右侧浮动框中回到顶部
 function goTop(){
 	$('html,body').animate({'scrollTop':0},600);
 }
@@ -18,11 +18,13 @@ $(function() {
 		url : "autoLogin.do",
 		error : function(){alert("连接错误....");},
 		success : function(data){
-			if(data == "false"){
-				$("#login").css("class","visible");
+			if(data == "false"){ // 表示用户不存在
+//				alert("aaaa")
+//				$("#login").attr("class","visible");
 			}else{
 				$("#userName").html(data);
-				$("#userInfo").css("dropdown hidden"); // 显示用户按钮
+				$("#login").attr("class","hidden"); // 显示用户按钮
+				$("#userInfo").attr("class","dropdown visible");
 //				$("#userSet").show();
 			}
 		}
@@ -61,7 +63,7 @@ $(function() {
 					$("#userName").html(data); // 显示用户姓名
 					// $("#userInfo").show(); // 显示用户按钮
 					// $("#userSet").show(); // 用户设置
-					location.replace("index2.jsp");
+					location.replace("index.jsp");
 				}
 			}
 		});
@@ -70,7 +72,7 @@ $(function() {
 
 
 
-
+	// 右侧浮动框
 	$(".side ul li").hover(function(){
 		$(this).find(".sidebox").stop()
 		.animate({"width":"124px"},200).css({"opacity":"1","filter":"Alpha(opacity=100)","background":"#ae1c1c"})
