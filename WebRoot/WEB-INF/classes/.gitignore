@@ -1,1 +1,12 @@
+<<<<<<< HEAD
+<<<<<<< HEAD
 /com
+=======
+/snippet
+/config
+/com
+/mailConfig.properties
+>>>>>>> refs/heads/whp
+=======
+/com
+>>>>>>> refs/remotes/origin/master

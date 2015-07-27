@@ -3,10 +3,12 @@ package com.pt.utils;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Properties;
 
 import org.apache.commons.mail.DefaultAuthenticator;
 import org.apache.commons.mail.Email;
@@ -19,28 +21,45 @@ import org.apache.commons.mail.SimpleEmail;
 import org.apache.commons.mail.resolver.DataSourceUrlResolver;
 import org.junit.Test;
 
-import com.pt.utils.Encode;
-
 public class PtMail {
-	public static final String serviceMailHostName = "smtp.mxhichina.com";
-	public static final int serviceMailPortNumber = 465;
-	public static final boolean ssl = true;
-	public static final String serviceMailMaster = "pt@pinton.com.cn";
-	public static final String serviceMailPwd = Encode.decode("giohihogdcmphgfffilegbliehmfnncl");
+
+	/**
+	 * @Fields props : 邮件配置文件,配置邮件服务器的地址发件箱密码等信息
+	 */
+	static Properties props;
+
+	static {
+		props = new Properties();
+		try {
+			props.load(PtMail.class.getClassLoader().getResourceAsStream("mailConfig.properties"));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public static final String serviceMailHostName = props.getProperty("mail.serviceMailHostName");
+	public static final int serviceMailPortNumber = Integer.parseInt(props.getProperty("mail.serviceMailPortNumber"));
+	public static final boolean ssl = Boolean.parseBoolean(props.getProperty("mail.ssl"));
+	public static final String serviceMailMaster = props.getProperty("mail.serviceMailMaster");
+	public static final String serviceMailPwd = Encode.decode(props.getProperty("mail.serviceMailPwd"));
 	/**
 	 * @Fields defaUserMail : 用户邮箱为空时。发送到此邮箱
-	 */ 
-	public static String defaUserMail = "wanghengpo@126.com";
-
+	 */
+	public static String defaUserMail = props.getProperty("mail.defaUserMail");
 
 	/**
-	 * <p>说明:  发送邮件给客户(简单邮件模式) 现阶段使用此方法</p>
+	 * <p>
+	 * 说明: 发送邮件给客户(简单邮件模式) 现阶段使用此方法
+	 * </p>
+	 * 
 	 * @Title: sendSimpMail
 	 * @return void
-	 * @param userMail 用户邮箱地址
-	 * @param msg 邮件内容
-	 */ 
-	public static void sendSimpMail(String userMail,String msg) {
+	 * @param userMail
+	 *            用户邮箱地址
+	 * @param msg
+	 *            邮件内容
+	 */
+	public static void sendSimpMail(String userMail, String msg) {
 		if (userMail == null)
 			userMail = PtMail.defaUserMail;
 		Email email = new SimpleEmail();
@@ -60,19 +79,21 @@ public class PtMail {
 		}
 	}
 
-	
 	/**
-	 * <p>说明:  发送邮件给客户(附件邮件模式)</p>
+	 * <p>
+	 * 说明: 发送邮件给客户(附件邮件模式)
+	 * </p>
+	 * 
 	 * @Title: sendAttachmentMail
 	 * @return void
-	 * @param userMail 
-	 */ 
+	 * @param userMail
+	 */
 	public static void sendAttachmentMail(String userMail) {
 		if (userMail == null)
 			userMail = PtMail.defaUserMail;
 		// Create the attachment
 		EmailAttachment attachment = new EmailAttachment();
-		attachment.setPath("src/cash.png");
+		attachment.setPath("config/mailConfig.properties");
 		attachment.setDisposition(EmailAttachment.ATTACHMENT);
 		attachment.setDescription("Picture of John");
 		attachment.setName("cash.png");
@@ -101,11 +122,14 @@ public class PtMail {
 	}
 
 	/**
-	 * <p>说明:  发送邮件给客户(url邮件模式)</p>
+	 * <p>
+	 * 说明: 发送邮件给客户(url邮件模式)
+	 * </p>
+	 * 
 	 * @Title: sendAttachmentUrlMail
 	 * @return void
-	 * @param userMail 
-	 */ 
+	 * @param userMail
+	 */
 	public static void sendAttachmentUrlMail(String userMail) {
 		if (userMail == null)
 			userMail = PtMail.defaUserMail;
@@ -145,11 +169,14 @@ public class PtMail {
 	}
 
 	/**
-	 * <p>说明:  发送邮件给客户(html邮件模式)</p>
+	 * <p>
+	 * 说明: 发送邮件给客户(html邮件模式)
+	 * </p>
+	 * 
 	 * @Title: sendAttachmentHtmlMail
 	 * @return void
-	 * @param userMail 
-	 */ 
+	 * @param userMail
+	 */
 	public static void sendAttachmentHtmlMail(String userMail) {
 		if (userMail == null)
 			userMail = PtMail.defaUserMail;
@@ -186,11 +213,14 @@ public class PtMail {
 	}
 
 	/**
-	 * <p>说明:  发送邮件给客户(img邮件模式)</p>
+	 * <p>
+	 * 说明: 发送邮件给客户(img邮件模式)
+	 * </p>
+	 * 
 	 * @Title: sendAttachmentHtmlMailWithImg
 	 * @return void
-	 * @param userMail 
-	 */ 
+	 * @param userMail
+	 */
 	public static void sendAttachmentHtmlMailWithImg(String userMail) {
 		if (userMail == null)
 			userMail = PtMail.defaUserMail;
@@ -229,12 +259,10 @@ public class PtMail {
 		}
 	}
 
-	
-
 	@Test
-	public void Test() {
-		PtMail.sendSimpMail(null,"test msg");
-		PtMail.sendAttachmentMail(null);
+	public  void Test() {
+		PtMail.sendSimpMail(null, "test msg");
+//		PtMail.sendAttachmentMail(null);
 	}
 
 	/**
@@ -242,6 +270,21 @@ public class PtMail {
 	 */
 	public static void main(String[] args) throws IOException {
 
+//		tuling();
+		
+		PtMail.sendSimpMail(null, "test msg");
+
+	}
+
+	/**
+	 * <p>说明:  图灵接口测试</p>
+	 * @Title: tuling
+	 * @return void
+	 * @throws UnsupportedEncodingException
+	 * @throws MalformedURLException
+	 * @throws IOException 
+	 */ 
+	public static void tuling() throws UnsupportedEncodingException, MalformedURLException, IOException {
 		String APIKEY = "aa2082f755b94358513da99e47f00e7e";
 		String INFO = URLEncoder.encode("北京今日天气", "utf-8");
 		String getURL = "http://www.tuling123.com/openapi/api?key=" + APIKEY + "&info=" + INFO;
@@ -261,7 +304,6 @@ public class PtMail {
 		// 断开连接
 		connection.disconnect();
 		System.out.println(sb);
-
 	}
 
 }
