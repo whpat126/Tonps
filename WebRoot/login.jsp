@@ -21,7 +21,8 @@
 						<div><a href="${pageContext.request.contextPath }/register.jsp" target="_blank">9秒注册</a></div>
 						<!-- 社交工具登录 -->
 						<div id="otherLogin">
-							--
+							<span>其他登录：</span><br/>
+							<a id="login_qq" href="qqLogin.do"><img src="${pageContext.request.contextPath }/style/common/userCSS/img/Connect_logo_1.png"></a> 
 						</div>
 						</form>
 					   
