@@ -32,6 +32,7 @@ public class PtMail {
 	public static final int serviceMailPortNumber = Integer.parseInt(props.getProperty("mail.serviceMailPortNumber"));
 	public static final boolean ssl = Boolean.parseBoolean(props.getProperty("mail.ssl"));
 	public static final String serviceMailMaster = props.getProperty("mail.serviceMailMaster");
+	public static final String serviceName = props.getProperty("mail.serviceName");
 	public static final String serviceMailPwd = Encode.decode(props.getProperty("mail.serviceMailPwd"));
 	/**
 	 * @Fields defaUserMail : 用户邮箱为空时。发送到此邮箱
@@ -58,7 +59,7 @@ public class PtMail {
 		email.setSSLOnConnect(ssl);
 		try {
 			email.addTo(userMail);
-			email.setFrom(serviceMailMaster);
+			email.setFrom(serviceMailMaster,serviceName);
 			email.setSubject("账号激活邮件");
 //			String msg = "http://www.baidu.com";
 			String msg=GenerateLinkUtils.generateActivateLink(user);
@@ -67,9 +68,9 @@ public class PtMail {
 			email.setHtmlMsg("<html><head><meta charset='UTF-8'></head><body>"
 					+ "HI!"+user.getUsername()+":<br/>"
 					+ "感谢您注册本系统！此邮件是系统发给您的账户激活邮件。您只需要点击以下链接即可激活账户："
-					+ "<p><a href='"+msg+"'>"
+					+ "<p><a href='"+msg+"'><font color='#0000ff'>"
 					+msg 
-					+"</a></p><p>如果上述链接无法点击，可以将上述链接复制到浏览器地址栏中进行访问。</p></body></html>");
+					+"</font></a><br><font color='#ff0000'>请于24小时内点击</font></p><p>如果上述链接无法点击，可以将上述链接复制到浏览器地址栏中进行访问。</p></body></html>");
 
 			// set the alternative message
 			email.setTextMsg("Your email client does not support HTML messages");
@@ -101,7 +102,7 @@ public class PtMail {
 		email.setSSLOnConnect(ssl);
 		try {
 			email.addTo(userMail);
-			email.setFrom(serviceMailMaster);
+			email.setFrom(serviceMailMaster,serviceName);
 			email.setSubject("重置账户密码");
 //			String msg = "http://www.baidu.com";
 			String msg=GenerateLinkUtils.generateResetPwdLink(user);
@@ -113,9 +114,9 @@ public class PtMail {
 							+ "要使用新的密码, 请使用以下链接进行密码重置操作:"
 					+ "<p><a href='"
 					+msg
-					+"'>"
+					+"'><font color='#0000ff'>"
 					+ msg
-					+ "</a></p><p>如果上述链接无法点击，可以将上述链接复制到浏览器地址栏中进行访问。</p>"
+					+ "</font></a><br><font color='#ff0000'>请于24小时内点击</font></p><p>如果上述链接无法点击，可以将上述链接复制到浏览器地址栏中进行访问。</p>"
 					+ "</body></html>");
 			
 			// set the alternative message
