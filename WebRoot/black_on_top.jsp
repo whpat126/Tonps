@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
 <!-- 最上方黑条 -->
-<SCRIPT language="javascript">
+<SCRIPT type="text/javascript">
     //加入收藏
     function AddFavorite(sURL, sTitle) {
         sURL = encodeURI(sURL);
@@ -25,29 +26,39 @@
         }
     }
 
-    $(document).ready(function(){
-        dropdownOpen();
-    });
-
-    function dropdownOpen() {
-
-        var $dropdownLi = $('li.dropdown');
-
-        $dropdownLi.mouseover(function() {
-            $(this).addClass('open');
-        }).mouseout(function() {
-            $(this).removeClass('open');
-        });
-    }
-
+	$(function () {
+		// 模态框设置
+		$('#myModal').modal({backdrop:"static", keyboard:false, show:false});
+		$("#login").click(function(){
+			$('#myModal').modal({backdrop:"static", keyboard:false, show:true});
+		});
+		// 退出系统
+		$("#logout").click(function(){
+			window.location.href="logout.jsp";
+		});
+		// 鼠标划过用户名自动弹出个人中心和退出
+		dropdownOpen();
+		function dropdownOpen() {
+		    var $dropdownLi = $('li.dropdown');
+		    $dropdownLi.mouseover(function() {
+		        $(this).addClass('open');
+		    }).mouseout(function() {
+		        $(this).removeClass('open');
+		    });
+		}
+		// 退出系统
+		$("#logout").click(function(){
+			window.location.href="logout.jsp";
+		});
+    })
+    
 </SCRIPT>
 <div class="row">
     <div class="black-bar navbar-fixed-top navbar-inverse" style="height: 28px;">
         <div class="black_bar_left col-sm-6">
             <ul class="nav-pills nav-tabs navbar-inverse">
                 <li class="userSet"><a onClick="SetHome('http://ptsoo.com')" href="javascript:void(0)"
-                                       title="设为首页"
-                                       class="first-page">设为首页</a>
+                                       title="设为首页" class="first-page">设为首页</a>
                 </li>
                 <li class="userSet"><a onClick="AddFavorite('http://ptsoo.com','平通网')" href="javascript:void(0)"
                                        title="加入收藏">加入收藏</a>
@@ -64,14 +75,14 @@
                 <ul class="userSet nav-pills nav-tabs navbar-inverse navbar-right">
                     <li><a href="#"><span class="glyphicon glyphicon-envelope" style="color: red;"></span>消息(<span style="color: red">5</span>)</a></li>
                     <li>&nbsp;</li>
-                    <li><a id="login" href="javascript:void(0);" class="hidden">登录</a></li>
-                    <li  class="dropdown visible">
-                            <a href="javascript:void(0);" id="userDown" class="dropdown-toggle" data-toggle="dropdown"><span id="userName"  style="color: white;">${userName}用户<span class="caret"></span></span>
-                            </a>
-                            <ul class="dropdown-menu">
-                                <li id="user-center"><a href="http://www.baidu.com" target="_blank">个人中心</a></li>
-                                <li id="quit"><a id="logout" href="javascript:;" title="退出系统">退出账号</a></li>
-                            </ul>
+                    <li><a id="login" href="javascript:void(0);" class="visible">登录</a></li>
+                    <li id="userInfo" class="dropdown hidden">
+						<a href="javascript:void(0);" id="userDown" class="dropdown-toggle" data-toggle="dropdown"><span id="userName"  style="color: white;"></span><span class="caret"></span>
+						</a>
+						<ul class="dropdown-menu">
+						    <li id="user-center"><a id="usercenter" href="javascript:;" onclick="window.open('usercenter.jsp', '_blank')" >个人中心</a></li>
+						    <li id="quit"><a id="logout" href="javascript:;" title="退出系统">退出账号</a></li>
+						</ul>
                     </li>
                 </ul>
             </div>

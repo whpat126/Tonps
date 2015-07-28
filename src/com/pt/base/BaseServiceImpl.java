@@ -145,29 +145,29 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	/** 
 	  * delete 方法 
 	  * <p>方法说明:</p> 根据pk名称和对应的值id 删除对象
-	  * @param id 值
-	  * @param pk 名称
+	  * @param pkValue 值
+	  * @param pkName 名称
 	  * @throws Exception 
 	  * @return boolean 
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
 	@Override
-	public boolean delete(Long id, String pk) throws Exception {
-		return baseDaoImpl.delete(id, pk);
+	public boolean delete(String pkValue, String pkName) throws Exception {
+		return baseDaoImpl.delete(pkValue, pkName);
 	}
 	/** 
 	  * delete 方法 
 	  * <p>方法说明:</p> 根据主键id删除对象
-	  * @param id
+	  * @param pkValue
 	  * @throws Exception 
 	  * @return boolean 
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
 	@Override
-	public boolean delete(Long id) throws Exception {
-		return baseDaoImpl.delete(id);
+	public boolean delete(String pkValue) throws Exception {
+		return baseDaoImpl.delete(pkValue);
 	}
 
 	

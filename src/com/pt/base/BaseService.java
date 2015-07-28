@@ -66,26 +66,26 @@ public interface BaseService<Entity> {
 	/** 
 	  * delete 方法 
 	  * <p>方法说明:</p> 根据pk名称和对应的值id 删除对象
-	  * @param id 值
-	  * @param pk 名称
+	  * @param pkValue 值
+	  * @param pkName 名称
 	  * @return
 	  * @throws Exception 
 	  * @return boolean 
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
-	boolean delete(Long id, String pk) throws Exception;
+	boolean delete(String pkValue, String pkName) throws Exception;
 	/** 
 	  * delete 方法 
 	  * <p>方法说明:</p> 根据主键id删除对象
-	  * @param id
+	  * @param pkValue
 	  * @return
 	  * @throws Exception 
 	  * @return boolean 
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
-	boolean delete(Long id) throws Exception;
+	boolean delete(String pkValue) throws Exception;
 
 	/** 
 	  * delete 方法 
@@ -132,7 +132,9 @@ public interface BaseService<Entity> {
 	  * @return Entity  
 	  * @author whp 
 	  * @date 2015年7月16日 
-	*/ 
+	*/
+
+
 
 
 	

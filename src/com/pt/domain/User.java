@@ -1,6 +1,8 @@
 package com.pt.domain;
 
-public class User {
+import com.pt.base.BaseDomain;
+
+public class User extends BaseDomain{
 
 	private String pk_users;
 	private String username;
@@ -9,6 +11,10 @@ public class User {
 	private String phone;
 	private String name;
 	private String demo;
+	
+	public User() {
+		setPk_users(basedbo.genPk());
+	}
 	public String getUsername() {
 		return username;
 	}
