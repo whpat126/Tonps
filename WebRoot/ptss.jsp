@@ -2,7 +2,7 @@
 <!-- ptss -->
 <div class="row">
 
-    <div class="navbar-fixed-top" style="margin-top: 106px;position: fixed;background-color: #f9f9f9;height: 60px;">
+    <div class="navbar-fixed-top" style="margin-top: 106px;position: fixed;background-color: white;height: 60px;">
         <form action="http://www.baidu.com/baidu" target="_blank" class="form-inline">
             <div class="col-sm-4"></div>
                 <div class="input-group">
