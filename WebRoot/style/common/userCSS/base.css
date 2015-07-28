@@ -1,6 +1,6 @@
 @charset "UTF-8";
 .black_bar_left{
-    position: relative; right: 50px;
+    position: relative; right: 20px;
     margin: 0px;
 }
 li{
@@ -10,11 +10,45 @@ li{
 .userSet a{
     color: white;
 }
+.userSet {
+    margin-right: 20px;
+}
+
+/*
+.dropdown-menu li a:hover{
+    background-color: blue;
+    margin: 0px;
+}
+*/
+
 .side ul{
     margin:0px;
     padding:0px;
     list-style-type:none;
 }
+
+
+.dropdown-menu::before {
+    content: '';
+    display: inline-block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid #CCC;
+    position: absolute;
+    top: -5px;
+    left: 130px;
+}
+.dropdown-menu::after {
+    content: '';
+    display: inline-block;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 6px solid white;
+    position: absolute;
+    top: -4px;
+    left: 130px;
+}
+
 .appclass{
     position:fixed;width:54px;left:-40px;top:214px;
 }

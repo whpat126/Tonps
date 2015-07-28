@@ -13,19 +13,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta name="description" content="平通网致力于打造企业及个人的信息门户，构建企业及个人的地址图谱，通过集成技术实现单点登录、信息集成，并与企业内部系统进行互通，实现信息共享，打造个人一个网页所有应用的平台(OPAA)"/>
     <meta http-equiv="imagetoolbar" content="no"/>
     <meta name="baidu-site-verification" content="GZU70K0VRo"/>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    
+
     <link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="style/common/userCSS/base.css"/>
     <link rel='icon' href='style/common/img/fivelogo.ico' type='image/x-ico'/>
     <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="style/common/userjs/index.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
     <title>企业云信息门户（SSO）,网址导航,打造自己的独立桌面-平通网</title>
 </head>
 <body style="background-color: #f9f9f9">
