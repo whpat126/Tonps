@@ -46,10 +46,6 @@
 		        $(this).removeClass('open');
 		    });
 		}
-		// 退出系统
-		$("#logout").click(function(){
-			window.location.href="logout.jsp";
-		});
     })
     
 </SCRIPT>
