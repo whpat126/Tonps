@@ -25,10 +25,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="style/common/userjs/index.js"></script>
+    <style>
+        .
+    </style>
+
     <title>企业云信息门户（SSO）,网址导航,打造自己的独立桌面-平通网</title>
 </head>
-<body style="background-color: #f9f9f9">
-<div  class="navbar-fixed-top" style="height: 106px;position: fixed;background-color: #f9f9f9"></div>
+<body style="background-color: white">
+<div  class="navbar-fixed-top" style="height: 106px;position: fixed;background-color: white"></div>
 <div class="container">
     <!-- 导航条-->
     <div><%@ include file="ptdh.jsp" %></div>
@@ -37,21 +41,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <!-- 搜索引擎 -->
     <div><%@ include file="ptss.jsp" %></div>
-    <div id="funcMenu" class="appclass">
+    <div id="funcMenu" class="appclass ">
         <!-- 后台生成，此处先写出来 -->
-        <ul>
-            <li class="btn btn-warning">酷&nbsp;&nbsp;&nbsp;&nbsp;站</li>
-            <li class="btn btn-warning">爱常用</li>
-            <li class="btn btn-warning">爱工作</li>
-            <li class="btn btn-warning">爱生活</li>
-            <li class="btn btn-warning">平通云</li>
+        <ul class="">
+            <li class="btn-info">酷&nbsp;&nbsp;&nbsp;&nbsp;站</li>
+            <li class="btn-info">爱常用</li>
+            <li class="btn-info">爱工作</li>
+            <li class="btn-info">爱生活</li>
+            <li class="btn-info">平通云</li>
         </ul>
     </div>
 
     <!-- 主要内容展示区 -->
     <div>
         <!-- 未登录用户使用，由系统推送 -->
-        <div  style="position: relative;top: 180px;left: 80px;height:500px;">
+        <div style="position: relative;top: 180px;left: 80px;height:500px;">
+            <div class="col-md-12">
             <ul class="media-list cus-addr" >
                 <li class="media cus-addrli"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/01.png" class="media-object" alt="平通网"></a></li>
                 <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/02.png" class="media-object" alt="平通网"></a></li>
@@ -217,8 +222,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/18.png" class="media-object" alt="平通网"></a></li>
 
             </ul>
-
-            <div class="co-md-1"></div>
+            </div>
+<!--            <div class="co-md-6">
+                <iframe src="http://news.sina.com.cn/" width="560px" height="1000px"></iframe>
+                &lt;!&ndash;<img src="style/cust/sss.png" alt=""/>&ndash;&gt;
+            </div>-->
 
 <!--            <div class="media" style="position: absolute;top: 200px">
                 <div id="none_login" >

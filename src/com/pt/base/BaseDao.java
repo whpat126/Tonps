@@ -105,7 +105,7 @@ public interface BaseDao<Entity> {
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
-	Entity findById(Long id );
+	Entity findById(String id );
 
 	/** 
 	  * getTotal 方法 

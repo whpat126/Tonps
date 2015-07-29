@@ -290,7 +290,7 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 	 * @date 2015年7月16日
 	 */
 	@Override
-	public Entity findById(Long id) {
+	public Entity findById(String id) {
 		Field[] fs = clazz.getDeclaredFields();
 		String pkName = fs[0].getName();// 反射得出主键名称
 		return findByProp(pkName, id.toString()).get(0);
@@ -390,7 +390,7 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			 * (Long)runner.query("select count(*) from account",new
 			 * ScalarHandler(1) );
 			 */
-			int count = (Integer) qRunner.query(conn, sql, new ScalarHandler<Integer>(1));
+			int count = qRunner.query(conn, sql, new ScalarHandler<Long>(1)).intValue();
 			return count;
 		} catch (SQLException e) {
 			e.printStackTrace();
