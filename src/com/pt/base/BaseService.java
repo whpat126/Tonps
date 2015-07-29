@@ -121,7 +121,7 @@ public interface BaseService<Entity> {
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
-	Entity findById(Long id ) throws Exception;
+	Entity findById(String id ) throws Exception;
 	/** 
 	  * findByProp 方法 
 	  * <br/>方法说明:<br/> 

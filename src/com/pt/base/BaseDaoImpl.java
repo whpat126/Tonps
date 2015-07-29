@@ -290,7 +290,7 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 	 * @date 2015年7月16日
 	 */
 	@Override
-	public Entity findById(Long id) {
+	public Entity findById(String id) {
 		Field[] fs = clazz.getDeclaredFields();
 		String pkName = fs[0].getName();// 反射得出主键名称
 		return findByProp(pkName, id.toString()).get(0);

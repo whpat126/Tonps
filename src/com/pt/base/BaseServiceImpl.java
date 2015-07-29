@@ -197,7 +197,7 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * @date 2015年7月16日 
 	*/ 
 	@Override
-	public Entity findById(Long id) throws Exception {
+	public Entity findById(String id) throws Exception {
 		// TODO Auto-generated method stub
 		return baseDaoImpl.findById(id);
 	}
