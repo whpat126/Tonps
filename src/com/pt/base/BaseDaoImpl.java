@@ -390,7 +390,7 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			 * (Long)runner.query("select count(*) from account",new
 			 * ScalarHandler(1) );
 			 */
-			int count = (Integer) qRunner.query(conn, sql, new ScalarHandler<Integer>(1));
+			int count = qRunner.query(conn, sql, new ScalarHandler<Long>(1)).intValue();
 			return count;
 		} catch (SQLException e) {
 			e.printStackTrace();
