@@ -1,6 +1,6 @@
 package com.pt.domain;
 /**
- * 有问题和回答
+ * 鏈夐棶棰樺拰鍥炵瓟
  * @author Administrator
  *
  */
