@@ -20,6 +20,8 @@
 			
 		</init-param>
 	</servlet>
+
+
 	<servlet-mapping>
 		<servlet-name>springmvc</servlet-name>
 		<!--
@@ -29,7 +31,6 @@
 		
 		<url-pattern>*.do</url-pattern>
 	</servlet-mapping>
-  
   
   
   
