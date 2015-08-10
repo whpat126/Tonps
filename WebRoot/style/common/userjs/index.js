@@ -21,9 +21,31 @@ $(function(){
 		}
 	});
 	
+	// 点击添加icon时
+	$("#addIcon").click(function(){
+		$("#iconname").val("");
+		$("#iconaddress").val("");
+		$('#myModal').modal({backdrop:"static", keyboard:false, show:true});
+	});
 	
-	
-	
+	// 点击确定添加时
+	$("#iconButton").click(function(){
+		var iconname = $("#iconname").val();
+		var iconaddress = $("#iconaddress").val();
+		if(iconname == "" || iconaddress == "") { $("#msg").html("名称和地址都必须输入"); return false;}
+		$.ajax({
+			type : "POST",
+			url : "AddIcon.do",
+			data : { "iconname":iconname, "iconaddress":iconaddress },
+			success : function(data){
+				if(data === "true"){
+					$('#myModal').modal({backdrop:"static", keyboard:false, show:false});
+					$('#myModal').modal('hide');
+					location.reload();
+				}
+			}
+		});
+	});
 	
 	
 });
@@ -163,24 +185,14 @@ function initSet() {
 					}
 				}
 			}
-			document.onmouseup = function (event) { //鼠标按下后抬起 onmouseup ondrop
+			obj.onmouseup = function (event) { //鼠标按下后抬起 onmouseup ondrop
 				ismousedown = false;
 				//console.log("鼠标按下后抬起 ismousedown" + ismousedown);
 				//document.onmousemove = null; //当鼠标弹起时移出移动事件
 				//document.onmouseup = null; //移出up事件，清空内存
 				//检测是否碰上，再交换位置
 				
-				var mouseUpTop = event.clientX;
-				var mouseUpLeft = event.clientY;
-//				console.log(mouseDownTop + ", " + mouseUpTop);
 				
-				if(mouseDownTop == mouseUpTop && mouseDownLeft == mouseUpLeft){
-					//console.log(obj.href);
-					objo.removeAttribute("onClick");
-					objo.href="http://www.pinton.com.cn";
-				}else{
-					objo.setAttribute("onClick","return false");
-				}
 				
 				var oNear = findMin(objo);
 				if (oNear) {
@@ -218,19 +230,35 @@ function initSet() {
 //				console.log("传给后台："+s);
 				//获取最后的顺序输出给后台 结束
 
+				var mouseUpTop = event.clientX;
+				var mouseUpLeft = event.clientY;
+//				console.log(mouseDownTop + ", " + mouseUpTop);
 				
-//				异步交互得到当前元素位置
-				$.ajax({
-					type : "POST",
-					url : "IconUpdate.do",
-					data : { "sortString":s },
-					success : function(iconData){
-					}
-					
-				});
+				if(mouseDownTop == mouseUpTop && mouseDownLeft == mouseUpLeft){
+					//console.log(obj.href);
+					objo.removeAttribute("onClick");
+					objo.href="http://www.pinton.com.cn";
+				}else{
+					objo.setAttribute("onClick","return false");
+					iconUpdate(s);
+				}
 				
 			}
 		}
+		
+		/** 更新icon位置信息 */
+		function iconUpdate(s){
+			$.ajax({
+				type : "POST",
+				url : "IconUpdate.do",
+				data : { "sortString":s },
+				success : function(iconData){
+				}
+				
+			});
+		}
+		
+		
 		//碰撞检测
 		function colTest(obj1, obj2) {
 			if (!obj1)
@@ -342,8 +370,28 @@ function initSet() {
 					}
 				});
 			}
-			if(v_id.substring(0,3) == "edit"){
-				
+			if(v_id.substring(0,3) == "edi"){
+				$("#iconname").val(""); $("#iconaddress").val("");
+				var obj_child = $("#"+v_id); 
+				var objId = obj_child.parent()[0].id;
+//				$(obj_child).parent().remove();
+//				$("#"+objId).click(function(){
+				$.ajax({
+					type : "POST",
+					url : "IconEdit.do",
+					data : { "iconId":objId },
+					success : function(iconData){
+						var data = eval("("+iconData+")");
+						$('#myModal').modal({backdrop:"static", keyboard:false, show:true});
+//							iconname, "iconaddress
+						$("#iconname").val(data.name);
+						$("#iconaddress").val(data.param_href);
+						
+						
+						
+					}
+				});
+//				});
 			}
 
 				
