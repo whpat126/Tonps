@@ -36,6 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		<li><a>消息中心</a></li>
    		<li><a href="javascript:;">个人信息</a></li>
    		<li><a>我的应用</a></li>
+   		<li><a>我的企业</a></li>
    		<li><a>安全中心</a></li>
    		<ul>
    			<li><a id="modifyPwd" href="javascript:;">密码修改</a></li>
