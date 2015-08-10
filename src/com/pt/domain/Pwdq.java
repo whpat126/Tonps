@@ -1,6 +1,6 @@
 package com.pt.domain;
 /**
- * ÃÜÂëÎÊÌâ¿â
+ * å¯†ç é—®é¢˜åº“
  * @author Administrator
  *
  */

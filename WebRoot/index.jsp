@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="imagetoolbar" content="no"/>
     <link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="style/common/userCSS/base.css"/>
-    <link rel='icon' href='style/common/img/fivelogo.ico' type='image/x-ico'/>
+    <link rel='icon' href='style/common/img/2.ico' type='image/x-ico'/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -25,7 +25,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="style/common/userjs/index.js"></script>
     <style>
-        .
+	#ul1 {width:880px; position:relative; margin:10px auto;}
+	#ul1 li {width:200px; height:150px; float:left; list-style:none; margin:10px;}
+	#ul1 li:hover{ border-color: #9a9fa4; box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.85);}
+	#ul1 .active{ border:1px dashed red;}
+	
     </style>
 
     <title>企业云信息门户（SSO）,网址导航,打造自己的独立桌面-平通网</title>
@@ -56,171 +60,36 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <!-- 未登录用户使用，由系统推送 -->
         <div style="position: relative;top: 180px;left: 80px;height:500px;">
             <div class="col-md-12">
-            <ul class="media-list cus-addr" >
-                <li class="media cus-addrli"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/01.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/02.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/03.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/04.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/05.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/06.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/07.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/08.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/09.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/10.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/11.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/12.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/13.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/14.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/15.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/16.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/17.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/18.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/01.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/02.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/03.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/04.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/05.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/06.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/07.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/08.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/09.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/10.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/11.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/12.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/13.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/14.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/15.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/16.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/17.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/18.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/01.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/02.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/03.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/04.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/05.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/06.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/07.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/08.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/09.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/10.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/11.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/12.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/13.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/14.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/15.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/16.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/17.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/18.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/01.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/02.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/03.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/04.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/05.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/06.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/07.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/08.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/09.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/10.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/11.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/12.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/13.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/14.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/15.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/16.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/17.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/18.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/01.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/02.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/03.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/04.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/05.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/06.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/07.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/08.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/09.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/10.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/11.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/12.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/13.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/14.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/15.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/16.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/17.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/18.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/01.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/02.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/03.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/04.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/05.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/06.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/07.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/08.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/09.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/10.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/11.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/12.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/13.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/14.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/15.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/16.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/17.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/18.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/01.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/02.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/03.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/04.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/05.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/06.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/07.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/08.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/09.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/10.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/11.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/12.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/13.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/14.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/15.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/16.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/17.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/18.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/01.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/02.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/03.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/04.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/05.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/06.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/07.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/08.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/09.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/10.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/11.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/12.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/13.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/14.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/15.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/16.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/17.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/18.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/01.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/02.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/03.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/04.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/05.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/06.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/07.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/08.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/09.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/10.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/11.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/12.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/13.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/14.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/15.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/16.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/17.png" class="media-object" alt="平通网"></a></li>
-                <li class="media"><a href="http://www.ptsso.com" class="pull-left"><img src="style/cust/18.png" class="media-object" alt="平通网"></a></li>
-
-            </ul>
+            <div id="Container">
+           		<div>
+					<ul id="ul1">
+					</ul>
+					</div>
+				<!-- +号，用于添加新的地址 -->
+				<div><span id="addIcon" style="font-size: 30px">+</span></div>
+				
+				 <!-- 地址模态框（Modal） -->
+		<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+						<h4 class="modal-title" id="myModalLabel">登录</h4>
+					</div>
+					<div class="modal-body">
+						<span id="msg"></span>
+					    <form action="" method="post">
+					    	名称:<input type="text" id="iconname" /><br/>
+					    	地址:<input type="text" id="iconaddress" /><br/>
+						<div class="modal-footer">
+							<input id="iconButton" class="btn primary" type="button" value="确定" />
+						</div>
+						</form>
+					</div>
+				</div><!-- /.modal-content -->
+			</div><!-- /.modal-dialog -->
+		</div><!-- /.modal -->
+           	</div>
             </div>
 <!--            <div class="co-md-6">
                 <iframe src="http://news.sina.com.cn/" width="560px" height="1000px"></iframe>

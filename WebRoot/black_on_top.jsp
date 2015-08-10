@@ -27,6 +27,19 @@
     }
 
 	$(function () {
+		// 页面加载拉取消息个数
+		$.ajax({
+			type : "POST",
+			url : "MessageInit.do",
+			success : function(msgData){
+				$("#message").html(msgData);
+			}
+		});
+		// 鼠标划过该区域，显示消息的标题和时间
+		$("#message").hover(function(){
+				
+		});
+		
 		// 模态框设置
 		$('#myModal').modal({backdrop:"static", keyboard:false, show:false});
 		$("#login").click(function(){
@@ -46,7 +59,14 @@
 		        $(this).removeClass('open');
 		    });
 		}
-    })
+		
+		
+		
+		
+		
+		
+		
+    });
     
 </SCRIPT>
 <div class="row">
@@ -69,7 +89,7 @@
             <!-- 个人设置 -->
             <div id="userSet">
                 <ul class="userSet nav-pills nav-tabs navbar-inverse navbar-right">
-                    <li><a href="#"><span class="glyphicon glyphicon-envelope" style="color: red;"></span>消息(<span style="color: red">5</span>)</a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-envelope" style="color: red;"></span>消息(<span id="message" style="color: red">5</span>)</a></li>
                     <li>&nbsp;</li>
                     <li><a id="login" href="javascript:void(0);" class="visible">登录</a></li>
                     <li id="userInfo" class="dropdown hidden">
