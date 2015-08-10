@@ -3,7 +3,7 @@ $(function(){
 	// 点击修改密码
 	$("#modifyPwd").click(function(){
 		if($("#modifyPwddiv").is(":hidden"))
-			$("#modifyPwddiv").css("display","block");
+			$("#modifyPwddiv").css("display","block"); // 除使用.show()方法外的另一种写法
 		else{
 			$("#modifyPwddiv").css("display","none");
 			location.replace(location);
