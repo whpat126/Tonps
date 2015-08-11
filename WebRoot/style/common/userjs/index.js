@@ -25,7 +25,7 @@ $(function(){
 	$("#addIcon").click(function(){
 		$("#iconname").val("");
 		$("#iconaddress").val("");
-		$('#myModal').modal({backdrop:"static", keyboard:false, show:true});
+		$('#myModal2').modal({backdrop:"static", keyboard:false, show:true});
 	});
 	
 	// 点击确定添加时
@@ -39,8 +39,8 @@ $(function(){
 			data : { "iconname":iconname, "iconaddress":iconaddress },
 			success : function(data){
 				if(data === "true"){
-					$('#myModal').modal({backdrop:"static", keyboard:false, show:false});
-					$('#myModal').modal('hide');
+					$('#myModal2').modal({backdrop:"static", keyboard:false, show:false});
+					$('#myModal2').modal('hide');
 					location.reload();
 				}
 			}
@@ -382,7 +382,7 @@ function initSet() {
 					data : { "iconId":objId },
 					success : function(iconData){
 						var data = eval("("+iconData+")");
-						$('#myModal').modal({backdrop:"static", keyboard:false, show:true});
+						$('#myModal2').modal({backdrop:"static", keyboard:false, show:true});
 //							iconname, "iconaddress
 						$("#iconname").val(data.name);
 						$("#iconaddress").val(data.param_href);
