@@ -41,7 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div><%@ include file="ptdh.jsp" %></div>
     <!-- 最上方黑条  style="display:none;" -->
     <div><%@ include file="black_on_top.jsp" %></div>
-
+ 
     <!-- 搜索引擎 -->
     <div><%@ include file="ptss.jsp" %></div>
     <div id="funcMenu" class="appclass ">
@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<div><span id="addIcon" style="font-size: 30px">+</span></div>
 				
 				 <!-- 地址模态框（Modal） -->
-		<div class="modal fade" id="myModal" tabindex="-1" aria-labelledby="modalTitle">
+		<div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="modalTitle">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">

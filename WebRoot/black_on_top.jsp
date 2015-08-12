@@ -96,7 +96,7 @@
 						<a href="javascript:void(0);" id="userDown" class="dropdown-toggle" data-toggle="dropdown"><span id="userName"  style="color: white;"></span><span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
-						    <li id="user-center"><a id="usercenter" href="javascript:;" onclick="window.open('usercenter.jsp', '_blank')" >个人中心</a></li>
+						    <li id="user-center"><a id="usercenter" target="_blank" href="${pageContext.request.contextPath }/menu_center.jsp" >个人中心</a></li>
 						    <li id="quit"><a id="logout" href="javascript:;" title="退出系统">退出账号</a></li>
 						</ul>
                     </li>
