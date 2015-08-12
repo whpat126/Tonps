@@ -1,13 +1,20 @@
 package com.pt.domain;
-
+/**
+ * 
+ * @author songqi
+ *
+ */
 public class Message {
 
 	private String pk_message;
 	private String title;
-	private String type;
-	private String source;
-	private String pk_user;
-	private String state;
+	private String contents;
+	private String msg_href;
+	private String type; // 消息类型普通、实时、待办等
+	private String source; // 消息来源 如系统推送和手工发送
+	private String pk_user; // 
+	private String state; // 消息状态 已读 未读
+	private String dr; // 删除标志
 	public String getPk_message() {
 		return pk_message;
 	}
@@ -43,6 +50,24 @@ public class Message {
 	}
 	public void setState(String state) {
 		this.state = state;
+	}
+	public String getContents() {
+		return contents;
+	}
+	public void setContents(String contents) {
+		this.contents = contents;
+	}
+	public String getDr() {
+		return dr;
+	}
+	public void setDr(String dr) {
+		this.dr = dr;
+	}
+	public String getMsg_href() {
+		return msg_href;
+	}
+	public void setMsg_href(String msg_href) {
+		this.msg_href = msg_href;
 	}
 	
 }
