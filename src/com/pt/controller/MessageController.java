@@ -41,7 +41,13 @@ public class MessageController {
 		PrintWriter out = response.getWriter();
 		out.print(3);
 	}
-	
+	/**
+	 * 消息头的列表
+	 * author：songqi
+	 * @param session
+	 * @param response
+	 * @throws IOException
+	 */
 	@RequestMapping("/MessageTitle")
 	private void getMessageTitle(HttpSession session, HttpServletResponse response) throws IOException{
 		response.setHeader("Cache-Control", "no-cache");
@@ -59,8 +65,61 @@ public class MessageController {
 		PrintWriter out = response.getWriter();
 		out.print(str);
 	}
+	/**
+	 * 消息详情页，全部消息（不包括删除消息）
+	 * author：songqi
+	 * @param session
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping("/unreadMsg")
+	private void getUnreadMsg(HttpSession session, HttpServletResponse response) throws IOException{
+		response.setHeader("Cache-Control", "no-cache");
+		response.setContentType("text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		List<Message> list = new ArrayList<Message>();
+		Gson gson = new Gson();
+		Message message1 = new Message();
+		message1.setTitle("消息1");
+		message1.setContents("消息1内容： ——————————————————————————————————————这是消息内容");
+		Message message2 = new Message();
+		message2.setTitle("消息2");
+		message2.setContents("消息2内容： ——————————————————————————————————————这是消息内容");
+		list.add(message1);
+		list.add(message2);
+		String str = gson.toJson(list);
+		PrintWriter out = response.getWriter();
+		out.print(str);
+	}
 	
-	
+	/**
+	 * 消息详情页，用户未读消息
+	 * author：songqi
+	 * @param session
+	 * @param response
+	 * @throws IOException
+	 */
+	@RequestMapping("/newMsg")
+	private void getNewMsg(HttpSession session, HttpServletResponse response) throws IOException{
+		response.setHeader("Cache-Control", "no-cache");
+		response.setContentType("text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		List<Message> list = new ArrayList<Message>();
+		Gson gson = new Gson();
+		Message message1 = new Message();
+		message1.setTitle("新消息1");
+		message1.setContents("新消息1内容： ——————————————————————————————————————这是消息内容");
+		message1.setMsg_href("http://www.baidu.com/");
+		Message message2 = new Message();
+		message2.setTitle("新消息2");
+		message2.setContents("新消息2内容： ——————————————————————————————————————这是消息内容");
+		message2.setMsg_href("http://www.sina.com.cn/");
+		list.add(message1);
+		list.add(message2);
+		String str = gson.toJson(list);
+		PrintWriter out = response.getWriter();
+		out.print(str);
+	}
 	
 	
 }
