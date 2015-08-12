@@ -33,19 +33,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<!-- 左侧功能菜单 -->
  	<div>
    	<ul>
-   		<li><a>消息中心</a></li>
-   		<li><a href="javascript:;">个人信息</a></li>
-   		<li><a>我的应用</a></li>
-   		<li><a>我的企业</a></li>
-   		<li><a>安全中心</a></li>
-   		<ul>
-   			<li><a id="modifyPwd" href="javascript:;">密码修改</a></li>
-   			<li><a id="emailVerify" href="javascript:;">邮箱验证</a></li>
-   			<li><a id="Security" href="javascript:;">密保问题</a></li>
-   		</ul>
+		<li><a id="modifyPwd" href="javascript:;">密码修改</a></li>
+		<li><a id="emailVerify" href="javascript:;">邮箱验证</a></li>
+		<li><a id="Security" href="javascript:;">密保问题</a></li>
    	</ul>
    </div>
- 
+
+
+  
  	<!-- 右侧具体内容 -->
  	<div id="modifyPwddiv" style="display:none;">
  		<div id=mpdmsg></div>
@@ -76,7 +71,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		请输入答案：<input type="text" id="yesnewpwdanswer" /><br/>
  		<input type="button" value="确认" id="yespwdbtn" />
  	</div>
- </div>
-   
+
+     </div>
   </body>
 </html>
