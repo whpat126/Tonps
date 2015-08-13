@@ -48,43 +48,55 @@ public class IconController {
 		icon1.setParam_dragableBox("true");
 		icon1.setParam_href("https://www.baidu.com");
 		icon1.setParam_title("1");
+		icon1.setIcon_path("style/cust/01.png");
 		Icon icon2 = new Icon();
 		icon2.setParam_id("2");
 		icon2.setName("a");
 		icon2.setParam_dragableBox("true");
 		icon2.setParam_href("http://www.sina.com.cn");
 		icon2.setParam_title("2");
+		icon2.setIcon_path("style/cust/02.png");
+
 		Icon icon3 = new Icon();
 		icon3.setParam_id("3");
 		icon3.setName("3");
 		icon3.setParam_dragableBox("true");
 		icon3.setParam_href("http://www.163.com");
 		icon3.setParam_title("3");
+		icon3.setIcon_path("style/cust/03.png");
+
 		Icon icon4 = new Icon();
 		icon4.setParam_id("4");
 		icon4.setName("4");
 		icon4.setParam_dragableBox("true");
 		icon4.setParam_href("http://www.126.com");
 		icon4.setParam_title("4");
-		
+		icon4.setIcon_path("style/cust/04.png");
+
 		Icon icon5 = new Icon();
 		icon5.setParam_id("5");
 		icon5.setName("5");
 		icon5.setParam_dragableBox("true");
 		icon5.setParam_href("http://www.taobao.com");
 		icon5.setParam_title("5");
+		icon5.setIcon_path("style/cust/05.png");
+
 		Icon icon6 = new Icon();
 		icon6.setParam_id("6");
 		icon6.setName("6");
 		icon6.setParam_dragableBox("true");
 		icon6.setParam_href("http://www.tmall.com");
 		icon6.setParam_title("6");
+		icon6.setIcon_path("style/cust/06.png");
+
 		Icon icon7 = new Icon();
 		icon7.setParam_id("7");
 		icon7.setName("7");
 		icon7.setParam_dragableBox("true");
 		icon7.setParam_href("http://www.jd.com");
 		icon7.setParam_title("7");
+		icon7.setIcon_path("style/cust/07.png");
+
 		Gson gson = new Gson();
 		List<Icon> list = new ArrayList<Icon>();
 		list.add(icon1);
