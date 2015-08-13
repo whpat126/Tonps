@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <![endif]-->
     <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
-    <title>menu_center.jsp</title>
+    <title>功能导航</title>
 
   </head>
   
@@ -34,9 +34,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	<ul>
    		<li><a href="${pageContext.request.contextPath }/msgcenter.jsp">消息中心</a></li>
    		<li><a href="${pageContext.request.contextPath }/usercenter.jsp">个人信息</a></li>
-   		<li><a href="${pageContext.request.contextPath }/myApply.jsp">我的应用</a></li>
-   		<li><a>我的企业</a></li>
-   		<li><a>安全中心</a></li>
+   		<!-- <li><a href="${pageContext.request.contextPath }/myApply.jsp">我的应用</a></li> -->
+   		<li><a href="${pageContext.request.contextPath }/company/myCompany.jsp">我的企业</a></li>
    	</ul>
    </div>
   </div>

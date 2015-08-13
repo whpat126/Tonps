@@ -14,7 +14,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <meta http-equiv="imagetoolbar" content="no"/>
     <link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="style/common/userCSS/base.css"/>
-    <link rel='icon' href='style/common/img/2.ico' type='image/x-ico'/>
+    <link rel='icon' href='style/common/img/800-img2ico.ico' type='image/x-ico'/>
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -37,6 +37,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <body style="background-color: white">
 <div  class="navbar-fixed-top" style="height: 106px;position: fixed;background-color: white"></div>
 <div class="container">
+  <!-- 登录的model -->
+	<%@ include file="login.jsp" %>
+  
+  
     <!-- 导航条-->
     <div><%@ include file="ptdh.jsp" %></div>
     <!-- 最上方黑条  style="display:none;" -->
@@ -115,8 +119,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
 </div>
 
-<!-- 登录的model -->
-<%@ include file="login.jsp" %>
+
 
 </body>
 </html>

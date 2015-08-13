@@ -55,7 +55,7 @@
            <!--<li><a href="javascript:void(0);"><div class="sidebox"><img src="style/common/img/side_icon01.png">客服中心</div></a></li>-->
            <!--<li><a href="javascript:void(0);"><div class="sidebox"><img src="style/common/img/side_icon02.png">客户案例</div></a></li>-->
            <!--<li><a href="javascript:void(0);" ><div class="sidebox"><img src="style/common/img/side_icon04.png">QQ客服</div></a></li>-->
-           <li class="sidebox"><a href="javascript:void(0);" class="sidebox"><img src="style/common/img/side_icon07.png" title="客户服务"></a></li>
-           <li style="border:none;display: none;" id="sidetop"><a href="javascript:goTop();" class="sidetop"><img src="style/common/img/side_icon06.png" title="回到顶端"></a></li>
+           <li class="sidebox"><a href="javascript:void(0);" class="sidebox"><img src="style/common/img/side_icon01.png" title="客户服务"></a></li>
+           <li style="border:none;display: none;" id="sidetop"><a href="javascript:goTop();" class="sidetop"><img src="style/common/img/side_icon05.png" title="回到顶端"></a></li>
        </ul>
    </div>
