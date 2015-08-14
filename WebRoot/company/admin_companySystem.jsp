@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <![endif]-->
     <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
-    <title>创建企业</title>
+    <title>企业系统维护</title>
 
   </head>
   
@@ -29,14 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <jsp:include page="../black_on_top.jsp"></jsp:include>
   <jsp:include page="../login.jsp"></jsp:include>
  <div class="navbar-fixed-top" style="margin-top: 106px;position: fixed;background-color: #f9f9f9;height: 60px;">
- 	企业名称：
- 	联系方式：
- 	组织机构代码证
- 	企业注册号
- 	
- 	以下为选择输入
- 	企业地址：
- 	企业网址：
+ 	使用管理系统的方式
  
  </div>
   </body>
