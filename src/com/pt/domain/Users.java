@@ -2,17 +2,17 @@ package com.pt.domain;
 
 import com.pt.base.BaseDomain;
 
-public class User extends BaseDomain{
+public class Users extends BaseDomain{
 
 	private String pk_users;
 	private String username;
 	private String password;
 	private String email;
 	private String phone;
-	private String name;
+//	private String name;
 	private String demo;
 	
-	public User() {
+	public Users() {
 		setPk_users(basedbo.genPk());
 	}
 	public String getUsername() {
@@ -39,12 +39,12 @@ public class User extends BaseDomain{
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+//	public String getName() {
+//		return name;
+//	}
+//	public void setName(String name) {
+//		this.name = name;
+//	}
 	public String getDemo() {
 		return demo;
 	}
