@@ -7,7 +7,7 @@ package com.pt.domain;
 public class Pwdqa {
 
 	private String pk_pwdqa;
-	private String wdq;
+	private String pwdq;
 	private String pqda;
 	private String pk_user;
 	public String getPk_pwdqa() {
@@ -17,10 +17,10 @@ public class Pwdqa {
 		this.pk_pwdqa = pk_pwdqa;
 	}
 	public String getWdq() {
-		return wdq;
+		return pwdq;
 	}
 	public void setWdq(String wdq) {
-		this.wdq = wdq;
+		this.pwdq = wdq;
 	}
 	public String getPqda() {
 		return pqda;
