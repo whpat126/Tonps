@@ -1,38 +1,54 @@
 package com.pt.domain;
+
+import com.pt.base.BaseDomain;
+
 /**
  * 有问题和回答
  * @author Administrator
  *
  */
-public class Pwdqa {
+public class Pwdqa extends BaseDomain{
 
 	private String pk_pwdqa;
 	private String pwdq;
-	private String pqda;
-	private String pk_user;
+	private String pwdqa;
+	private String pk_users;
+	
+	public Pwdqa() {
+		setPk_pwdqa(basedbo.genPk());
+	}
+
 	public String getPk_pwdqa() {
 		return pk_pwdqa;
 	}
+
 	public void setPk_pwdqa(String pk_pwdqa) {
 		this.pk_pwdqa = pk_pwdqa;
 	}
-	public String getWdq() {
+
+	public String getPwdq() {
 		return pwdq;
 	}
-	public void setWdq(String wdq) {
-		this.pwdq = wdq;
+
+	public void setPwdq(String pwdq) {
+		this.pwdq = pwdq;
 	}
-	public String getPqda() {
-		return pqda;
+
+	public String getPwdqa() {
+		return pwdqa;
 	}
-	public void setPqda(String pqda) {
-		this.pqda = pqda;
+
+	public void setPwdqa(String pwdqa) {
+		this.pwdqa = pwdqa;
 	}
-	public String getPk_user() {
-		return pk_user;
+
+	public String getPk_users() {
+		return pk_users;
 	}
-	public void setPk_user(String pk_user) {
-		this.pk_user = pk_user;
+
+	public void setPk_users(String pk_users) {
+		this.pk_users = pk_users;
 	}
+
 	
 }
