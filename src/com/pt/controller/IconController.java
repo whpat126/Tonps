@@ -17,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
 import com.pt.domain.Icon;
+import com.pt.domain.Users;
 import com.pt.service.IconService;
+import com.pt.service.UsersService;
 
 /**
  * 负责图标的controller
@@ -25,10 +27,12 @@ import com.pt.service.IconService;
  */
 @Controller
 public class IconController {
-//	@Autowired
-//	@Qualifier("IconService")
-//	private IconService iconService;
+	@Autowired
+	@Qualifier("iconService")
+	private IconService iconService;
 
+	@Qualifier("userService")
+	private UsersService userService;
 	/**
 	 * 图标初始化就执行的方法，该方法将数据库中存放的图标返回到页面中，
 	 * author：songqi
@@ -39,6 +43,9 @@ public class IconController {
 	@RequestMapping("/IconInit")
 	private void Init(HttpSession session, HttpServletResponse response)
 			throws IOException {
+		String userName = (String) session.getAttribute("userName");
+		String userId = userService.findByProp("username", userName).getPk_users();
+		System.out.println("8-18:" + userId);
 		response.setHeader("Cache-Control", "no-cache");
 		response.setContentType("text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
@@ -160,6 +167,7 @@ public class IconController {
 	private void iconEdit(HttpSession session, HttpServletResponse response, 
 			String iconId) throws IOException{
 		// 根据session得到用户的id
+		
 //		boolean flag = false;
 		Gson gson = new Gson();
 		Icon icon1 = new Icon();
