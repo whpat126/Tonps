@@ -3,6 +3,7 @@ package com.pt.base;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -44,8 +45,6 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 	@SuppressWarnings("unchecked")
 	public BaseDaoImpl() {
 
-		// System.out.println(this.getClass());
-		// System.out.println(this.getClass().getGenericSuperclass());
 		ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
 		// 带有真实类型参数的对象
 		clazz = (Class<Entity>) pt.getActualTypeArguments()[0];
@@ -65,13 +64,13 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 	 */
 	@Override
 	public boolean save(Entity obj) {
-		System.out.println("111111111111111111111111111111111111");
 		// obj.getSimpleName();
 		Connection conn = OurDaoUtils.getConnection();
 		String sql = "insert into " + clazz.getSimpleName() + " values(";
+//		System.out.println("baseDaoImpl:" + clazz.getSimpleName());
 		// 可以获取本类所声明的变量
 		Field[] fs = clazz.getDeclaredFields();
-		// System.out.println(fs.length);
+//		System.out.println("fs:" + fs.length);
 
 		for (int i = 0; i < fs.length; i++) {
 			if (i == 0) {
@@ -81,21 +80,15 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			}
 		}
 		sql = sql + ")";
-		// System.out.println(sql);
 
 		// 进行预编译
 		PreparedStatement ps = OurDaoUtils.getPs(conn, sql);
-
-		// ps.setString(1, user.getName());
-
 		try {
 			for (int i = 0; i < fs.length; i++) {
 				// 拼接方法的名称
 				String MethodName = "get" + Character.toUpperCase(fs[i].getName().charAt(0)) + fs[i].getName().substring(1);
-				// System.out.println("MethodName:"+MethodName);
 				Method m = clazz.getMethod(MethodName);
-				// System.out.println(">>>>>>>>>>>"+m.invoke(obj));
-				ps.setObject(i, m.invoke(obj));
+				ps.setObject(i+1, m.invoke(obj));
 			}
 			ps.executeUpdate();
 			return true;
@@ -189,7 +182,7 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 		for (int i = 1; i < fs.length; i++) {
 			sql += fs[i].getName() + "=?,";
 		}
-		sql = sql.substring(0, sql.length() - 1) + " where " + pk + " = ? ";
+		sql = sql.substring(0, sql.length() - 1) + " where " +fs[0].getName() + " = '" + pk +"'";
 		PreparedStatement ps = OurDaoUtils.getPs(conn, sql);
 		try {
 			for (int i = 1; i < fs.length; i++) {
@@ -197,9 +190,6 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 				Method m = clazz.getMethod(methodName);
 				ps.setObject(i, m.invoke(obj));// user.getName();
 			}
-			Method m2 = clazz.getMethod("get" + Character.toUpperCase(fs[0].getName().charAt(0)) + fs[0].getName().substring(1));
-			ps.setLong(fs.length, (Long) m2.invoke(obj));
-
 			ps.executeUpdate();
 			return true;
 		} catch (Exception e) {
@@ -264,7 +254,6 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			ResultSetHandler<List<Entity>> h = new BeanListHandler<Entity>(clazz);
 			// 执行 SQL 语句,使用 BeanListHandler,返回对象的list集合
 			nList = (List<Entity>) qRunner.query(conn, sql, h);
-
 			return nList;
 
 		} catch (SQLException e) {
@@ -380,7 +369,7 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 	public int getTotal(String sqlwhere) {
 		Connection conn = OurDaoUtils.getConnection();
 		QueryRunner qRunner = new QueryRunner();
-		String sql = "select count(*) as total from" + clazz.getSimpleName() + " where ";
+		String sql = "select count(*) as total from " + clazz.getSimpleName() + " where ";
 		sql += sqlwhere;
 
 		try {
@@ -390,8 +379,8 @@ public class BaseDaoImpl<Entity> implements BaseDao<Entity> {
 			 * (Long)runner.query("select count(*) from account",new
 			 * ScalarHandler(1) );
 			 */
-			int count = qRunner.query(conn, sql, new ScalarHandler<Long>(1)).intValue();
-			return count;
+			BigDecimal cnt = (BigDecimal)qRunner.query(conn, sql, new ScalarHandler(1));
+			return cnt.intValue();
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return 0;

@@ -12,7 +12,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import com.pt.dao.UserDao;
+import com.pt.dao.IconDao;
+import com.pt.dao.PwdqDao;
+import com.pt.dao.PwdqaDao;
+import com.pt.dao.UsersDao;
 
 /** 
   * BaseServiceImpl  
@@ -24,50 +27,59 @@ import com.pt.dao.UserDao;
 @Lazy(true)
 @Service("baseService")
 public class BaseServiceImpl<Entity> implements BaseService<Entity> {
-
+	@Autowired
+	@Qualifier("userDao")
+	public UsersDao usersDao;
+	@Autowired
+	@Qualifier("iconDao")
+	private IconDao iconDao;
+	@Autowired
+	@Qualifier("pwdqDao")
+	private PwdqDao pwdqDao;
+	@Autowired
+	@Qualifier("pwdqaDao")
+	private PwdqaDao pwdqaDao;
+	
+	
 	/**
 	 * BaseDao<Entity>baseDao接口
 	 */
-	protected BaseDao<Entity> baseDaoImpl;
+	protected BaseDao<Entity> baseDao;
 	/**
 	 * Class<?>clazz
 	 * 存储了具体操作的类
 	 */
 	private Class<?> clazz;
+	
+	@PostConstruct
+	public void init(){
+		String clazzName=clazz.getSimpleName();
+		String clazzDao=Character.toLowerCase(clazzName.charAt(0))+clazzName.substring(1)+"Dao";
+		try {
+			Field clazzField =this.getClass().getSuperclass().getDeclaredField(clazzDao);
+			Field baseField =this.getClass().getSuperclass().getDeclaredField("baseDao");
+			baseField.set(this, clazzField.get(this));
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	@SuppressWarnings("unchecked")
 	public BaseServiceImpl(){
-		// System.out.println(this.getClass());
-		// System.out.println(this.getClass().getGenericSuperclass());
 		ParameterizedType pt = (ParameterizedType) this.getClass().getGenericSuperclass();
 		// 带有真实类型参数的对象
 		clazz = (Class<Entity>) pt.getActualTypeArguments()[0];
 	
 	}
-	@PostConstruct
-	public void init(){
-		String clazzName=clazz.getSimpleName();
-		String clazzDao=Character.toLowerCase(clazzName.charAt(0))+clazzName.substring(1)+"DaoImpl";
-		try {
-			Field clazzField =this.getClass().getSuperclass().getDeclaredField(clazzDao);
-			Field baseField =this.getClass().getSuperclass().getDeclaredField("baseDaoImpl");
-			baseField.set(this, clazzField.get(this));
-			
-		} catch (Exception e) {
-			// TODO: handle exception
-		}
-	}
-	@Autowired
-	@Qualifier("userDao")
-	public UserDao userDao;
 	
 	
-
 	public BaseDao<Entity> getBaseDaoImpl() {
-		return baseDaoImpl;
+		return baseDao;
 	}
 
-	public void setBaseDaoImpl(BaseDao<Entity> baseDaoImpl) {
-		this.baseDaoImpl = baseDaoImpl;
+	public void setBaseDaoImpl(BaseDao<Entity> baseDao) {
+		this.baseDao = baseDao;
 	}
 
 	/** 
@@ -80,8 +92,7 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	*/ 
 	@Override
 	public boolean save(Entity obj) {
-		System.out.println("22222222222222222222222222222222");
-		return baseDaoImpl.save(obj);
+		return baseDao.save(obj);
 	}
 
 	/** 
@@ -94,8 +105,9 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	*/ 
 	@Override
 	public List<Entity> findAll() {
+//		System.out.println("base findAll");
 		// TODO Auto-generated method stub
-		return baseDaoImpl.findAll();
+		return baseDao.findAll();
 	}
 	/** 
 	  * findAll 方法 
@@ -110,7 +122,7 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	@Override
 	public List<Entity> findAll(String username, int currentPage, int pageSize) throws Exception {
 		// TODO Auto-generated method stub
-		return baseDaoImpl.findAll();
+		return baseDao.findAll();
 	}
 	/** 
 	  * findAll 方法 
@@ -126,7 +138,7 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	@Override
 	public List<Entity> findAll(String username, int currentPage, int pageSize, Map<String, Object> m) throws Exception {
 		// TODO Auto-generated method stub
-		return baseDaoImpl.findAll();
+		return baseDao.findAll();
 	}
 	/** 
 	  * update 方法 
@@ -139,8 +151,8 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * @date 2015年7月16日 
 	*/ 
 	@Override
-	public boolean update(Entity obj, String pk) throws Exception {
-		 return baseDaoImpl.update(obj, pk);
+	public boolean update(Entity obj, String pk) {
+		 return baseDao.update(obj, pk);
 	}
 	/** 
 	  * delete 方法 
@@ -153,8 +165,8 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * @date 2015年7月16日 
 	*/ 
 	@Override
-	public boolean delete(String pkValue, String pkName) throws Exception {
-		return baseDaoImpl.delete(pkValue, pkName);
+	public boolean delete(String pkValue, String pkName) {
+		return baseDao.delete(pkValue, pkName);
 	}
 	/** 
 	  * delete 方法 
@@ -166,14 +178,14 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * @date 2015年7月16日 
 	*/ 
 	@Override
-	public boolean delete(String pkValue) throws Exception {
-		return baseDaoImpl.delete(pkValue);
+	public boolean delete(String pkValue) {
+		return baseDao.delete(pkValue);
 	}
 
 	
 	/** 
 	  * findById 方法 
-	  * <p>方法说明:</p> 根据pk名称和对应的值id 查找对象
+	  * <p>方法说明:</p> 根据属性名称 查找对象
 	  * @param id 值
 	  * @param pk 名称
 	  * @return
@@ -183,9 +195,13 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * @date 2015年7月16日 
 	*/ 
 	@Override
-	public Entity findByProp(String id, String pk){
-		// TODO Auto-generated method stub
-		return baseDaoImpl.findByProp(id, pk).get(0);
+	public Entity findByProp(String prop, String value){
+		List<Entity> list = baseDao.findByProp(prop, value);
+		if(null == list || list.size() <1){
+			return null;
+		}else{
+			return list.get(0);
+		}
 	}
 	/** 
 	  * findById 方法 
@@ -197,9 +213,9 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * @date 2015年7月16日 
 	*/ 
 	@Override
-	public Entity findById(String id) throws Exception {
+	public Entity findById(String id) {
 		// TODO Auto-generated method stub
-		return baseDaoImpl.findById(id);
+		return baseDao.findById(id);
 	}
 	/** 
 	  * delete 方法 
@@ -213,7 +229,12 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	@Override
 	public boolean delete(String[] ids) {
 		// TODO Auto-generated method stub
-		return baseDaoImpl.delete(ids);
+		return baseDao.delete(ids);
+	}
+	
+	@Override
+	public int getTotal(String sqlwhere) {
+		return baseDao.getTotal(sqlwhere);
 	}
 
 }

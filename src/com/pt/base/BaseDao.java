@@ -72,7 +72,7 @@ public interface BaseDao<Entity> {
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
-	boolean update(Entity obj, String pk) throws Exception;
+	boolean update(Entity obj, String pk);
 	/** 
 	  * delete 方法 
 	  * <p>方法说明:</p> 根据pk名称和对应的值id 删除对象
@@ -151,5 +151,4 @@ public interface BaseDao<Entity> {
 	*/ 
 	boolean delete(String[] ids);
 
-	
 }
