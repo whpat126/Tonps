@@ -5,16 +5,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.pt.base.BaseServiceImpl;
-import com.pt.dao.UserDao;
-import com.pt.domain.User;
-import com.pt.service.UserService;
+import com.pt.dao.UsersDao;
+import com.pt.domain.Users;
+import com.pt.service.UsersService;
 
 @Service("userService")
-public class UserServiceImpl extends BaseServiceImpl<User> implements UserService {
+public class UsersServiceImpl extends BaseServiceImpl<Users> implements UsersService {
 
 	@Autowired
 	@Qualifier("userDao")
-	private UserDao ud;
+	private UsersDao userDao;
 
 //	public boolean adminValidate(Users user) {
 //		return userDao.adminValidate(user);
@@ -27,21 +27,27 @@ public class UserServiceImpl extends BaseServiceImpl<User> implements UserServic
 //	}
 
 	@Override
-	public boolean adminLogin(User user) {
+	public boolean adminLogin(Users user) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean userLogin(User user) {
+	public boolean userLogin(Users user) {
 		// TODO Auto-generated method stub
-		return true;
+		return userDao.userLogin(user);
 	}
 
 	@Override
 	public boolean userValidate(String userName) {
+		
+		return userDao.userValidate(userName);
+	}
+
+	@Override
+	public boolean findByProp(Users user) {
 		// TODO Auto-generated method stub
-		return ud.userValidate(userName);
+		return userDao.findByProp(user);
 	}
 
 }
