@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	<div id="emailVerifydiv" style="display:none;">
  		<div id="evdmsg"></div>
  		输入email地址：<input type="text" id="emailContent" /><br/>
- 		确认：<input type="button" id="emailVerifybtn" value="提交"/>
+ 		确认：<input type="button" id="emailVerifybtn" value="验证"/> <i>邮箱一旦验证将不可更改</i>
  		
  	</div>
  	<!-- 未设置密码问题 -->
