@@ -3,7 +3,7 @@ package com.pt.test;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.pt.domain.User;
+import com.pt.domain.Users;
 
 public class TestDemo {
 
@@ -16,7 +16,7 @@ public class TestDemo {
 		Map<String, String> map=new HashMap<String, String>();
 		Long long1=System.currentTimeMillis();
 		for (int i = 0; i < 10000; i++) {
-			String string = (new User()).getPk_users();
+			String string = (new Users()).getPk_users();
 			System.out.println(i+":"+string);
 			map.put(string, string);
 			
