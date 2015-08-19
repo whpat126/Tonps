@@ -2,7 +2,6 @@ package com.pt.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -20,8 +19,12 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.pt.domain.Pwdq;
-import com.pt.domain.User;
-import com.pt.service.UserService;
+import com.pt.domain.Pwdqa;
+import com.pt.domain.Users;
+import com.pt.service.PwdqService;
+import com.pt.service.PwdqaService;
+import com.pt.service.UsersService;
+import com.pt.utils.PtMail;
 import com.qq.connect.QQConnectException;
 import com.qq.connect.oauth.Oauth;
 
@@ -30,28 +33,32 @@ public class UserController {
 
 	@Autowired
 	@Qualifier("userService")
-	private UserService us;
-
+	private UsersService userService;
+	@Autowired
+	@Qualifier("pwdqService")
+	private PwdqService pwdqService;
+	@Autowired
+	@Qualifier("pwdqaService")
+	private PwdqaService pwdqaService;
+	
 	/**
 	 * 用户注册信息验证 ，判断该用户是否存在
 	 * 
 	 * @author：songqi
 	 * @param userName
-	 * @return
+	 * @return 用户存在 返回true 用户不存在 返回false
 	 */
 	@RequestMapping("/userValidate")
 	private void userValidate(String userName, HttpServletResponse resp)
 			throws IOException {
-		// System.out.println("bbbbbbbbbbbbb");
-		System.out.println("用户验证的方法-------->" + userName);
-		// flag 为 true 表示用户已经存在，false表示不存在，默认是true
-		boolean flag = us.userValidate(userName);
+//		System.out.println("用户验证的方法-------->" + userName);
+		boolean flag = userService.userValidate(userName);
 		PrintWriter out = resp.getWriter();
-		flag = false;
+//		flag = false;
 		if (flag) {
-			out.print(false);
-		} else {
 			out.print(true);
+		} else {
+			out.print(false);
 		}
 
 	}
@@ -66,22 +73,22 @@ public class UserController {
 	private void userRegister(String reusername, String repassword,
 			HttpServletResponse resp, HttpSession session) throws IOException {
 		PrintWriter out = resp.getWriter();
-		System.out.println("===》用户注册的方法" + reusername);
-		// 验证用户名是否存在 flag 为 true 表示用户已经存在，false表示不存在，默认是true
-		boolean flag = us.userValidate(reusername);
-		flag = false;
+//		System.out.println("===》用户注册的方法" + reusername);
+		boolean flag = userService.userValidate(reusername);
+//		flag = false;
 		if (flag) {
-			out.print(true);
+			out.print(true); // 用户已经存在
 		} else {
-			User user = new User();
+			Users user = new Users();
 			user.setUsername(reusername);
 			user.setPassword(repassword);
+			
 			// 保存用户到数据库中
-			// boolean bl = us.save(user);
-			// System.out.println("userRegister方法中判断basedao返回的值：" + bl);
-			boolean bl = false;
-			bl = true;
-			if (bl) {
+			 boolean bl = userService.save(user);
+			 System.out.println(user.getUsername());
+//			boolean bl = false;
+//			bl = true;
+			if (bl) { // true 表示注册成功
 				session.setAttribute("userName", reusername);
 				out.print("success");
 			} else {
@@ -107,10 +114,10 @@ public class UserController {
 			HttpServletRequest request, HttpServletResponse resp)
 			throws ServletException, IOException {
 		// System.out.println("userLogin......");
-		User user = new User();
+		Users user = new Users();
 		user.setUsername(username);
 		user.setPassword(password);
-		boolean flag = us.userLogin(user);
+		boolean flag = userService.userLogin(user);
 		PrintWriter out = resp.getWriter();
 		// flag =false;
 		if (!flag) {
@@ -118,8 +125,8 @@ public class UserController {
 			// return mav;
 		} else if ("true".equals(remeber)) {
 			HttpSession session = request.getSession();
-			session.setAttribute("userName", "zhangsan"); // 要修改
-			Cookie cookieName = new Cookie("user", "1" + "@@@@" + "zhangsanpwd"); // 要修改
+			session.setAttribute("userName", username); // 要修改
+			Cookie cookieName = new Cookie("user", "1" + "@@@@" + username); // 要修改
 			// 保留7天
 			cookieName.setMaxAge(7 * 24 * 3600);
 			resp.addCookie(cookieName);
@@ -130,13 +137,14 @@ public class UserController {
 			// return mav;
 		} else {
 			HttpSession session = request.getSession();
-			session.setAttribute("userName", "zhangsan"); // 要修改
+			session.setAttribute("userName", username); // 要修改
 			out.print(username);
 		}
 	}
 
 	/**
-	 * 用户在访问页面时，会使用自动登录功能,如果获得的session为null，则返回false author：songqi
+	 * 用户在访问页面时，会使用自动登录功能,如果获得的session为null，则返回false 
+	 * @author songqi
 	 * 
 	 * @param session
 	 * @param request
@@ -147,8 +155,7 @@ public class UserController {
 	@RequestMapping("/autoLogin")
 	private void autoLogin(HttpSession session, HttpServletRequest request,
 			HttpServletResponse resp) throws ServletException, IOException {
-		System.out.println("autoLogin的session"
-				+ session.getAttribute("userName"));
+//		System.out.println("autoLogin的session" + session.getAttribute("userName"));
 		String userName = (String) session.getAttribute("userName");
 		PrintWriter out = resp.getWriter();
 		if (userName == null || "".equals(userName)) {
@@ -180,23 +187,23 @@ public class UserController {
 	}
 
 	/**
-	 * 用户点击修改密码后，页面通过controller跳转到web-inf下的jsp中 author：songqi
+	 * 用户点击修改密码后，页面通过controller跳转到jsp中 
+	 * author：songqi
 	 * 
 	 * @param session
 	 * @return
 	 */
 	@RequestMapping("/modifyPwd")
 	private void modifyPwd(HttpServletResponse response, HttpSession session,
-			String opwd, String pwd, String newpwd) throws IOException {
+			String opwd, String pwd) throws IOException {
 		PrintWriter out = response.getWriter();
 		String username = (String) session.getAttribute("userName");
-		// boolean flag = us. //调用service的验证方法参数：username,opwd
-		boolean flag = false;
-		flag = true;
-		if (!flag) { // 密码不正确 flag=false
+		Users user = userService.findByProp("username", username);
+		if (!opwd.equals(user.getPassword())) { // 密码不正确 flag=false
 			out.print(false);
 		} else {
-			// flag = us.u // 传入新密码
+			user.setPassword(pwd);
+			boolean flag = userService.update(user, user.getPk_users()); // 传入新密码
 			if (flag) {
 				out.print("success");
 			} else {
@@ -216,14 +223,16 @@ public class UserController {
 	 */
 	@RequestMapping("/validateEmail")
 	private void validateEmail(HttpServletResponse response,
-			HttpSession session, String opwd) throws IOException {
+			HttpSession session, String email) throws IOException {
 		PrintWriter out = response.getWriter();
 		String username = (String) session.getAttribute("userName");
-		// boolean flag = // 调用发送邮件的方法
-		boolean flag = false;
-		flag = true;
-		if (flag)
+		Users user = userService.findByProp("username", username);
+		user.setEmail(email);
+		boolean flag = PtMail.sendAccountActivateEmail(user); // 调用发送邮件的方法
+		if (flag){
+			userService.update(user,user.getPk_users());
 			out.print(true);
+		}
 		else
 			out.print(false);
 	}
@@ -236,13 +245,15 @@ public class UserController {
 	 * @param opwd
 	 * @throws IOException
 	 */
-	@RequestMapping("queryEmail")
+	@RequestMapping("/queryEmail")
 	private void queryEmail(HttpServletResponse response, HttpSession session,
 			String opwd) throws IOException {
+		response.setHeader("Cache-Control", "no-cache");
+		response.setContentType("text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String username = (String) session.getAttribute("userName");
-		// String str = // 获取邮箱的方法
-		String str = "abc.com";
+		String str = userService.findByProp("username", username).getEmail(); // 获取邮箱的方法
 		if ("".equals(str) || null == str)
 			out.print(false);
 		else
@@ -256,24 +267,14 @@ public class UserController {
 	 * @param session
 	 * @throws IOException
 	 */
-	@RequestMapping("QuestionList")
+	@RequestMapping("/QuestionList")
 	private void QuestionList(HttpServletResponse response, HttpSession session)
 			throws IOException {
 		response.setHeader("Cache-Control", "no-cache");
 		response.setContentType("text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
-		String username = (String) session.getAttribute("userName");
-		// boolean flag = false; //去数据库中判断该用户是否设置过密保问题fals表示没有验证
-		List<Pwdq> list = new ArrayList<Pwdq>();
-		Pwdq question = new Pwdq();
-		question.setPk_pwdq("1");
-		question.setPwdq("你最爱的人是谁？");
-		list.add(question);
-		Pwdq question2 = new Pwdq();
-		question2.setPk_pwdq("2");
-		question2.setPwdq("你的名字是什么？");
-		list.add(question2);
+		List<Pwdq> list = pwdqService.findAll();
 		Gson gson = new Gson();
 		String str = gson.toJson(list);
 		out.print(str);
@@ -287,7 +288,7 @@ public class UserController {
 	 * @param opwd
 	 * @throws IOException
 	 */
-	@RequestMapping("judgeUserQuestion")
+	@RequestMapping("/judgeUserQuestion")
 	private void judgeUserQuestion(HttpServletResponse response,
 			HttpSession session) throws IOException {
 		response.setHeader("Cache-Control", "no-cache");
@@ -295,38 +296,31 @@ public class UserController {
 		response.setCharacterEncoding("UTF-8");
 		PrintWriter out = response.getWriter();
 		String username = (String) session.getAttribute("userName");
-		// boolean flag = false; //去数据库中判断该用户是否设置过密保问题fals表示没有验证
-		List<Pwdq> list = new ArrayList<Pwdq>();
-		Pwdq question = new Pwdq();
-		question.setPk_pwdq("1");
-		question.setPwdq("你最爱的人是谁？");
-		list.add(question);
-		Pwdq question2 = new Pwdq();
-		question2.setPk_pwdq("2");
-		question2.setPwdq("你的名字是什么？");
-		list.add(question2);
+		Users user = userService.findByProp("username", username);
 		Gson gson = new Gson();
-		boolean flag = false;
-		flag = true;
-		if (!flag) {
-			// String str = // 获取数据库中存放的密码问题
+		Pwdqa pwdqa = pwdqaService.findByProp("pk_users", user.getPk_users()); //去数据库中判断该用户是否设置过密保问题，如果为null表示没有设置过
+		if (null == pwdqa || pwdqa.equals("")) { 
+			List<Pwdq> list = pwdqService.findAll();  // 获取数据库中存放的密码问题
 			String str = gson.toJson(list);
 			// System.out.println(str);
 			out.print(str);
 		} else {
-			// String str = "" // 去数据库中交互得到用户设置的内容
-			String str = gson.toJson(question2);
-			System.out.println(str);
+			Pwdq pwdq = pwdqService.findById(pwdqa.getPwdq());
+			String str = gson.toJson(pwdq);
+//			System.out.println(str);
 			out.print(str);
 		}
 	}
 
 	/**
-	 * 验证用户输入的老密码是否正确，如果正确则把新的密保问题及答案存储到数据库中，如果不正确则返回false给jsp。 author：songqi
-	 * 
+	 * 验证用户输入的老密码是否正确，如果正确则把新的密保问题及答案存储到数据库中，如果不正确则返回false给jsp。
+	 * author：songqi
 	 * @param response
 	 * @param session
-	 * @param opwd
+	 * @param opwdq 旧密码问题
+	 * @param opwda 旧密码答案
+	 * @param npwdq 新密码问题
+	 * @param npwda 新密码答案
 	 * @throws IOException
 	 */
 	@RequestMapping("/validatePwdQuestion")
@@ -335,15 +329,18 @@ public class UserController {
 			String npwda) throws IOException {
 		PrintWriter out = response.getWriter();
 		String username = (String) session.getAttribute("userName");
-		// boolean flag = false; //去数据库中判断旧密码问题和答案是否正确
-		boolean flag = false;
-		flag = true;
-		if (!flag) {
+		Users user = userService.findByProp("username", username);
+		String sqlwhere = " pwdq= '" + opwdq + "' and pwdqa='"+opwda+"' and pk_users='"+user.getPk_users()+"' ";
+		int num = pwdqaService.getTotal(sqlwhere);
+		if (num == 0) {
 			out.print(false);  // 如果不正确返回false
 		} else {
-			// String str = "" // 如果旧密码问题和答案都一致，则将其修改的新密保及问题存储到数据库中
-			boolean blean = false;
-			blean = true;
+			 // 如果旧密码问题和答案都一致，则将其修改的新密保及问题存储到数据库中
+			Pwdqa pwdqa = pwdqaService.findByProp("pk_users", user.getPk_users());
+			pwdqa.setPk_users(user.getPk_users());
+			pwdqa.setPwdq(npwdq);
+			pwdqa.setPwdqa(npwda);
+			boolean blean = pwdqaService.update(pwdqa, pwdqa.getPk_pwdqa());
 			if(blean)
 				out.print("success");
 			else
@@ -367,10 +364,13 @@ public class UserController {
 		String username = (String) session.getAttribute("userName");
 		// boolean flag = false; //
 		// 需要得到主键的方法
+		Users user = userService.findByProp("username", username);
 		// 把内容存储到数据库中方法
-		
-		boolean flag = true;
-//		flag = false;
+		Pwdqa pwdqa = new Pwdqa();
+		pwdqa.setPwdq(nopwdQ);
+		pwdqa.setPwdqa(nopwdA);
+		pwdqa.setPk_users(user.getPk_users());
+		boolean flag = pwdqaService.save(pwdqa);
 		out.print(flag);
 	}
 
@@ -382,10 +382,10 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/adminLogin")
-	private ModelAndView adminLogin(User user, HttpSession session) {
+	private ModelAndView adminLogin(Users user, HttpSession session) {
 
 		ModelAndView mav = new ModelAndView();
-		boolean flag = us.adminLogin(user);
+		boolean flag = userService.adminLogin(user);
 		if (flag) {
 			session.setAttribute("username", user.getUsername());
 			mav.setViewName("/WEB-INF/jsps/index");
