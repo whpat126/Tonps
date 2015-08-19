@@ -10,7 +10,7 @@ import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
 import org.junit.Test;
 
-import com.pt.domain.User;
+import com.pt.domain.Users;
 
 public class PtMail {
 
@@ -46,10 +46,10 @@ public class PtMail {
 	 * @return void
 	 * @param user 
 	 */ 
-	public static void sendAccountActivateEmail(User user) {
+	public static boolean sendAccountActivateEmail(Users user) {
 		String userMail=user.getEmail();
 		if (userMail == null)
-			userMail = PtMail.defaUserMail;
+			return false;
 		// Create the email message
 		HtmlEmail email = new HtmlEmail();
 		email.setHostName(serviceMailHostName);
@@ -77,11 +77,12 @@ public class PtMail {
 
 			// send the email
 			email.send();
+			return true;
 		} catch (EmailException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return false;
 	}
 	/**
 	 * <p>说明:  发送重设密码链接的邮件</p>
@@ -89,7 +90,7 @@ public class PtMail {
 	 * @return void
 	 * @param user 
 	 */ 
-	public static void sendResetPasswordEmail(User user) {
+	public static boolean sendResetPasswordEmail(Users user) {
 		String userMail=user.getEmail();
 		if (userMail == null)
 			userMail = PtMail.defaUserMail;
@@ -124,11 +125,12 @@ public class PtMail {
 			
 			// send the email
 			email.send();
+			return true;
 		} catch (EmailException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+		return false;
 	}
 	/**
 	 * <p>
@@ -142,7 +144,7 @@ public class PtMail {
 	 * @param msg
 	 *            邮件内容
 	 */
-	public static void sendSimpMail(String userMail, String msg) {
+	public static boolean sendSimpMail(String userMail, String msg) {
 		if (userMail == null)
 			userMail = PtMail.defaUserMail;
 		Email email = new SimpleEmail();
@@ -157,26 +159,28 @@ public class PtMail {
 			email.addTo(userMail);
 			email.setMsg(msg);
 			email.send();
+			return true;
 		} catch (EmailException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return false;
 	}
 
 	
 
 	@Test
 	public  void Test() {
-		User user=new User();
+		Users user=new Users();
 		user.setEmail(null);
 		PtMail.sendAccountActivateEmail(user);
-		PtMail.sendResetPasswordEmail(user);
+//		PtMail.sendResetPasswordEmail(user);
 	}
 
 
 	public static void main(String[] args) throws IOException {
 
-		User user=new User();
+		Users user=new Users();
 		user.setUsername("张三");
 		user.setEmail(null);
 		PtMail.sendAccountActivateEmail(user);

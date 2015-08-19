@@ -8,7 +8,7 @@
 */ 
 package com.pt.utils;
 
-import com.pt.domain.User;
+import com.pt.domain.Users;
 
 
 /**   
@@ -40,7 +40,7 @@ public class GenerateLinkUtils {
 	    /** 
 	     * 生成帐户激活链接 
 	     */  
-	    public static String generateActivateLink(User user) {  
+	    public static String generateActivateLink(Users user) {  
 	        return WEB_URL+"/AccountActivate/activateAccount?id="   
 	                + user.getPk_users() + "&" + CHECK_CODE + "=" + generateCheckcode(user);  
 	    }  
@@ -48,7 +48,7 @@ public class GenerateLinkUtils {
 	    /** 
 	     * 生成重设密码的链接 
 	     */  
-	    public static String generateResetPwdLink(User user) {  
+	    public static String generateResetPwdLink(Users user) {  
 	        return WEB_URL+"/AccountActivate/resetPasswordUI?userName="   
 	                + user.getUsername() + "&" + CHECK_CODE + "=" + generateCheckcode(user);  
 	    }  
@@ -58,8 +58,8 @@ public class GenerateLinkUtils {
 	     * @param user  要激活的帐户 
 	     * @return 将用户名和密码组合后，通过md5加密后的16进制格式的字符串 
 	     */  
-	    public static String generateCheckcode(User user) {  
-	        String userName = user.getName();  
+	    public static String generateCheckcode(Users user) {  
+	        String userName = user.getUsername();  
 	        String userMail = user.getEmail();  
 	        //过期时间戳，用于校验链接的合法性
 	        String ts = String.valueOf(System.currentTimeMillis()+86400000);  
