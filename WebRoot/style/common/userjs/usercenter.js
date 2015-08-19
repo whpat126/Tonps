@@ -9,7 +9,7 @@ $(function(){
 			location.replace(location);
 		}
 	});
-	// 点击邮箱验证
+	// 点击邮箱验证提交按钮
 	$("#emailVerify").click(function(){
 		if($("#emailVerifydiv").is(":hidden")){
 			// 异步交互拿到邮箱内容
@@ -25,7 +25,7 @@ $(function(){
 					}
 				}
 			});
-			$("#emailVerifydiv").css("display","block");
+			$("#emailVerifydiv").show(1000);
 		}else{
 //			$("#emailVerifydiv").css("display","none");
 			location.replace(location);
@@ -132,7 +132,7 @@ $(function(){
 		if(pwd != npwd) {$("#mpdmsg").html("密码不一致");return false;}
 		$.ajax({
 			type : "POST",
-			data : {"opwd" : opwd, "pwd" : pwd, "npwd":npwd},
+			data : {"opwd" : opwd, "pwd" : pwd},
 			url : "modifyPwd.do",
 			success : function(data){
 				if("false" == data){
@@ -141,7 +141,7 @@ $(function(){
 					$("#mpdmsg").html("修改成功");
 					location.replace(location);
 				}else{
-					$("#remsg").html("修改失败");
+					$("#mpdmsg").html("修改失败");
 				}
 			}
 		});
