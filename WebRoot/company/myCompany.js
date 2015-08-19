@@ -5,8 +5,8 @@ $(function(){
 		type : "POST",
 		url : "checkUser.do",
 		success : function(data){
-			// data = "noCompanyUser";
-			// data = "companyUser";
+//			 data = "noCompanyUser";
+//			 data = "companyUser";
 			data = "companyAdmin";
 			if( "noCompanyUser" == data ){ // 不是企业用户
 				$("#noCompanyDiv").show();
