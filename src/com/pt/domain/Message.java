@@ -1,10 +1,13 @@
 package com.pt.domain;
+
+import com.pt.base.BaseDomain;
+
 /**
  * 
  * @author songqi
  *
  */
-public class Message {
+public class Message extends BaseDomain{
 
 	private String pk_message;
 	private String title;
@@ -15,6 +18,11 @@ public class Message {
 	private String pk_user; // 
 	private String state; // 消息状态 已读 未读
 	private String dr; // 删除标志
+	
+	public Message() {
+		setPk_message(basedbo.genPk());
+	}
+	
 	public String getPk_message() {
 		return pk_message;
 	}
