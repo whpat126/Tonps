@@ -33,7 +33,26 @@
 	</servlet-mapping>
   
   
-  
+  <!-- comet4j 使用 -->
+	<listener>
+		<description>Comet4J容器侦听</description>
+		<listener-class>org.comet4j.core.CometAppListener</listener-class>
+	</listener>
+        <servlet>
+                <description>Comet连接[默认:org.comet4j.core.CometServlet]</description>
+                <display-name>CometServlet</display-name>
+                <servlet-name>CometServlet</servlet-name>
+                <servlet-class>org.comet4j.core.CometServlet</servlet-class>
+        </servlet>
+        <servlet-mapping>
+                <servlet-name>CometServlet</servlet-name>
+                <url-pattern>/comm</url-pattern>
+        </servlet-mapping>
+
+	<listener>
+		<description>HelloWorld</description>
+		<listener-class>com.pt.utils.Comet4j</listener-class>
+	</listener>	
   
   
   
