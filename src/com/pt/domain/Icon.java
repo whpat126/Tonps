@@ -1,6 +1,8 @@
 package com.pt.domain;
 
-public class Icon {
+import com.pt.base.BaseDomain;
+
+public class Icon extends BaseDomain{
 
 	private String pk_icon; // 图标的主键
 	private String name; // icon name
@@ -10,6 +12,9 @@ public class Icon {
 	private String param_dragableBox; //icon dragableBox param,use drag
 	private String icon_path;
 	
+	public Icon() {
+		setPk_icon(basedbo.genPk());
+	}
 	public String getPk_icon() {
 		return pk_icon;
 	}
