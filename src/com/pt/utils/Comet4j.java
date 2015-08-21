@@ -1,13 +1,12 @@
 package com.pt.utils;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
 import org.comet4j.core.CometContext;
 import org.comet4j.core.CometEngine;
+
+import com.pt.dao.impl.IconDaoImpl;
 
 public class Comet4j implements ServletContextListener{
 
@@ -31,14 +30,16 @@ public class Comet4j implements ServletContextListener{
 		public void run() {
 			
 			CometEngine engine = CometContext.getInstance().getEngine();
+			int msg =0;
 			while(true){
+				msg = getMsgNum();
 				try {
-					Thread.sleep(1000);
+					Thread.sleep(10000); // 设置为参数，可由系统管理员给予修改
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				engine.sendToAll(CHANNEL, new SimpleDateFormat( "yyyy-MM-dd hh:mm:ss").format(new Date()));
+//				System.out.println("com4j:" + msg);
+				engine.sendToAll(CHANNEL, msg);
 			}
 		}
 		
@@ -47,7 +48,16 @@ public class Comet4j implements ServletContextListener{
 	public void contextDestroyed(ServletContextEvent sce) {
 		// TODO Auto-generated method stub
 	}
-
+	/**
+	 * 
+	 * author：songqi
+	 * @return
+	 */
+	private int getMsgNum() {
+		IconDaoImpl idi = new IconDaoImpl();
+		int num = idi.getMsgCount();
+		return num;
+	}
 }
 
 
