@@ -17,10 +17,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <title>企业申请审核</title>
     <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
-    <title>用户信息维护</title>
-
+	<script type="text/javascript">
+	 // 全选和反选操作
+	    function checkboxAll(){
+	    	var checkboxSelect = document.getElementById("checkboxSelect");
+	    	var checkbox = document.getElementsByName("checkbox");
+	    	if(checkboxAll.checked){
+	    		for(var i=0;i<checkbox.length;i++){
+	    			checkbox[i].checked=true;
+	    		}
+	    	}else{
+	    		for(var i=0;i<checkbox.length;i++){
+	    			checkbox[i].checked=false;
+	    		}
+	    	}
+	    	
+	    }
+	</script>
   </head>
   
   <body>
@@ -29,10 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <jsp:include page="../black_on_top.jsp"></jsp:include>
   <jsp:include page="../login.jsp"></jsp:include>
  <div class="navbar-fixed-top" style="margin-top: 106px;position: fixed;background-color: #f9f9f9;height: 60px;">
- 	
  	<!-- 已经加入企业：管理员 -->
 	<span style="color:#666 ">企业管理员（删除）</span>
-	<div id="companyAdminDiv" style=";">
+	<div id="companyAdminDiv" style="">
 		<div >
 			<ul>
 				<li><a href="company/myCompany.jsp" id="admin_userApply">用户申请审核</a></li>
@@ -46,7 +61,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	</div>
 	
- 	使用管理系统的方式
+ 	<div id="adminCompanyApply" style=";">
+		<table id="table2"  class="table table-hover table-bordered">
+			<thead>
+				<tr><th></th><th>申请类型</th><th>姓名</th><th>单位</th><th>电话</th></tr>
+			</thead>
+			
+			<tbody>
+			<!-- 为试验效果添加 -->
+			<tr>
+				<td>
+				<input type="checkbox" name="checkbox" value="1">
+				</td>
+				<td>申请成为我的上级</td>
+				<td>宋琪</td>
+				<td>山东平通</td>
+				<td>111222333</td>
+				</tr>
+				<tr>
+				<td>
+				<input type="checkbox" name="checkbox" value="2">
+				</td>
+				<td>申请成q</td>
+				<td>王五</td>
+				<td>山东平通</td>
+				<td>222333444</td>
+			</tr>
+			</tbody>
+		</table>
+	</div>
  
  </div>
   </body>

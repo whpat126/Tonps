@@ -2,16 +2,20 @@ package com.pt.utils;
 
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.xml.ws.spi.http.HttpContext;
 
 import org.comet4j.core.CometContext;
 import org.comet4j.core.CometEngine;
 
-import com.pt.dao.impl.IconDaoImpl;
+import com.pt.dao.impl.UserIconDaoImpl;
 
-public class Comet4j implements ServletContextListener{
+public  class Comet4j implements ServletContextListener{
 
 	private static final String CHANNEL = "songqiupdate";
 	
+	@Override
 	public void contextInitialized(ServletContextEvent sce) {
 		
 		CometContext cc = CometContext.getInstance();
@@ -31,15 +35,22 @@ public class Comet4j implements ServletContextListener{
 			
 			CometEngine engine = CometContext.getInstance().getEngine();
 			int msg =0;
+			int i=0;
 			while(true){
+				String id =Ids.getCidmap().get("aa");
+//				System.out.println("id:"+id);
+//				System.out.println("map:" + Ids.getCidmap().size());
 				msg = getMsgNum();
 				try {
-					Thread.sleep(10000); // 设置为参数，可由系统管理员给予修改
+					Thread.sleep(1000); // 设置为参数，可由系统管理员给予修改
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 //				System.out.println("com4j:" + msg);
-				engine.sendToAll(CHANNEL, msg);
+//				engine.sendToAll(CHANNEL, msg);
+				i++;
+//				engine.sendTo(CHANNEL, engine.getConnection(id),i);
+				engine.sendTo(CHANNEL, engine.getConnection(id), msg);
 			}
 		}
 		
@@ -54,10 +65,11 @@ public class Comet4j implements ServletContextListener{
 	 * @return
 	 */
 	private int getMsgNum() {
-		IconDaoImpl idi = new IconDaoImpl();
+		UserIconDaoImpl idi = new UserIconDaoImpl();
 		int num = idi.getMsgCount();
 		return num;
 	}
+	
 }
 
 

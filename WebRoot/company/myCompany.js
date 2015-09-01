@@ -6,27 +6,26 @@ $(function(){
 		url : "checkUser.do",
 		success : function(data){
 //			 data = "noCompanyUser";
-//			 data = "companyUser";
-			data = "companyAdmin";
+			 data = "companyUser";
+//			data = "companyAdmin";
 			if( "noCompanyUser" == data ){ // 不是企业用户
 				$("#noCompanyDiv").show();
 			}
-			if("companyUser" == data){ // 是企业的普通用户
+			if("companyUser" == data){ // 是企业用户
 				var $myCompany = $("#myCompany");
 				$("#companyUserDiv").show();
 				$myCompany.show();
 				displayUser();
-			}
-			if("companyAdmin" == data){
 				$("#companyAdminDiv").show();
-				
 				displayAdmin();
-				
 			}
+			/*if("companyAdmin" == data){
+				
+			}*/
 		}
 	});
 	
-	// 管理员用户申请审核
+	/*// 管理员用户申请审核
 	$("#admin_userApply").click(function(){
 		// location.replace(location);
 		$("#adminCompanyApply").hide();
@@ -85,10 +84,7 @@ $(function(){
 				$("#adminCompanyInfo").show(500);
 			}
 		});
-	});
-	
-	
-	
+	});*/
 	
 	
 	function displayUser(){
@@ -99,7 +95,9 @@ $(function(){
 				var data = eval("("+jsonData+")");
 				var contents = "";
 				for(var i=0;i<data.length;i++){
-					contents += "<li>" + data[i].name +  "<a href='#'>申请管理员</a><a href='#'>退出企业</a></li> <br/>";
+					contents += "<li>" + data[i].name + 
+					"<a href='applyAdmin.do?pk_myCompany="+ data[i].pk_myCompany +"' >申请管理员</a>" +
+					"<a href='outCompany.do?pk_myCompany="+ data[i].pk_myCompany +"'>退出企业</a></li> <br/>";
 				}
 				$("#myCompany").append(contents);
 			}
@@ -127,7 +125,7 @@ $(function(){
 		var aaa = $("#"+j);
 		$(aaa).children("tbody").children().remove();
 		for(var i=0 ; i<data.length; i++){
-			var chk="<input type='checkbox' value='"+ data[i].pk_myCompany +"'/>";
+			var chk="<input type='checkbox' name='checkbox' value='"+ data[i].pk_myCompany +"'/>";
 			var type = data[i].type ;
 			var userName = data[i].userName;
 			var user_company = data[i].user_company;
@@ -144,3 +142,36 @@ $(function(){
 	
 	
 });
+
+
+// 全选和反选操作
+function checkboxAll() {
+	var checkboxSelect = document.getElementById("checkboxSelect");
+	var checkbox = document.getElementsByName("checkbox");
+	if (checkboxSelect.checked) {
+		for (var i = 0; i < checkbox.length; i++) {
+			checkbox[i].checked = true;
+		}
+	} else {
+		for (var i = 0; i < checkbox.length; i++) {
+			checkbox[i].checked = false;
+		}
+	}
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

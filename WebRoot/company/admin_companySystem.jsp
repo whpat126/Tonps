@@ -29,6 +29,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <jsp:include page="../black_on_top.jsp"></jsp:include>
   <jsp:include page="../login.jsp"></jsp:include>
  <div class="navbar-fixed-top" style="margin-top: 106px;position: fixed;background-color: #f9f9f9;height: 60px;">
+ 	<!-- 已经加入企业：管理员 -->
+	<span style="color:#666 ">企业管理员（删除）</span>
+	<div id="companyAdminDiv" style=";">
+		<div >
+			<ul>
+				<li><a href="company/myCompany.jsp" id="admin_userApply">用户申请审核</a></li>
+				<li><a href="company/admin_companyApply.jsp" id="admin_companyApply">企业申请审核</a></li>
+				<li><a href="company/admin_business.jsp" id="admin_business">企业业务申请</a></li>
+				<li><a href="company/admin_companyInfo.jsp" id="admin_companyInfo">维护企业信息</a></li>
+				<li><a href="company/admin_group.jsp" id="admin_group">群组设置</a></li>
+				<li><a href="company/admin_userInfo.jsp" id="admin_userInfo">用户信息维护</a></li>
+				<li><a href="company/admin_companySystem.jsp" id="admin_companySystem">企业系统维护</a></li>
+			</ul>
+		</div>
+	</div>
+ 	
  	使用管理系统的方式
  
  </div>

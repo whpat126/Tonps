@@ -12,9 +12,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
-import com.pt.dao.IconDao;
+import com.pt.dao.CompanyIconDao;
+import com.pt.dao.MyCompanyDao;
+import com.pt.dao.PublicIconDao;
 import com.pt.dao.PwdqDao;
 import com.pt.dao.PwdqaDao;
+import com.pt.dao.UserIconDao;
 import com.pt.dao.UsersDao;
 
 /** 
@@ -31,15 +34,23 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	@Qualifier("userDao")
 	public UsersDao usersDao;
 	@Autowired
-	@Qualifier("iconDao")
-	private IconDao iconDao;
+	@Qualifier("userIconDao")
+	private UserIconDao userIconDao;
+	@Autowired
+	@Qualifier("publicIconDao")
+	private PublicIconDao publicIconDao;
+	@Autowired
+	@Qualifier("companyIconDao")
+	private CompanyIconDao companyIconDao;
 	@Autowired
 	@Qualifier("pwdqDao")
 	private PwdqDao pwdqDao;
 	@Autowired
 	@Qualifier("pwdqaDao")
 	private PwdqaDao pwdqaDao;
-	
+	@Autowired
+	@Qualifier("myCompanyDao")
+	private MyCompanyDao myCompanyDao;
 	
 	/**
 	 * BaseDao<Entity>baseDao接口

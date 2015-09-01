@@ -2,25 +2,21 @@ package com.pt.domain;
 
 import com.pt.base.BaseDomain;
 
-public class Icon extends BaseDomain{
+public class CompanyIcon extends BaseDomain{
 
-	private String pk_icon; // 图标的主键
+	private String pk_companyIcon; // 图标的主键
 	private String name; // icon name
-	private String param_id; // icon id param
-	private String param_title; 
-	private String param_href;
+	private String param_id; // icon 位置，需要根据此属性做排序
+	private String param_title; // a标签的title属性
+	private String param_href; // a标签的href属性
 	private String param_dragableBox; //icon dragableBox param,use drag
-	private String icon_path;
+	private String icon_path; // 图标在文档中的路径
+	private String type; // 图标的属性：0表示公共的图标  1表示用户私有的图标
 	
-	public Icon() {
-		setPk_icon(basedbo.genPk());
+	public CompanyIcon() {
+		setPk_companyIcon(basedbo.genPk());
 	}
-	public String getPk_icon() {
-		return pk_icon;
-	}
-	public void setPk_icon(String pk_icon) {
-		this.pk_icon = pk_icon;
-	}
+	
 	public String getName() {
 		return name;
 	}
@@ -56,6 +52,20 @@ public class Icon extends BaseDomain{
 	}
 	public void setIcon_path(String icon_path) {
 		this.icon_path = icon_path;
+	}
+	public String getType() {
+		return type;
+	}
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getPk_companyIcon() {
+		return pk_companyIcon;
+	}
+
+	public void setPk_companyIcon(String pk_companyIcon) {
+		this.pk_companyIcon = pk_companyIcon;
 	}
 	
 }

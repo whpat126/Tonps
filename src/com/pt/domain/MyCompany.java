@@ -1,18 +1,25 @@
 package com.pt.domain;
 
-public class MyCompany {
+import com.pt.base.BaseDomain;
+
+public class MyCompany extends BaseDomain{
 
 	private String pk_myCompany;
 	private String name;
 	private String companyAdmin;
 	private String outCompany;
+	private String phone;
 	
 	/* 临时增加  用于jsp页面显示全 */
 	private String userName;
+	private String address;
 	private String user_company;
 	private String user_phone;
-	private String type;
+	private String type; // 0表示
 	
+	public MyCompany() {
+		setPk_myCompany(basedbo.genPk());
+	}
 	
 	public String getPk_myCompany() {
 		return pk_myCompany;
@@ -61,6 +68,22 @@ public class MyCompany {
 	}
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	
 }

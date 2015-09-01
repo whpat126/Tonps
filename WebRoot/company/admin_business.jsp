@@ -19,7 +19,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <![endif]-->
     <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
-    <title>用户信息维护</title>
+    
+    <title>企业业务申请</title>
 
   </head>
   
@@ -29,10 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <jsp:include page="../black_on_top.jsp"></jsp:include>
   <jsp:include page="../login.jsp"></jsp:include>
  <div class="navbar-fixed-top" style="margin-top: 106px;position: fixed;background-color: #f9f9f9;height: 60px;">
- 	
  	<!-- 已经加入企业：管理员 -->
 	<span style="color:#666 ">企业管理员（删除）</span>
-	<div id="companyAdminDiv" style=";">
+	<div id="companyAdminDiv" style="">
 		<div >
 			<ul>
 				<li><a href="company/myCompany.jsp" id="admin_userApply">用户申请审核</a></li>
@@ -45,8 +45,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</ul>
 		</div>
 	</div>
-	
- 	使用管理系统的方式
  
  </div>
   </body>

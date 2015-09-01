@@ -2,7 +2,7 @@ $(function(){
 	// 页面加载显示所有图标
 	$.ajax({
 		type : "POST",
-		url : "IconInit.do",
+		url : "publicIconInit.do",
 		success : function(iconData){
 			var data = eval("("+iconData+")");
 			var $add = $("#ul1");

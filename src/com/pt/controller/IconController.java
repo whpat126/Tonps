@@ -5,8 +5,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import javassist.compiler.ast.InstanceOfExpr;
-
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -16,9 +14,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.google.gson.Gson;
-import com.pt.domain.Icon;
-import com.pt.domain.Users;
-import com.pt.service.IconService;
+import com.pt.domain.PublicIcon;
+import com.pt.domain.UserIcon;
+import com.pt.service.CompanyIconService;
+import com.pt.service.PublicIconService;
+import com.pt.service.UserIconService;
 import com.pt.service.UsersService;
 
 /**
@@ -28,9 +28,15 @@ import com.pt.service.UsersService;
 @Controller
 public class IconController {
 	@Autowired
-	@Qualifier("iconService")
-	private IconService iconService;
-
+	@Qualifier("userIconService")
+	private UserIconService userIconService;
+	@Autowired
+	@Qualifier("publicIconService")
+	private PublicIconService publicIconService;
+	@Autowired
+	@Qualifier("companyIconService")
+	private CompanyIconService companyIconService;
+	@Autowired
 	@Qualifier("userService")
 	private UsersService userService;
 	/**
@@ -40,85 +46,45 @@ public class IconController {
 	 * @param response 
 	 * @throws IOException
 	 */
-	@RequestMapping("/IconInit")
+	@RequestMapping("/publicIconInit")
 	private void Init(HttpSession session, HttpServletResponse response)
 			throws IOException {
-		String userName = (String) session.getAttribute("userName");
-		String userId = userService.findByProp("username", userName).getPk_users();
-		System.out.println("8-18:" + userId);
 		response.setHeader("Cache-Control", "no-cache");
 		response.setContentType("text/html;charset=UTF-8");
 		response.setCharacterEncoding("UTF-8");
-		Icon icon1 = new Icon();
-		icon1.setParam_id("1");
-		icon1.setName("a");
-		icon1.setParam_dragableBox("true");
-		icon1.setParam_href("https://www.baidu.com");
-		icon1.setParam_title("1");
-		icon1.setIcon_path("style/cust/01.png");
-		Icon icon2 = new Icon();
-		icon2.setParam_id("2");
-		icon2.setName("a");
-		icon2.setParam_dragableBox("true");
-		icon2.setParam_href("http://www.sina.com.cn");
-		icon2.setParam_title("2");
-		icon2.setIcon_path("style/cust/02.png");
-
-		Icon icon3 = new Icon();
-		icon3.setParam_id("3");
-		icon3.setName("3");
-		icon3.setParam_dragableBox("true");
-		icon3.setParam_href("http://www.163.com");
-		icon3.setParam_title("3");
-		icon3.setIcon_path("style/cust/03.png");
-
-		Icon icon4 = new Icon();
-		icon4.setParam_id("4");
-		icon4.setName("4");
-		icon4.setParam_dragableBox("true");
-		icon4.setParam_href("http://www.126.com");
-		icon4.setParam_title("4");
-		icon4.setIcon_path("style/cust/04.png");
-
-		Icon icon5 = new Icon();
-		icon5.setParam_id("5");
-		icon5.setName("5");
-		icon5.setParam_dragableBox("true");
-		icon5.setParam_href("http://www.taobao.com");
-		icon5.setParam_title("5");
-		icon5.setIcon_path("style/cust/05.png");
-
-		Icon icon6 = new Icon();
-		icon6.setParam_id("6");
-		icon6.setName("6");
-		icon6.setParam_dragableBox("true");
-		icon6.setParam_href("http://www.tmall.com");
-		icon6.setParam_title("6");
-		icon6.setIcon_path("style/cust/06.png");
-
-		Icon icon7 = new Icon();
-		icon7.setParam_id("7");
-		icon7.setName("7");
-		icon7.setParam_dragableBox("true");
-		icon7.setParam_href("http://www.jd.com");
-		icon7.setParam_title("7");
-		icon7.setIcon_path("style/cust/07.png");
-
 		Gson gson = new Gson();
-		List<Icon> list = new ArrayList<Icon>();
-		list.add(icon1);
-		list.add(icon2);
-		list.add(icon3);
-		list.add(icon4);
-		list.add(icon5);
-		list.add(icon6);
-		list.add(icon7);
-		
-		String str = gson.toJson(list);
-//		System.out.println(str);
 		PrintWriter out = response.getWriter();
-		out.print(str);
+		List<PublicIcon> list = publicIconService.findAll();
+		out.print(gson.toJson(list));
+			
 	}
+	/**
+	 * 用户个人图标初始化就执行的方法，该方法将数据库中存放的图标返回到页面中，
+	 * author：songqi
+	 * @param session 根据登录的用户查找对应的类
+	 * @param response 
+	 * @throws IOException
+	 */
+	@RequestMapping("/userIconInit")
+	private void userInit(HttpSession session, HttpServletResponse response)
+			throws IOException {
+		response.setHeader("Cache-Control", "no-cache");
+		response.setContentType("text/html;charset=UTF-8");
+		response.setCharacterEncoding("UTF-8");
+		String userName = (String) session.getAttribute("userName");
+		String userId = userService.findByProp("userName", userName).getPk_users();
+		Gson gson = new Gson();
+		PrintWriter out = response.getWriter();
+		List<PublicIcon> list = userIconService.findAll(userId);
+		if(null == list || list.size() < 1){
+			return ;
+		}else{
+			
+			out.print(gson.toJson(list));
+		}
+			
+	}
+	
 	
 	/**
 	 * 将用户修改的图标顺序取到，并保存到数据库中
@@ -127,13 +93,20 @@ public class IconController {
 	 * @param response
 	 * @param param_id
 	 */
-	@RequestMapping("/IconUpdate")
+	@RequestMapping("/userIconUpdate")
 	private void iconUpdate(HttpSession session, HttpServletResponse response, 
 			String sortString){
 		// 根据session得到用户的id
-//		
-		// 将替换后的顺序保存到数据库中
-		System.out.println("新的顺序："+sortString);
+		String userName = (String) session.getAttribute("userName");
+		if("".equals(userName) || null == userName){
+			return;
+		}else{
+			// 将替换后的顺序保存到数据库中
+			String userId = userService.findByProp("userName", userName).getPk_users();
+			boolean flag = userIconService.update(userId,sortString);
+			
+			
+		}
 		
 	}
 	/***
@@ -170,7 +143,7 @@ public class IconController {
 		
 //		boolean flag = false;
 		Gson gson = new Gson();
-		Icon icon1 = new Icon();
+		UserIcon icon1 = new UserIcon();
 		icon1.setParam_id("1");
 		icon1.setName("a");
 		icon1.setParam_dragableBox("true");

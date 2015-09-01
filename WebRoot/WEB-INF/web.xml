@@ -34,7 +34,7 @@
   
   
   <!-- comet4j 使用 -->
-	<listener>
+	<!-- <listener>
 		<description>Comet4J容器侦听</description>
 		<listener-class>org.comet4j.core.CometAppListener</listener-class>
 	</listener>
@@ -52,7 +52,7 @@
 	<listener>
 		<description>HelloWorld</description>
 		<listener-class>com.pt.utils.Comet4j</listener-class>
-	</listener>	
+	</listener>	 -->
   
   
   

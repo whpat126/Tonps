@@ -56,30 +56,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  	
  	<!-- 已经加入企业：管理员 -->
 	<span style="color:#666 ">企业管理员（删除）</span>
-	<div id="companyAdminDiv" style="display:none;">
+	<div id="companyAdminDiv" style=";">
 		<div >
 			<ul>
-				<li><a href="javascript:;" id="admin_userApply">用户申请审核</a></li>
-				<li><a href="javascript:;" id="admin_companyApply">企业申请审核</a></li>
-				<li><a href="javascript:;" id="admin_business">企业业务申请</a></li>
-				<li><a href="javascript:;" id="admin_companyInfo">维护企业信息</a></li>
+				<li><a href="company/myCompany.jsp" id="admin_userApply">用户申请审核</a></li>
+				<li><a href="company/admin_companyApply.jsp" id="admin_companyApply">企业申请审核</a></li>
+				<li><a href="company/admin_business.jsp" id="admin_business">企业业务申请</a></li>
+				<li><a href="company/admin_companyInfo.jsp" id="admin_companyInfo">维护企业信息</a></li>
 				<li><a href="company/admin_group.jsp" id="admin_group">群组设置</a></li>
 				<li><a href="company/admin_userInfo.jsp" id="admin_userInfo">用户信息维护</a></li>
 				<li><a href="company/admin_companySystem.jsp" id="admin_companySystem">企业系统维护</a></li>
 			</ul>
 		</div>
 	</div>
-	<div id="adminUserApply" style="display:none;">
+ 	
+ 	<div id="adminUserApply" style=";">
+		<div > <span id="approve">审核通过</span>   <span id="ignore">忽略</span>   <span id="filtrate">筛选</span></div>
 		<table id="table1"  class="table table-hover table-bordered">
 			<thead>
-				<tr><th></th><th>申请类型</th><th>姓名</th><th>单位</th><th>电话</th></tr>
+				<tr><th><input type="checkbox" id="checkboxSelect" onclick="checkboxAll();" /></th><th>申请类型</th><th>姓名</th><th>单位</th><th>电话</th></tr>
 			</thead>
 			
 			<tbody>
 			<!-- 为试验效果添加 -->
-			<tr>
+			<!-- <tr>
 				<td>
-				<input type="checkbox" value="1">
+				<input type="checkbox" name="checkbox" value="1">
 				</td>
 				<td>申请加入企业</td>
 				<td>宋琪</td>
@@ -88,60 +90,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</tr>
 				<tr>
 				<td>
-				<input type="checkbox" value="2">
+				<input type="checkbox" name="checkbox" value="2">
 				</td>
 				<td>申请成为管理员</td>
 				<td>王五</td>
 				<td>山东平通</td>
 				<td>222333444</td>
-			</tr>
+			</tr> -->
 			
-			</tbody>
-		</table>
-	</div>
-	<div id="adminCompanyApply" style="display:none;">
-		<table id="table2"  class="table table-hover table-bordered">
-			<thead>
-				<tr><th></th><th>申请类型</th><th>姓名</th><th>单位</th><th>电话</th></tr>
-			</thead>
-			
-			<tbody>
-			<!-- 为试验效果添加 -->
-			<tr>
-				<td>
-				<input type="checkbox" value="1">
-				</td>
-				<td>申请成为我的上级</td>
-				<td>宋琪</td>
-				<td>山东平通</td>
-				<td>111222333</td>
-				</tr>
-				<tr>
-				<td>
-				<input type="checkbox" value="2">
-				</td>
-				<td>申请成q</td>
-				<td>王五</td>
-				<td>山东平通</td>
-				<td>222333444</td>
-			</tr>
 			</tbody>
 		</table>
 	</div>
 	
-	<div id="adminBusiness" style="display:none;"></div>
-	<div id="adminCompanyInfo" style="display:none;">
-		企业名称：
-	 	联系方式：
-	 	组织机构代码证
-	 	企业注册号
-	 	
-	 	以下为选择输入
-	 	企业地址：
-	 	企业网址：
-		
-		
-	</div>
+	
+	
  </div>
   </body>
 </html>
