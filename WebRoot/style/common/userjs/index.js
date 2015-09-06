@@ -1,28 +1,121 @@
 $(function(){
-	// 页面加载显示所有图标
-	$.ajax({
-		type : "POST",
-		url : "publicIconInit.do",
-		success : function(iconData){
-			var data = eval("("+iconData+")");
-			var $add = $("#ul1");
-//			[{"name":"a","param_id":"1","param_title":"百度","param_href":"https://www.baidu.com"},{"name":"a","param_id":"2","param_title":"百度","param_href":"https://www.baidu.com"}]
-			$.each(data, function(i, value){
-				$add.append("<li id="+value.param_id+"><div> " +
-						"<a href='"+value.param_href+"' title='"+value.param_title +"' target='_blank'> " +
-//						"<a title='"+value.param_title +"' target='_blank'> " +
-						"<img src='"+value.icon_path+"' width='200' height='150' ></img> " +
-						"<em>"+value.param_title+"</em></a></div> " +
-						"<a id='del"+value.param_id+"'>del</a> " +
-						"<a id='edit"+value.param_id+"'>edit</a> " +
-						"</li>");
-			});
-			initSet();
+	if($("#userName").html() == ""){
+		// 页面加载显示所有图标
+		$.ajax({
+			type : "POST",
+			url : "publicIconInit.do",
+			success : function(iconData){
+				$("#love_kuzhan").show();
+				initIcon(iconData,1);
+				var oUl = document.getElementById("ul1");
+				var aLi = oUl.getElementsByTagName("li");
+				initSet(oUl,aLi);
+			}
+		});
+	}else{
+		$.ajax({
+			type : "POST",
+			url : "publicIconInit.do",
+			success : function(iconData){
+				$("#love_common").show();
+				initIcon(iconData,2);
+				var oUl = document.getElementById("ul2");
+				var aLi = oUl.getElementsByTagName("li");
+				initSet(oUl,aLi);
+			}
+		});
+	}
+	
+	// 点击酷站
+	$("#menu01").click(function(){
+		$("#love_kuzhan").show();
+		$("#love_common").hide();
+		$("#love_work").hide();
+		$("#love_life").hide();
+		$("#pt_yun").hide();
+		$.ajax({
+			type : "POST",
+			url : "publicIconInit.do",
+			success : function(iconData){
+				initIcon(iconData,1);
+			}
+		});
+	});
+	// 点击爱常用
+	$("#menu02").click(function(){
+		if($("#userName").html() == ""){
+			alert("该功能注册用户使用！")
+			window.location.href="register.jsp";
 		}
+		$("#love_kuzhan").hide();
+		$("#love_common").show();
+		$("#love_work").hide();
+		$("#love_life").hide();
+		$("#pt_yun").hide();
+		$.ajax({
+			type : "POST",
+			url : "publicIconInit.do",
+			success : function(iconData){
+				initIcon(iconData,2);
+				var oUl = document.getElementById("ul2");
+				var aLi = oUl.getElementsByTagName("li");
+				initSet(oUl,aLi);
+			}
+		});
 	});
 	
+	// 点击爱工作
+	$("#menu03").click(function(){
+		if($("#userName").html() == ""){
+			alert("该功能注册用户使用！")
+			window.location.href="register.jsp";
+		}
+		$("#love_kuzhan").hide();
+		$("#love_common").hide();
+		$("#love_work").show();
+		$("#love_life").hide();
+		$("#pt_yun").hide();
+		$.ajax({
+			type : "POST",
+			url : "publicIconInit.do",
+			success : function(iconData){
+				initIcon(iconData,3);
+				var oUl = document.getElementById("ul3");
+				var aLi = oUl.getElementsByTagName("li");
+				initSet(oUl,aLi);
+			}
+		});
+	});
+	
+	// 点击爱生活
+	$("#menu04").click(function(){
+		if($("#userName").html() == ""){
+			alert("该功能注册用户使用！")
+			window.location.href="register.jsp";
+		}
+		$("#love_kuzhan").hide();
+		$("#love_common").hide();
+		$("#love_work").hide();
+		$("#love_life").show();
+		$("#pt_yun").hide();
+		$.ajax({
+			type : "POST",
+			url : "publicIconInit.do",
+			success : function(iconData){
+				initIcon(iconData,4);
+				var oUl = document.getElementById("ul4");
+				var aLi = oUl.getElementsByTagName("li");
+				initSet(oUl,aLi);
+			}
+		});
+	});
+	
+	
+	
 	// 点击添加icon时
-	$("#addIcon").click(function(){
+	$(".addIcon").click(function(){
+		var name = $(this).attr("data-value");
+		$("#addTypeIcon").val(name); // 添加icon到不同的类别
 		$("#iconname").val("");
 		$("#iconaddress").val("");
 		$('#myModal2').modal({backdrop:"static", keyboard:false, show:true});
@@ -30,13 +123,14 @@ $(function(){
 	
 	// 点击确定添加时
 	$("#iconButton").click(function(){
+		var addIcon = $("#addTypeIcon").val();
 		var iconname = $("#iconname").val();
 		var iconaddress = $("#iconaddress").val();
-		if(iconname == "" || iconaddress == "") { $("#msg").html("名称和地址都必须输入"); return false;}
+		if(iconname == "") { $("#iconmsg").html("名称和地址都必须输入"); return false;}
 		$.ajax({
 			type : "POST",
 			url : "AddIcon.do",
-			data : { "iconname":iconname, "iconaddress":iconaddress },
+			data : { "iconname":iconname, "iconaddress":iconaddress,"addIcon": addIcon },
 			success : function(data){
 				if(data === "true"){
 					$('#myModal2').modal({backdrop:"static", keyboard:false, show:false});
@@ -56,9 +150,9 @@ $(function(){
 ********************************************************/
 var ismousedown;
 
-function initSet() {
-		var oUl = document.getElementById("ul1"); //ul1元素
-		var aLi = oUl.getElementsByTagName("li"); //li元素
+function initSet(oUl,aLi) {
+		// var oUl = document.getElementById("ul1"); //ul1元素
+		// var aLi = oUl.getElementsByTagName("li"); //li元素
 		var disX = 0;
 		var disY = 0;
 		var minZindex = 1; //层数
@@ -455,4 +549,20 @@ function initSet() {
 		},30);
 	}
 	
+	function initIcon(iconData,num){
+		var data = eval("("+iconData+")");
+		var $add = $("#ul" + num);
+//			[{"name":"a","param_id":"1","param_title":"百度","param_href":"https://www.baidu.com"},{"name":"a","param_id":"2","param_title":"百度","param_href":"https://www.baidu.com"}]
+		$add.children().remove();
+		$.each(data, function(i, value){
+			$add.append("<li id="+value.param_id+"><div> " +
+					"<a href='"+value.param_href+"' title='"+value.param_title +"' target='_blank'> " +
+//						"<a title='"+value.param_title +"' target='_blank'> " +
+					"<img src='"+value.icon_path+"' width='115' height='70' ></img> " +
+//						"<em>"+value.param_title+"</em></a></div> " +  // 右下角数字显示
+					"<a id='del"+value.param_id+"'>del</a> " +
+					"<a id='edit"+value.param_id+"'>edit</a> " +
+					"</li>");
+		});
+	}
 	

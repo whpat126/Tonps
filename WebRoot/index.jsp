@@ -23,12 +23,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <![endif]-->
     <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
-    <script type="text/javascript" src="style/common/userjs/index.js"></script>
+  
     <style>
-	#ul1 {width:880px; position:relative; margin:10px auto;}
-	#ul1 li {width:200px; height:150px; float:left; list-style:none; margin:10px;}
-	#ul1 li:hover{ border-color: #9a9fa4; box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.85);}
-	#ul1 .active{ border:1px dashed red;}
+	.ulMenu {width:880px; position:relative; margin:10px auto;}
+	.ulMenu li {width:115px; height:70px; float:left; list-style:none; margin:10px;}
+	.ulMenu li:hover{ border-color: #9a9fa4; box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.85);}
+	.ulMenu .active{ border:1px dashed red;}
 	
     </style>
 
@@ -51,28 +51,79 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div id="funcMenu" class="appclass ">
         <!-- 后台生成，此处先写出来 -->
         <ul class="">
-            <li class="btn-info">酷&nbsp;&nbsp;&nbsp;&nbsp;站</li>
-            <li class="btn-info">爱常用</li>
-            <li class="btn-info">爱工作</li>
-            <li class="btn-info">爱生活</li>
-            <li class="btn-info">平通云</li>
+            <li class="btn-info"><a id="menu01" href="javascript:;">酷&nbsp;&nbsp;&nbsp;&nbsp;站</a></li>
+            <li class="btn-info"><a id="menu02" href="javascript:;">爱常用</a></li>
+            <li class="btn-info"><a id="menu03" href="javascript:;">爱工作</a></li>
+            <li class="btn-info"><a id="menu04" href="javascript:;">爱生活</a></li>
+            <li class="btn-info"><a id="menu05" href="javascript:alert('暂未开通');">平通云</a></li>
         </ul>
     </div>
 
     <!-- 主要内容展示区 -->
-    <div>
-        <!-- 未登录用户使用，由系统推送 -->
-        <div style="position: relative;top: 180px;left: 80px;height:500px;">
-            <div class="col-md-12">
-            <div id="Container">
-           		<div>
-					<ul id="ul1">
-					</ul>
+    <div style="position: relative;top: 180px;left: 80px;height:500px;">
+        <!-- 未登录用户 酷站功能，由系统推送 -->
+		<div id="love_kuzhan" style="display:none;">
+			<div class="col-md-12">
+				<div id="Container">
+				<div>kuzhan</div>
+					<div>
+						<ul class="ulMenu" id="ul1">
+						</ul>
 					</div>
-				<!-- +号，用于添加新的地址 -->
-				<div><span id="addIcon" style="font-size: 30px">+</span></div>
-				
-				 <!-- 地址模态框（Modal） -->
+
+				</div>
+			</div>
+		</div>
+
+        <!-- 爱常用中内容 -->
+        <div id="love_common" style="display:none;">
+			<div class="col-md-12">
+				<div id="Container">
+				<div>爱常用</div>
+					<div>
+						<ul class="ulMenu" id="ul2">
+						</ul>
+					</div>
+					<!-- +号，用于添加新的地址 class不可改，修改外面套着的div -->
+					<div><span class="addIcon" style="font-size: 30px" data-value="addCommonIcon">+</span></div>
+				</div>
+			</div>
+        </div>
+        <div id="love_work" style="display:none;">
+        	<div class="col-md-12">
+				<div id="Container">
+				<div>爱工作</div>
+					<div>
+						<ul class="ulMenu" id="ul3">
+						</ul>
+					</div>
+					<!-- +号，用于添加新的地址  class不可改，修改外面套着的div -->
+					<div><span class="addIcon" style="font-size: 30px"  data-value="addWorkIcon">+</span></div>
+				</div>
+			</div>
+        </div>
+        <div id="love_life" style="display:none;">
+        	<div class="col-md-12">
+				<div id="Container">
+				<div>爱生活</div>
+					<div>
+						<ul class="ulMenu" id="ul4">
+						</ul>
+					</div>
+					<!-- +号，用于添加新的地址  class不可改，修改外面套着的div -->
+					<div ><span class="addIcon" style="font-size: 30px" data-value="addLifeIcon">+</span></div>
+				</div>
+			</div>
+        </div>
+        <div id="pt_yun" style="display:none;">
+        	
+        </div>
+    </div>
+    
+</div>
+
+
+	 <!-- 地址模态框（Modal） -->
 		<div class="modal fade" id="myModal2" tabindex="-1" aria-labelledby="modalTitle">
 			<div class="modal-dialog">
 				<div class="modal-content">
@@ -81,8 +132,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<h4 class="modal-title" id="myModalLabel">登录</h4>
 					</div>
 					<div class="modal-body">
-						<span id="msg"></span>
+						<strong><span id="iconmsg"></span></strong>
 					    <form action="" method="post">
+					    	<input type="hidden" id="addTypeIcon" value="" />
 					    	名称:<input type="text" id="iconname" /><br/>
 					    	地址:<input type="text" id="iconaddress" /><br/>
 						<div class="modal-footer">
@@ -93,33 +145,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				</div><!-- /.modal-content -->
 			</div><!-- /.modal-dialog -->
 		</div><!-- /.modal -->
-           	</div>
-            </div>
-<!--            <div class="co-md-6">
-                <iframe src="http://news.sina.com.cn/" width="560px" height="1000px"></iframe>
-                &lt;!&ndash;<img src="style/cust/sss.png" alt=""/>&ndash;&gt;
-            </div>-->
-
-<!--            <div class="media" style="position: absolute;top: 200px">
-                <div id="none_login" >
-                    <a href="http://www.ptsso.com" class=""><img src="style/cust/01.png" class="media-object" alt="平通网"></a>
-
-                </div>
-            </div>-->
-        </div>
-
-        <!-- 爱常用中内容 -->
-        <div id="love_common" style="display:none;">
-
-        </div>
-        <div id="love_work" style="display:none;"></div>
-        <div id="love_life" style="display:none;"></div>
-        <div id="pt_yun" style="display:none;"></div>
-    </div>
-    
-</div>
-
-
-
+	<script type="text/javascript" src="style/common/userjs/index.js"></script>
 </body>
 </html>

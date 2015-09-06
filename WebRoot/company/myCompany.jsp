@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<span style="color:#666 ">企业管理员（删除）</span>
 	<div id="companyAdminDiv" style=";">
 		<div >
-			<ul>
+			<ul class="company">
 				<li><a href="company/myCompany.jsp" id="admin_userApply">用户申请审核</a></li>
 				<li><a href="company/admin_companyApply.jsp" id="admin_companyApply">企业申请审核</a></li>
 				<li><a href="company/admin_business.jsp" id="admin_business">企业业务申请</a></li>

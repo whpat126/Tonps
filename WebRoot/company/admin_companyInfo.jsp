@@ -8,19 +8,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
+    <title>维护企业信息</title>
     <link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="style/common/userCSS/base.css"/>
     <link rel='icon' href='style/common/img/fivelogo.ico' type='image/x-ico'/>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    <!--[if lt IE 9]>-->
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    
+    <link rel="stylesheet" href="style/other/zTree/zTreeStyle/zTreeStyle.css">
     <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
-    <title>维护企业信息</title>
+    <script type="text/javascript" src="style/other/zTree/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="style/other/zTree/jquery.ztree.excheck-3.5.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		var setting = {
+	  		data : { simpleData: { enable:true, "idKey":"pk_myCompany","pidKey":0} },
+	  		callback:{
+	  			onClick:onClick
+	  		}
+	  	};
 
+		$.ajax({
+			type : "post",
+			url : "company/queryCompany.do",
+			success : function(znodes) {
+				var nodes = eval("("+znodes+")")
+				$.fn.zTree.init($("#demo"),setting, nodes);
+			}
+		});
+		function onClick(event,treeId,treeNode,clickFlag){
+			// alert("bbbbbbbbb")
+			var pk_myCompany = treeNode.pk_myCompany;
+			$.ajax({
+				type : "post",
+				url : "company/queryCompanyById.do",
+				data : {"pk_myCompany": pk_myCompany},
+				success : function(jsonData) {
+					var data = eval("("+jsonData+")");
+					$("#div1").show();
+					$("#myCompanyName").val(data.name);
+					$("#myCompanyPhone").val(data.phone);
+				}
+			});
+		}
+		
+	});
+
+	function submitAdminCompanyInfo(){
+		// 判断必填项
+		var zzjgdmz = document.getElementById("zzjgdmz");
+		if(zzjgdmz.value == "" || zzjgdmz.value == null) {$("#companyInfoErrorMsg").html("必须上传文件");return false;}
+				
+		document.getElementById("adminCompanyInfoForm").submit();
+	}
+	</script>
+	
   </head>
   
   <body>
@@ -29,12 +73,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <jsp:include page="../black_on_top.jsp"></jsp:include>
   <jsp:include page="../login.jsp"></jsp:include>
  <div class="navbar-fixed-top" style="margin-top: 106px;position: fixed;background-color: #f9f9f9;height: 60px;">
- 	
- 	<!-- 已经加入企业：管理员 -->
-	<span style="color:#666 ">企业管理员（删除）</span>
 	<div id="companyAdminDiv" style="">
 		<div >
-			<ul>
+			<ul class="company">
 				<li><a href="company/myCompany.jsp" id="admin_userApply">用户申请审核</a></li>
 				<li><a href="company/admin_companyApply.jsp" id="admin_companyApply">企业申请审核</a></li>
 				<li><a href="company/admin_business.jsp" id="admin_business">企业业务申请</a></li>
@@ -45,20 +86,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			</ul>
 		</div>
 	</div>
-	
- 	<div id="adminCompanyInfo" style=";">
-		<form>
-		企业名称：<input type="text" name="company.name" />
-	 	联系方式：<input type="text" name="company.tel">
-	 	组织机构代码证
-	 	企业注册号
-	 	
-	 	以下为选择输入
-	 	企业地址：
-	 	企业网址：
-		
-		</form>
+	<strong><span style="margin-left:150px;">${companyInfomsg }</span></strong>
+ 	<div style="position:absolute;left:0; width:150px; height:100%;border-right: red 1px solid; ">
+		<!-- 这个是功能节点树的div -->
+		<div id="demo" class="ztree" style="width:150px;"></div>
 	</div>
+	
+	<div id="div1" style="margin-left:150px; height:100%; display: none;">
+		<div id="adminCompanyInfo" style=";">
+			<span id="companyInfoErrorMsg"></span>
+			<form id="adminCompanyInfoForm" action="company/admin_companyInfo.do" method="post" enctype="multipart/form-data">
+				企业名称：<input type="text" name="name" id="myCompanyName"  />
+			 	联系方式：<input type="text" name="phone" id="myCompanyPhone"  />
+		 		组织机构代码证:<input type="file" name="zzjgdmz" id="zzjgdmz"  />
+			 	<!-- 企业注册号:<input type="text" name="" id=""  />
+			 	
+			 	以下为选择输入
+			 	企业地址：<input type="text" name=""  />
+			 	企业网址：<input type="text" name=""  /> -->
+			 	<input type="button" value="确定" onclick="submitAdminCompanyInfo();"/>
+			
+			</form>
+		</div>
+	</div>
+	
+ 	
  
  </div>
   </body>

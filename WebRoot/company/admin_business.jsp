@@ -30,11 +30,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <jsp:include page="../black_on_top.jsp"></jsp:include>
   <jsp:include page="../login.jsp"></jsp:include>
  <div class="navbar-fixed-top" style="margin-top: 106px;position: fixed;background-color: #f9f9f9;height: 60px;">
- 	<!-- 已经加入企业：管理员 -->
-	<span style="color:#666 ">企业管理员（删除）</span>
 	<div id="companyAdminDiv" style="">
 		<div >
-			<ul>
+			<ul class="company">
 				<li><a href="company/myCompany.jsp" id="admin_userApply">用户申请审核</a></li>
 				<li><a href="company/admin_companyApply.jsp" id="admin_companyApply">企业申请审核</a></li>
 				<li><a href="company/admin_business.jsp" id="admin_business">企业业务申请</a></li>

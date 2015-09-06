@@ -79,7 +79,7 @@ public class IconController {
 		if(null == list || list.size() < 1){
 			return ;
 		}else{
-			
+			System.out.println(list.size());
 			out.print(gson.toJson(list));
 		}
 			
@@ -119,10 +119,11 @@ public class IconController {
 	 */
 	@RequestMapping("/AddIcon")
 	private void iconAdd(HttpSession session, HttpServletResponse response, 
-			String iconname, String iconaddress) throws IOException{
+			String iconname, String iconaddress,String addIcon) throws IOException{
 		// 根据session得到用户的id
 //		通过用户ID将图标信息保存到数据库中
 //		boolean flag = false;
+		System.out.println("addIconaddIconaddIconaddIcon");
 		PrintWriter out = response.getWriter();
 		out.print(true);
 		

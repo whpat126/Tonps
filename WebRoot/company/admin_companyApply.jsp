@@ -8,18 +8,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
+    <title>企业申请审核</title>
     <link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="style/common/userCSS/base.css"/>
     <link rel='icon' href='style/common/img/fivelogo.ico' type='image/x-ico'/>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
+    <!--[if lt IE 9]>-->
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <title>企业申请审核</title>
+    <link rel="stylesheet" href="style/other/zTree/zTreeStyle/zTreeStyle.css">
     <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
+    <script type="text/javascript" src="style/other/zTree/jquery.ztree.core-3.5.js"></script>
+	<script type="text/javascript" src="style/other/zTree/jquery.ztree.excheck-3.5.js"></script>
 	<script type="text/javascript">
 	 // 全选和反选操作
 	    function checkboxAll(){
@@ -45,11 +45,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <jsp:include page="../black_on_top.jsp"></jsp:include>
   <jsp:include page="../login.jsp"></jsp:include>
  <div class="navbar-fixed-top" style="margin-top: 106px;position: fixed;background-color: #f9f9f9;height: 60px;">
- 	<!-- 已经加入企业：管理员 -->
-	<span style="color:#666 ">企业管理员（删除）</span>
 	<div id="companyAdminDiv" style="">
 		<div >
-			<ul>
+			<ul class="company">
 				<li><a href="company/myCompany.jsp" id="admin_userApply">用户申请审核</a></li>
 				<li><a href="company/admin_companyApply.jsp" id="admin_companyApply">企业申请审核</a></li>
 				<li><a href="company/admin_business.jsp" id="admin_business">企业业务申请</a></li>

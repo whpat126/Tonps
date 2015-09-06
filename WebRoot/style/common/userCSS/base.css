@@ -16,8 +16,12 @@
     font-weight: bold;
 }
 
-li{
+.userSet li{
     list-style-type: none;
+    display: inline;
+}
+.company li{
+	list-style-type: none;
     display: inline;
 }
 .userSet a{
@@ -94,131 +98,6 @@ li{
     border: 2px green solid;
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
