@@ -26,15 +26,52 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   
+  <jsp:include page="ptdh.jsp"></jsp:include>
   <jsp:include page="black_on_top.jsp"></jsp:include>
   <jsp:include page="login.jsp"></jsp:include>
-   <div>
+ <div class="navbar-fixed-top" style="margin-top: 106px;position: fixed;background-color: #f9f9f9;height: 60px;">
+ 	<!-- 左侧功能菜单 -->
+ 	<div>
    	<ul>
-   		<li><a>消息中心</a></li>
-   		<li><a href="javascript:;">个人信息</a></li>
-   		<li><a>我的应用</a></li>
-   		<li><a>安全中心</a></li>
+		<li><a id="modifyPwd" href="javascript:;">密码修改</a></li>
+		<li><a id="emailVerify" href="javascript:;">邮箱验证</a></li>
+		<li><a id="Security" href="javascript:;">密保问题</a></li>
    	</ul>
    </div>
+
+
+  
+ 	<!-- 右侧具体内容 -->
+ 	<div id="modifyPwddiv" style="display:none;">
+ 		<div id=mpdmsg></div>
+ 		旧密码：<input type="password" id="oldpassword" /><br/>
+ 		新密码:<input type="password" id="new1password" /><br/>
+ 		确认:<input type="password" id="new2password" /><br/>
+ 		<input type="button" id="modifyPwdbtn" value="确认修改"/>
+ 	</div>
+ 	<div id="emailVerifydiv" style="display:none;">
+ 		<div id="evdmsg"></div>
+ 		输入email地址：<input type="text" id="emailContent" /><br/>
+ 		确认：<input type="button" id="emailVerifybtn" value="验证"/> <i>邮箱一旦验证将不可更改</i>
+ 		
+ 	</div>
+ 	<!-- 未设置密码问题 -->
+ 	<div id="noSecuritydiv" style="display:none;">
+ 		<div id="noSecuritymsg"></div>
+ 		请选择密码问题：<select id="nopwdquestion"></select><br/>
+ 		请输入答案:<input type="text" id="nopwdanswer" /><br/>
+ 		<input type="button" id="nopwdbtn" value="提交" />
+ 	</div>
+ 	<!-- 已经设置过密码问题 -->
+ 	<div id="Securitydiv" style="display:none;">
+ 		<div id="sdmsg"></div>
+ 		旧密保问题：<select id="yesoldpwdquestion"></select><br/>
+ 		请输入旧密保问题答案:<input type="text" id="yesoldpwdanswer" /><br/>
+ 		请选择新问题：<select id="yesnewpwdquestion"></select><br/>
+ 		请输入答案：<input type="text" id="yesnewpwdanswer" /><br/>
+ 		<input type="button" value="确认" id="yespwdbtn" />
+ 	</div>
+
+     </div>
   </body>
 </html>

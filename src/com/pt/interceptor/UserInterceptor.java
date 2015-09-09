@@ -10,14 +10,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.pt.domain.User;
-import com.pt.service.UserService;
+import com.pt.domain.Users;
+import com.pt.service.UsersService;
 
 public class UserInterceptor implements HandlerInterceptor {
 
 	@Autowired
 	@Qualifier("userService")
-	private UserService userService;
+	private UsersService userService;
 
 	/**
 	 * 业务处理请求之前被调用 author:宋琪

@@ -68,6 +68,9 @@ public  class Comet4j implements ServletContextListener{
 		/*UserIconDaoImpl idi = new UserIconDaoImpl();
 		int num = idi.getMsgCount();*/
 		return 0;
+//		UserIconDaoImpl idi = new UserIconDaoImpl();
+//		int num = idi.getMsgCount();
+//		return num;
 	}
 	
 }

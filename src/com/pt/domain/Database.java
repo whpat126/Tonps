@@ -1,13 +1,23 @@
 package com.pt.domain;
 
-public class Database {
+import com.pt.base.BaseDomain;
 
-	private Long id;
+public class Database extends BaseDomain{
+
+	private String pk_db;
 	private String dbname;
 	private String dbtype;
 	private String dbaddress;
 	private String dbuser;
 	private String dbpassword;
+	
+	/**
+	* <p>Title: 无参构造方法,用于生成主键</p>
+	* <p>Description: </p>
+	*/ 
+	public Database() {
+		setPk_db(basedbo.genPk());;
+	}
 	public String getDbtype() {
 		return dbtype;
 	}
@@ -32,11 +42,11 @@ public class Database {
 	public void setDbpassword(String dbpassword) {
 		this.dbpassword = dbpassword;
 	}
-	public Long getId() {
-		return id;
+	public String getPk_db() {
+		return pk_db;
 	}
-	public void setId(Long id) {
-		this.id = id;
+	public void setPk_db(String pk_db) {
+		this.pk_db = pk_db;
 	}
 	public String getDbname() {
 		return dbname;

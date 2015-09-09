@@ -72,29 +72,29 @@ public interface BaseDao<Entity> {
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
-	boolean update(Entity obj, String pk) throws Exception;
+	boolean update(Entity obj, String pk);
 	/** 
 	  * delete 方法 
 	  * <p>方法说明:</p> 根据pk名称和对应的值id 删除对象
-	  * @param id 值
-	  * @param pk 名称
+	  * @param pkValue 值
+	  * @param pkName 名称
 	  * @return
 	  * @throws Exception 
 	  * @return boolean 
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
-	boolean delete(Long id, String pk) ;
+	boolean delete(String pkValue, String pkName) ;
 	/** 
 	  * delete 方法 
 	  * <p>方法说明:</p> 根据id值 删除实体
-	  * @param id 实体类的主键
+	  * @param pkValue 实体类的主键
 	  * @return 
 	  * @return boolean 是否成功
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
-	boolean delete(Long id) ;
+	boolean delete(String pkValue) ;
 	
 	/** 
 	  * findById 方法 
@@ -105,7 +105,7 @@ public interface BaseDao<Entity> {
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
-	Entity findById(Long id );
+	Entity findById(String id );
 
 	/** 
 	  * getTotal 方法 
@@ -150,5 +150,5 @@ public interface BaseDao<Entity> {
 	  * @date 2015年7月16日 
 	*/ 
 	boolean delete(String[] ids);
-	
+
 }

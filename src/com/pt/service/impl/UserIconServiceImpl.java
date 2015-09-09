@@ -28,5 +28,4 @@ public class UserIconServiceImpl extends BaseServiceImpl<UserIcon> implements Us
 	public List<UserIcon> findAll(String userId) {
 		return userIconDao.findAll(userId);
 	}
-
 }

@@ -145,21 +145,11 @@ public class IconController {
 //		boolean flag = false;
 		Gson gson = new Gson();
 		UserIcon icon1 = new UserIcon();
-		icon1.setName("a");
-		icon1.setParam_dragableBox("true");
-		icon1.setParam_href("https://www.baidu.com");
-		icon1.setParam_title("1");
-		String str = gson.toJson(icon1);
-		System.out.println(str);
-		PrintWriter out = response.getWriter();
-		out.print(str);
-		
 	}
-	
-	
-	
-	
-	
-	
-	
 }
+	
+	
+	
+	
+	
+	
