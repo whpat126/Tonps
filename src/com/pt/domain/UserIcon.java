@@ -90,6 +90,4 @@ public class UserIcon extends BaseDomain{
 		this.pk_users = pk_users;
 	}
 
-	
-	
 }

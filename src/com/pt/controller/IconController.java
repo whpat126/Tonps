@@ -147,9 +147,3 @@ public class IconController {
 		UserIcon icon1 = new UserIcon();
 	}
 }
-	
-	
-	
-	
-	
-	

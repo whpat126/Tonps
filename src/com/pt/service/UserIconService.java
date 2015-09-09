@@ -23,6 +23,4 @@ public interface UserIconService extends BaseService<UserIcon>{
 	 */
 	List<UserIcon> findAll(String userId);
 
-
-
 }

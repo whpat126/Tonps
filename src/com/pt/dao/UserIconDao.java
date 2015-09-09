@@ -21,6 +21,4 @@ public interface UserIconDao extends BaseDao<UserIcon> {
 	 * @param userId 通过用户id来获取该用户的爱常用中的图标
 	 */
 	List<UserIcon> findAll(String userId);
-
-
 }
