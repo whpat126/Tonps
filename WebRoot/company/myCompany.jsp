@@ -36,23 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<a href="${pageContext.request.contextPath }/company/joinCompany.jsp">加入企业</a>
 		<a href="${pageContext.request.contextPath }/company/createCompany.jsp">创建企业</a>
 	</div>
-  <!-- 已经加入企业：普通用户 -->
- 	<span style="color:#666 ">企业普通用户（需要删除）：</span>
- 	<div id="companyUserDiv" style="display:none;">
-		<p> 使用bootstrap的选项卡，默认显示我的企业 </p>
-		<ul>
-			<li><a id="userMyCompany">我的企业</a></li>
-			<li><a href="${pageContext.request.contextPath }/company/joinCompany.jsp">加入企业</a></li>
-		</ul>
- 	</div>
- 	
- 	<div id="myCompany" >
- 			<span style="color:#666 ">每行三块内容 企业名称  申请管理员  退出企业</span>
- 		<ul>
- 		</ul>
- 	</div>
- 	
- 	
+  
  	
  	<!-- 已经加入企业：管理员 -->
 	<span style="color:#666 ">企业管理员（删除）</span>
@@ -102,7 +86,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</table>
 	</div>
 	
-	
+	<!-- 已经加入企业：普通用户 -->
+ 	<span style="color:#666 ">企业普通用户（需要删除）：</span>
+ 	<div id="companyUserDiv" style="display:none;">
+		<p> 使用bootstrap的选项卡，默认显示我的企业 </p>
+		<ul>
+			<li><a id="userMyCompany">我的企业</a></li>
+			<li><a href="${pageContext.request.contextPath }/company/joinCompany.jsp">加入企业</a></li>
+		</ul>
+ 	</div>
+ 	
+ 	<div id="myCompany" >
+ 			<span style="color:#666 ">每行三块内容 企业名称  申请管理员  退出企业</span>
+ 		<ul>
+ 		</ul>
+ 	</div>
 	
  </div>
   </body>
