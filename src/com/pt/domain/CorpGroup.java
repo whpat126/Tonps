@@ -8,9 +8,9 @@ import com.pt.base.BaseDomain;
  * @author sq
  *
  */
-public class Group extends BaseDomain{
+public class CorpGroup extends BaseDomain{
 
-	private String pk_group;
+	private String pk_corpgroup;
 	/** 群组名称 */
 	private String name;
 	/** 组成员 */
@@ -20,31 +20,38 @@ public class Group extends BaseDomain{
 	/** 组描述信息 */
 	private String comment;
 	
-	public Group() {
-		setPk_group(basedbo.genPk());
+	public CorpGroup() {
+		setPk_corpgroup(basedbo.genPk());
 	}
-	
-	public String getPk_group() {
-		return pk_group;
+
+	public String getPk_corpgroup() {
+		return pk_corpgroup;
 	}
-	public void setPk_group(String pk_group) {
-		this.pk_group = pk_group;
+
+	public void setPk_corpgroup(String pk_corpgroup) {
+		this.pk_corpgroup = pk_corpgroup;
 	}
+
 	public String getName() {
 		return name;
 	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
 	public String getGroupUsers() {
 		return groupUsers;
 	}
+
 	public void setGroupUsers(String groupUsers) {
 		this.groupUsers = groupUsers;
 	}
+
 	public String getPk_users() {
 		return pk_users;
 	}
+
 	public void setPk_users(String pk_users) {
 		this.pk_users = pk_users;
 	}
@@ -56,5 +63,7 @@ public class Group extends BaseDomain{
 	public void setComment(String comment) {
 		this.comment = comment;
 	}
+	
+	
 	
 }
