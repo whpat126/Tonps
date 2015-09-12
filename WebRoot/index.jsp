@@ -15,8 +15,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="style/common/userCSS/base.css"/>
     <link rel='icon' href='style/common/img/800-img2ico.ico' type='image/x-ico'/>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
@@ -85,7 +83,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</ul>
 					</div>
 					<!-- +号，用于添加新的地址 class不可改，修改外面套着的div -->
-					<div><span class="addIcon" style="font-size: 30px" data-value="addCommonIcon">+</span></div>
+					<div><span class="addIcon" style="font-size: 30px" data-value="2">+</span></div>
 				</div>
 			</div>
         </div>
@@ -98,7 +96,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</ul>
 					</div>
 					<!-- +号，用于添加新的地址  class不可改，修改外面套着的div -->
-					<div><span class="addIcon" style="font-size: 30px"  data-value="addWorkIcon">+</span></div>
+					<div><span class="addIcon" style="font-size: 30px"  data-value="3">+</span></div>
 				</div>
 			</div>
         </div>
@@ -111,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</ul>
 					</div>
 					<!-- +号，用于添加新的地址  class不可改，修改外面套着的div -->
-					<div ><span class="addIcon" style="font-size: 30px" data-value="addLifeIcon">+</span></div>
+					<div ><span class="addIcon" style="font-size: 30px" data-value="4">+</span></div>
 				</div>
 			</div>
         </div>
@@ -135,6 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						<strong><span id="iconmsg"></span></strong>
 					    <form action="" method="post">
 					    	<input type="hidden" id="addTypeIcon" value="" />
+					    	<input type="hidden" id="pk_icon" value="" />
 					    	名称:<input type="text" id="iconname" /><br/>
 					    	地址:<input type="text" id="iconaddress" /><br/>
 						<div class="modal-footer">

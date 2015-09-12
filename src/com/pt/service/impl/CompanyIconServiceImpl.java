@@ -1,5 +1,7 @@
 package com.pt.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -21,6 +23,12 @@ public class CompanyIconServiceImpl extends BaseServiceImpl<CompanyIcon> impleme
 	public boolean update(String userId, String sortString) {
 		// TODO Auto-generated method stub
 		return false;
+	}
+
+	@Override
+	public List<CompanyIcon> findAll(String userId) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	
