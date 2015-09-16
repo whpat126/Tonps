@@ -23,7 +23,7 @@
 		});
 	});
   
-    window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"2","bdPos":"right","bdTop":"200"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+   // window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"1","bdMiniList":false,"bdPic":"","bdStyle":"0","bdSize":"16"},"slide":{"type":"slide","bdImg":"2","bdPos":"right","bdTop":"200"}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 
 </script>
 
@@ -32,8 +32,8 @@
     <div class="navbar-fixed-top" style="position: fixed;top: 28px;height: 42px;">
         <div class="col-md-3 logo-bar navbar-header">
             <a href="http://www.ptsso.com"><img src="style/common/img/pingtong_web.png" width="170px" alt="平通网"></a>
-            <iframe width="328" scrolling="no" height="30" frameborder="0" allowtransparency="true"
-                    src="http://i.tianqi.com/index.php?c=code&id=40&icon=1&num=3"></iframe>
+           <!--  <iframe width="328" scrolling="no" height="30" frameborder="0" allowtransparency="true"
+                    src="http://i.tianqi.com/index.php?c=code&id=40&icon=1&num=3"></iframe> -->
         </div>
         <!-- 导航栏 -->
         <div id="menu-Bar" class="col-md-8">

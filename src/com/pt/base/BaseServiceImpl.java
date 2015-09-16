@@ -131,9 +131,9 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	  * @date 2015年7月16日 
 	*/ 
 	@Override
-	public List<Entity> findAll(String username, int currentPage, int pageSize) throws Exception {
+	public List<Entity> findAll(String username, int currentPage, int pageSize) {
 		// TODO Auto-generated method stub
-		return baseDao.findAll();
+		return baseDao.findAll(username, currentPage, pageSize);
 	}
 	/** 
 	  * findAll 方法 
@@ -149,7 +149,7 @@ public class BaseServiceImpl<Entity> implements BaseService<Entity> {
 	@Override
 	public List<Entity> findAll(String username, int currentPage, int pageSize, Map<String, Object> m) throws Exception {
 		// TODO Auto-generated method stub
-		return baseDao.findAll();
+		return baseDao.findAll(username, currentPage, pageSize, m);
 	}
 	/** 
 	  * update 方法 

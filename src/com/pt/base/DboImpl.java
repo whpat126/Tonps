@@ -33,7 +33,6 @@ public class DboImpl implements BaseDbo {
 	 * @return String
 	 * @return 
 	 */ 
-	@Override
 	public String genPk(){
 		return UUID.randomUUID().toString().replace("-", "");
 	}

@@ -11,6 +11,9 @@ public class Users extends BaseDomain{
 	private String phone;
 //	private String name;
 	private String demo;
+	private String state; // 用户在企业中的状态 0不是企业用户 1普通企业用户 2企业管理员 
+	
+	private String pk_mycompany;
 	
 	public Users() {
 		setPk_users(basedbo.genPk());
@@ -56,6 +59,18 @@ public class Users extends BaseDomain{
 	}
 	public void setPk_users(String pk_users) {
 		this.pk_users = pk_users;
+	}
+	public String getPk_mycompany() {
+		return pk_mycompany;
+	}
+	public void setPk_mycompany(String pk_mycompany) {
+		this.pk_mycompany = pk_mycompany;
+	}
+	public String getState() {
+		return state;
+	}
+	public void setState(String state) {
+		this.state = state;
 	}
 	
 }

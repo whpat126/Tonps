@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 	$(function(){
 		var setting = {
-	  		data : { simpleData: { enable:true, "idKey":"pk_myCompany","pidKey":0} },
+	  		data : { simpleData: { enable:true, "idKey":"pk_myCompany","pidKey":"pk_father"} },
 	  		callback:{
 	  			onClick:onClick
 	  		}

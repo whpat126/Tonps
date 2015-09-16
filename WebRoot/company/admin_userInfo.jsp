@@ -24,7 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript" >
 	$(function(){
 		var setting = {
-	  		data : { simpleData: { enable:true, "idKey":"pk_myCompany","pidKey":0} },
+	  		data : { simpleData: { enable:true, "idKey":"pk_myCompany","pidKey":"pk_father"} },
 	  		callback:{
 	  			onClick:onClick
 	  		}
@@ -39,16 +39,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			}
 		});
 		function onClick(event,treeId,treeNode,clickFlag){
-			// alert("bbbbbbbbb")
 			var pk_myCompany = treeNode.pk_myCompany;
 			$.ajax({
 				type : "post",
 				url : "company/queryUserByCompanyId.do",
 				data : {"pk_myCompany": pk_myCompany},
 				success : function(jsonData) {
-					var data = eval("("+jsonData+")");
-					$("#div1").show();
-					AddRow(data);
+					if(jsonData == "null"){
+						$("#div1").show();
+					}else{
+						var data = eval("("+jsonData+")");
+						$("#div1").show();
+						AddRow(data);
+					}
+					
 				}
 			});
 		}
@@ -57,14 +61,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	function AddRow(data){
 		$("#table1 tbody").children().remove();
+		var chk="";
+		var username1 = "";
+		var phone1 = "";
+		var state1 = "";
+		var type1 = "";
+		var trHTML = "";
 		for(var i=0 ; i<data.length; i++){
-			var chk="<input type='checkbox' value='"+ data[i].pk_users +"'/>";
-			var username1 =  data[i].username ;
-			var phone1 = data[i].phone;
-			var type1 = "<a href='company/userToAdmin.do?pk_company="+data[i].pk_myCompany+"&pk_users="+data[i].pk_users+"'>"
-				+ "升级企业管理员</a>  <a href='company/removeUsers.do?pk_company="+data[i].pk_myCompany+"&pk_users="+data[i].pk_users+"'>"
+			chk ="<input type='checkbox' value='"+ data[i].pk_users +"'/>";
+			username1 =  data[i].username ;
+			phone1 = data[i].phone==undefined?"":data[i].phone; // 三目运算强大！！！
+			state1 = data[i].state;
+			if(state1 == "1"){
+				state1 = "普通用户";
+				type1 = "<a href='company/userToAdmin.do?pk_company="+data[i].pk_mycompany+"&pk_users="+data[i].pk_users+"'>"
+				+ "升级企业管理员</a>  <a href='company/removeUsers.do?pk_company="+data[i].pk_mycompany+"&pk_users="+data[i].pk_users+"'>"
 				+ "移出本单位</a>";
-			var trHTML = "<tr><td>"+chk+"</td><td>"+username1+"</td><td>"+phone1+"</td><td>"+type1+"</td></tr>";
+			}else if(state1 == "2"){
+				state1 = "企业管理员";
+				type1 = "  <a href='company/removeUsers.do?pk_company="+data[i].pk_mycompany+"&pk_users="+data[i].pk_users+"'>"
+				+ "移出本单位</a>";
+			}else{
+				state1 = "";
+			}
+			trHTML = "<tr><td>"+chk+"</td><td>"+username1+"</td><td>"+phone1+"</td><td>"+state1+"</td><td>"+type1+"</td></tr>";
 			$(trHTML).appendTo($("#table1 tbody"));
 		}
 	}
@@ -101,7 +121,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<div id="div1" style="margin-left:150px; height:100%; display:none; ">
 		<table id="table1" class="table table-hover table-bordered">
 			<thead><tr>
-				<th></th><th>用户</th><th>电话</th><th>业务</th>
+				<th></th><th>用户</th><th>电话</th><th>用户状态</th><th>业务</th>
 			</tr></thead>
 			<tbody>
 			</tbody>

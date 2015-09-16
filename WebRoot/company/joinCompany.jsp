@@ -11,12 +11,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <link rel="stylesheet" href="style/other/bootstrap/bootstrap.min.css">
     <link rel="stylesheet" href="style/common/userCSS/base.css"/>
     <link rel='icon' href='style/common/img/fivelogo.ico' type='image/x-ico'/>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
     <script src="//cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="//cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
     <script type="text/javascript" src="style/other/jquery-1.11.2.min.js"></script>
     <script type="text/javascript" src="style/other/bootstrap/bootstrap.min.js"></script>
     <script type="text/javascript" src="<%=basePath %>/company/joinCompany.js"></script>
@@ -37,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		<span id="name"></span>
  		<span id="address"></span>
  		<span id="phone"></span>
- 	<input type="button" value="加入企业" id="joinCompany" /> <a href="<%=basePath %>/company/appealCompany.jsp" >企业申诉</a> <input type="reset" value="取消" />
+ 	<input type="button" value="加入企业" id="joinCompany" /> <a href="<%=basePath %>/company/appealCompany.jsp" >企业申诉</a> <!-- <input type="reset" value="取消" /> -->
  		</div>
  	</div>
 	<div id="noCompany" style="display:none;">

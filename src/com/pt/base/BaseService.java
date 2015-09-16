@@ -36,7 +36,7 @@ public interface BaseService<Entity> {
 	  * @author whp 
 	  * @date 2015年7月16日 
 	*/ 
-	List<Entity> findAll(String username, int currentPage, int pageSize) throws Exception;
+	List<Entity> findAll(String username, int currentPage, int pageSize);
 	/** 
 	  * findAll 方法 
 	  * <p>方法说明:</p> 分页显示对象list
