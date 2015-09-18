@@ -12,7 +12,8 @@ public class Users_MyCompany extends BaseDomain{
 
 	private String apply_company;
 	private String apply_pk_mycompany;
-	
+	private String applyName;
+
 	private String username;
 	private String name;
 	
@@ -108,5 +109,15 @@ public class Users_MyCompany extends BaseDomain{
 
 	public void setApply_pk_mycompany(String apply_pk_mycompany) {
 		this.apply_pk_mycompany = apply_pk_mycompany;
+	}
+
+
+	public String getApplyName() {
+		return applyName;
+	}
+
+
+	public void setApplyName(String applyName) {
+		this.applyName = applyName;
 	}
 }

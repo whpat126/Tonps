@@ -18,7 +18,7 @@ public interface MyCompanyService extends BaseService<MyCompany>{
 	int findByUserId(String userId);
 
 	/**
-	 * 
+	 *  根据用户的ID查询单位信息
 	 * @author：songqi
 	 * @param useId
 	 * @return
@@ -101,11 +101,30 @@ public interface MyCompanyService extends BaseService<MyCompany>{
 	/**
 	 * 批量同意用户加入企业
 	 * @author：songqi
-	 * @param joinCompany
-	 * @param applyAdmin
+	 * @param joinCompany 加入企业
+	 * @param applyAdmin 成为管理员
 	 * @return
 	 */
 	void usersApply(String joinCompany, String applyAdmin);
+
+	/**
+	 *  管理员： 企业申请 （成为上级单位或下级单位） 首先判断该单位是否有上级单位，软后判断该用户是否做过同类申请，然后在确定是否将申请写入数据库
+	 * @author：songqi
+	 * @param applyCompany 提交申请  企业  
+	 * @param joinCompany  被申请  加入的企业
+	 * @param  business 申请类型 成为上级单位1或成为下级单位2
+	 * @return 0未申请，1申请中不可重复申请 2申请成功，3申请失败,4该单位已经有上级单位了
+	 */
+	int submitCompanyApply(String business, String joinCompany,String applyCompany, String userId);
+
+	/**
+	 * 批量同意企业申请
+	 * @author：songqi
+	 * @param applyFatherCompany 申请成为上级
+	 * @param applyChildCompany 申请成为下级
+	 * @return
+	 */
+	void companyApply(String applyFatherCompany, String applyChildCompany);
 
 //	List<MyCompany> findAll(String username, int currentPage, int pageSize);
 }

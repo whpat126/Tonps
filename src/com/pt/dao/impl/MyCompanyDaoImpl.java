@@ -119,8 +119,8 @@ public class MyCompanyDaoImpl extends BaseDaoImpl<MyCompany> implements MyCompan
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, userId);
 			pstmt.setString(2, pk_company);
-			int num = pstmt.executeUpdate();
-			if(num >= 1){ // 已经做过申请
+			rs = pstmt.executeQuery();
+			if(rs.next()){ // 已经做过申请
 				return true;
 			}
 		}catch (SQLException e) {
@@ -358,29 +358,168 @@ public class MyCompanyDaoImpl extends BaseDaoImpl<MyCompany> implements MyCompan
 		String[] applyAdmins = applyAdmin.split(",");
 		conn = OurDaoUtils.getConnection();
 		try {
-			// 用户申请加入企业
-			for(int i=0;i<joinCompanys.length;i++){
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, "1");
-				pstmt.setString(2, "");
-				pstmt.setString(3, joinCompanys[i]);
-				pstmt.executeUpdate();
-				pstmt.close();
+			if(!"".equals(joinCompany)){
+				// 用户申请加入企业
+				for(int i=0;i<joinCompanys.length;i++){
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, "1");
+					pstmt.setString(2, "");
+					pstmt.setString(3, joinCompanys[i]);
+					pstmt.executeUpdate();
+					pstmt.close();
+				}
 			}
-			// 申请成为管理员
-			for(int i=0;i<applyAdmins.length;i++){
-				pstmt = conn.prepareStatement(sql);
-				pstmt.setString(1, "2");
-				pstmt.setString(2, "");
-				pstmt.setString(3, applyAdmins[i]);
-				pstmt.executeUpdate();
-				pstmt.close();
+			if(!"".equals(applyAdmin)){
+				// 申请成为管理员
+				for(int i=0;i<applyAdmins.length;i++){
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, "2");
+					pstmt.setString(2, "");
+					pstmt.setString(3, applyAdmins[i]);
+					pstmt.executeUpdate();
+					pstmt.close();
+				}
 			}
 		}catch (SQLException e) {
 			e.printStackTrace();
 		}finally{
 			OurDaoUtils.close(conn);
 		}
+	}
+
+	@Override
+	public boolean checkSubmitCompany(String business, String joinCompany,
+			String applyCompany) {
+		String sql = "select pk_users_mycompany from users_mycompany "
+				+ " where pk_mycompany=? and apply_company=? and apply_pk_mycompany=?"; // 
+		conn = OurDaoUtils.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, applyCompany);
+			pstmt.setString(2, business);
+			pstmt.setString(3, joinCompany);
+			rs = pstmt.executeQuery();
+			if(rs.next()) 
+				return true;
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			OurDaoUtils.close(rs);
+			OurDaoUtils.close(pstmt);
+			OurDaoUtils.close(conn);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean submitCompanyApply(String business, String joinCompany,String userId,
+			String applyCompany) {
+		String sql = "insert into users_mycompany(pk_users_mycompany,pk_users,pk_mycompany,apply_company,apply_pk_mycompany) values(?,?,?,?,?)"; // 
+		conn = OurDaoUtils.getConnection();
+		String pk_users_mycompany = new DboImpl().genPk();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, pk_users_mycompany);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, applyCompany );
+			pstmt.setString(4, business);
+			pstmt.setString(5, joinCompany);
+			int num = pstmt.executeUpdate();
+			if(num == 1){
+				return true;
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			OurDaoUtils.close(pstmt);
+			OurDaoUtils.close(conn);
+		}
+		return false;
+	}
+
+	@Override
+	public boolean checkFatherCompany(String joinCompany) {
+		String sql = "select pk_father from mycompany where pk_mycompany=?"; // 
+		conn = OurDaoUtils.getConnection();
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, joinCompany);
+			rs = pstmt.executeQuery();
+			while(rs.next()){
+				String str = rs.getString(1);
+				if(null != str){
+					return true;
+				}
+			}
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			OurDaoUtils.close(pstmt);
+			OurDaoUtils.close(conn);
+		}
+		return false;
+	}
+
+	@Override
+	public void companyApply(String applyFatherCompany, String applyChildCompany) {
+		String sql = "update users_mycompany set apply_company=?,apply_pk_mycompany=? where pk_users_mycompany=?"; // 
+		String sql2 = "update mycompany set pk_father=? where name=?";
+		String[] applyFatherCompanys = applyFatherCompany.split(",");
+		String[] applyChildCompanys = applyChildCompany.split(",");
+		conn = OurDaoUtils.getConnection();
+		try {
+			conn.setAutoCommit(false);
+			// 用户申请加入企业
+			if(!"".equals(applyFatherCompany)){
+				for(int i=0;i<applyFatherCompanys.length;i++){
+					String[] fatherComanys = applyFatherCompanys[i].split(":");
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, "");
+					pstmt.setString(2, "");
+					pstmt.setString(3, fatherComanys[0]);
+					pstmt.executeUpdate();
+					pstmt.close();
+					pstmt = conn.prepareStatement(sql2);
+					pstmt.setString(1, fatherComanys[2]);
+					pstmt.setString(2, fatherComanys[1]);
+					pstmt.executeUpdate();
+					pstmt.close();
+				}
+			}
+			if(!"".equals(applyChildCompany)){
+				// 申请成为管理员
+				for(int i=0;i<applyChildCompanys.length;i++){
+					String[] childComanys = applyChildCompanys[i].split(":");
+					pstmt = conn.prepareStatement(sql);
+					pstmt.setString(1, "");
+					pstmt.setString(2, "");
+					pstmt.setString(3, childComanys[0]);
+					pstmt.executeUpdate();
+					pstmt.close();
+					pstmt = conn.prepareStatement(sql2);
+					pstmt.setString(1, childComanys[2]);
+					pstmt.setString(2, childComanys[1]);
+					pstmt.executeUpdate();
+					pstmt.close();
+				}
+			}
+			conn.commit();
+		}catch (SQLException e) {
+			try {
+				conn.rollback();
+			} catch (SQLException e1) {
+				e1.printStackTrace();
+			}
+			e.printStackTrace();
+		}finally{
+			try {
+				conn.setAutoCommit(true);
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+			OurDaoUtils.close(conn);
+		}
+		
 	}
 
 	

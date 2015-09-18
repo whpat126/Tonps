@@ -114,16 +114,16 @@ public class MyCompanyController {
 			company.setCompanyAdmin(userId);
 			boolean flag = mcs.save(company);
 			if(flag){
-				System.out.println("success");
+//				System.out.println("success");
 				return "redirect:/company/myCompany.jsp";
 			}else{
-				System.out.println("error");
+//				System.out.println("error");
 				String msgError = "创建失败，请检查网络连接后刷新本页面重试!";
 				request.setAttribute("msgError", msgError);
 				return "/company/createCompany";
 			}
 		}else{
-			System.out.println("have ");
+//			System.out.println("have ");
 			String msgError = "创建失败，该企业已经存在您可以选择<a href='company/appealCompany.jsp'>申诉</a>!";
 			request.setAttribute("msgError", msgError);
 			return "/company/createCompany";
@@ -207,38 +207,35 @@ public class MyCompanyController {
 			}else{
 				Gson gson = new Gson();
 				String str =  gson.toJson(list);
-				System.out.println(str);
+//				System.out.println(str);
 				out.print(str);
 			}
 		}
 	}
-	
+	/**
+	 *  单位管理员批量同意用户加入企业或者成为企业管理员
+	 * @author：songqi
+	 * @param joinCompany
+	 * @param applyAdmin
+	 */
 	@RequestMapping(value = "/Users_Apply")
-	private void Users_Apply(HttpSession session, HttpServletResponse response,
-			String joinCompany, String applyAdmin) throws IOException {
-		PrintWriter out = response.getWriter();
-		String username = (String) session.getAttribute("userName");
-		System.out.println("B:" + joinCompany);
-		System.out.println("D:" + applyAdmin);
-		
-		mcs.usersApply(joinCompany,applyAdmin);
-		
-		
-		
+	private void Users_Apply(HttpSession session, String joinCompany,
+			String applyAdmin) throws IOException {
+		mcs.usersApply(joinCompany, applyAdmin);
 	}
 
 	/**
-	 * 管理员：企业申请审核
+	 * 管理员： 显示企业申请审核
 	 * @author：songqi
 	 */
-	@RequestMapping(value = "/admin_companyApply")
-	private void admin_companyApply(HttpSession session, HttpServletResponse response,String action, String pageNum,String rowsNum)
-			throws IOException  {
-		
+	@RequestMapping(value = "/admin_companyApply2")
+	private void admin_companyApply(HttpSession session,
+			HttpServletResponse response, String action, String pageNum,
+			String rowsNum) throws IOException {
 		PrintWriter out = response.getWriter();
 		String username = (String) session.getAttribute("userName");
+		String userId = userService.findByProp("userName", username).getPk_users();
 		// 查询该管理员名下的单位中正在申请加入企业或者成为企业管理员的用户
-//		List<MyCompany> list = mcs.findUserApply(userId);
 		MyCompanyDaoImplPage page = new MyCompanyDaoImplPage();
 		if("".equals(action) || null == action){ //判断是否是页面加载
 			pageNum = "1";
@@ -247,76 +244,65 @@ public class MyCompanyController {
 		if(Integer.parseInt(pageNum) < 1){ // 判断是否是第一页
 			out.print("false");
 		}else{
-			PageBean list = page.findAll(username,Integer.parseInt(pageNum),Integer.parseInt(rowsNum));
+			PageBean list = page.findAll2(userId,Integer.parseInt(pageNum),Integer.parseInt(rowsNum));
 			if(list.getDataList()==null||list.getDataList().size()<1){
 				out.print("false");
 			}else{
 				Gson gson = new Gson();
 				String str =  gson.toJson(list);
-				System.out.println(str);
 				out.print(str);
 			}
 		}
-		
-		
-		/*PrintWriter out = response.getWriter();
-		String username = (String) session.getAttribute("userName");
-		
-		Gson gson = new Gson();
-		List<MyCompany> list = new ArrayList<MyCompany>();
-		MyCompany mc1 = new MyCompany();
-		mc1.setPk_myCompany(1+"");
-//		mc1.setType("申请成为上级");
-		mc1.setUserName("宋琪");
-		mc1.setUser_phone("111222333");
-		mc1.setUser_company("山东平通");
-		list.add(mc1);
-		MyCompany mc2 = new MyCompany();
-		mc2.setPk_myCompany(2+"");
-		mc2.setUserName("王五");
-		mc2.setUser_phone("222333444");
-		mc2.setUser_company("山东平通");
-//		mc2.setType("申请成为下级");
-		list.add(mc2);
-		String str = gson.toJson(list);
-		
-		out.print(str);
-*/
 	}
 	
 	/**
-	 * 管理员：业务申请审核
+	 *  单位管理员批量同意用户加入企业或者成为企业管理员
+	 * @author：songqi
+	 * @param joinCompany
+	 * @param applyAdmin
+	 */
+	@RequestMapping(value = "/company/admin_companyApply")
+	private void Users_Company(HttpSession session, String applyFatherCompany,
+			String applyChildCompany) throws IOException {
+		mcs.companyApply(applyFatherCompany, applyChildCompany);
+		return ;
+	}
+	
+	
+	
+	
+	/**
+	 * 管理员：企业业务申请，用户通过checkCompany请求找到该企业之后使用
 	 * @author：songqi
 	 */
-	@RequestMapping(value = "/admin_business")
-	private void admin_business(HttpSession session, HttpServletResponse response)
-			throws IOException {
-		response.setHeader("Cache-Control", "no-cache");
-		response.setContentType("text/html;charset=UTF-8");
-		response.setCharacterEncoding("UTF-8");
-		PrintWriter out = response.getWriter();
+	@RequestMapping(value = "/companyBusinessApply")
+	private void admin_business(HttpSession session,
+			HttpServletResponse response) throws IOException {
 		String username = (String) session.getAttribute("userName");
-		Gson gson = new Gson();
-		List<MyCompany> list = new ArrayList<MyCompany>();
-		MyCompany mc1 = new MyCompany();
-		mc1.setPk_myCompany(1+"");
-//		mc1.setType("申请成为上级");
-		mc1.setUserName("宋琪");
-		mc1.setUser_phone("111222333");
-		mc1.setUser_company("山东平通");
-		list.add(mc1);
-		MyCompany mc2 = new MyCompany();
-		mc2.setPk_myCompany(2+"");
-		mc2.setUserName("王五");
-		mc2.setUser_phone("222333444");
-		mc2.setUser_company("山东平通");
-//		mc2.setType("申请成为下级");
-		list.add(mc2);
-		String str = gson.toJson(list);
-		
-		out.print(str);
-
+		String userId = userService.findByProp("userName", username).getPk_users();
+		List<MyCompany> list = mcs.findAll(userId);
+		String str = new Gson().toJson(list);
+//		System.out.println(str);
+		response.getWriter().print(str);
 	}
+	
+	/**
+	 * 管理员：提交该单位的申请，需注意申请类型和申请企业，以及不能重复申请
+	 * @param applyCompany 提交申请  企业  
+	 * @param joinCompany  被申请  加入的企业
+	 * @param  business 申请类型 成为上级单位1或成为下级单位2
+	 * @author：songqi
+	 */
+	@RequestMapping(value = "/submitCompanyApply")
+	private void submitCompanyApply(HttpSession session, String applyCompany,
+			HttpServletResponse response, String business, String joinCompany)
+			throws IOException {
+		String username = (String) session.getAttribute("userName");
+		String userId = userService.findByProp("userName", username).getPk_users();
+		int num = mcs.submitCompanyApply(business,joinCompany,applyCompany,userId);
+		response.getWriter().print(num);
+	}
+	
 	
 	/**
 	 * 管理员 : 显示本管理员名下的所有管理单位信息

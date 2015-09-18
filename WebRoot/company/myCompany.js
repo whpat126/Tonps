@@ -177,11 +177,13 @@ $(function(){
 		var rows = document.getElementById("table1").rows; 
 		var row = "";
 		var type = "";
+		var count =0;
 		for(var i=0;i<checkbox.length;i++){
 			if(checkbox[i].checked){
+				count ++;
 				// 根据table中的值得到申请类型
 				row = checkbox[i].parentElement.parentElement.rowIndex; 
-				type = rows[row].cells[3].innerHTML;
+				type = rows[row].cells[3].innerHTML; // 获得整行数据的方法
 				if(type == "加入本单位"){ // 用户申请加入企业
 					joinCompany +="," + checkbox[i].value ;
 				}else if(type == "升级企业管理员"){ // 用户申请成为企业管理员
@@ -189,6 +191,7 @@ $(function(){
 				}
 			}
 		}
+		if(count == 0){return false;};
 		joinCompany = joinCompany.substr(1) ;
 		applyAdmin = applyAdmin.substr(1);
 		// 将选中的整行数据提交给后台

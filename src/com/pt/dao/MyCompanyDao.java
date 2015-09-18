@@ -118,15 +118,50 @@ public interface MyCompanyDao extends BaseDao<MyCompany> {
 	void usersApply(String joinCompany, String applyAdmin);
 
 	/**
-	 * 
+	 * 检查用户是否已经做过同类申请,
 	 * @author：songqi
-	 * @param userId
+	 * @param  business 申请类型 成为上级单位1或成为下级单位2
+	 * @param joinCompany  被申请  加入的企业
+	 * @param applyCompany 提交申请  企业 （ 管理员管理单位）
+	 * @return true 表示做过该申请，false表示未做过同类申请
+	 */
+	boolean checkSubmitCompany(String business, String joinCompany,
+			String applyCompany);
+
+	
+	/**
+	 *  管理员： 企业申请 （成为上级单位或下级单位） 先判断该用户是否做过同类申请，然后在确定是否将申请写入数据库
+	 * @author：songqi
+	 * @param  business 申请类型 成为上级单位1或成为下级单位2
+	 * @param joinCompany  被申请  加入的企业
+	 * @param applyCompany 提交申请  企业 （ 管理员管理单位）
+	 * @return true 表示通知已经提交给企业管理员，false表示有错误 
+	 */
+	boolean submitCompanyApply(String business, String joinCompany,String userId,
+			String applyCompany);
+
+	/**
+	 * 检查当前申请类型为1(成为上级单位)的单位的pk_father是否存在
+	 * 即查看被申请的单位（joinCompany）的pk_father是否存在
+	 * @author：songqi
+	 * @param applyCompany 提交申请  企业  （ 管理员管理单位）
+	 * @param joinCompany  被申请  加入的企业
+	 * @return 存在返回 true 不存在返回false
+	 */
+	boolean checkFatherCompany(String joinCompany);
+
+	/**
+	 * 批量同意企业申请
+	 * @author：songqi
+	 * @param applyFatherCompany 申请成为上级
+	 * @param applyChildCompany 申请成为下级
 	 * @return
 	 */
+	void companyApply(String applyFatherCompany, String applyChildCompany);
+	
+
 //	List<MyCompany> findUserApply(String userId);
 
 //	boolean update(String userId, String sortString);
-
-//	List<MyCompany> findAll(String username, int currentPage, int pageSize);
 
 }

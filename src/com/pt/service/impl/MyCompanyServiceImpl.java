@@ -94,6 +94,34 @@ public class MyCompanyServiceImpl extends BaseServiceImpl<MyCompany> implements 
 		mcd.usersApply(joinCompany, applyAdmin);
 	}
 
+	@Override
+	public int submitCompanyApply(String business, String joinCompany,String applyCompany, String userId) {
+		//判断申请类型：申请成为上级需要先判断是否已经有了上级单位
+		if("1".equals(business)){ 
+			boolean panduan = mcd.checkFatherCompany(joinCompany);
+			if(panduan){ // 已经存在上级单位
+				return 4;
+			}
+		}
+		boolean flag = mcd.checkSubmitCompany(business,joinCompany,applyCompany);
+		if(flag){
+			return 1;
+		}else{
+			boolean flag2 = mcd.submitCompanyApply(business,joinCompany,applyCompany,userId);
+			if(flag2){
+				return 2;
+			}else{
+				return 3;
+			}
+		}
+	}
+
+	@Override
+	public void companyApply(String applyFatherCompany, String applyChildCompany) {
+		// TODO Auto-generated method stub
+		mcd.companyApply(applyFatherCompany, applyChildCompany);
+	}
+
 //	@Override
 //	public List<MyCompany> findAll(String username, int currentPage, int pageSize){
 //		return mcd.findAll(username, currentPage, pageSize);
