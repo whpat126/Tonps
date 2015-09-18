@@ -14,6 +14,9 @@ public class MyCompany extends BaseDomain{
 	private String state; // 0 说明是未加入企业 1说明是企业用户  2说明是管理员 
 	private String apply; //0 用户申请加入企业  1普通用户申请成为管理员
 	
+	private String apply_company;
+	private String apply_pk_mycompany;
+	
 	/* 临时增加  用于jsp页面显示全 */
 	private String userName; // 申诉人姓名 
 	private String address; // 企业地址
@@ -127,6 +130,22 @@ public class MyCompany extends BaseDomain{
 
 	public void setApply(String apply) {
 		this.apply = apply;
+	}
+
+	public String getApply_company() {
+		return apply_company;
+	}
+
+	public void setApply_company(String apply_company) {
+		this.apply_company = apply_company;
+	}
+
+	public String getApply_pk_mycompany() {
+		return apply_pk_mycompany;
+	}
+
+	public void setApply_pk_mycompany(String apply_pk_mycompany) {
+		this.apply_pk_mycompany = apply_pk_mycompany;
 	}
 
 	
